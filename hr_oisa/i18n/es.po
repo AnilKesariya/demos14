@@ -1,0 +1,693 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#    * hr_oisa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-29 00:07+0000\n"
+"PO-Revision-Date: 2018-06-29 00:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_zapato:0
+msgid "22"
+msgstr "22"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_zapato:0
+msgid "23"
+msgstr "23"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_zapato:0
+msgid "24"
+msgstr "24"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_zapato:0
+msgid "25"
+msgstr "25"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_zapato:0
+msgid "26"
+msgstr "26"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_zapato:0
+msgid "27"
+msgstr "27"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+#: selection:hr.employee,talla_zapato:0
+msgid "28"
+msgstr "28"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+#: selection:hr.employee,talla_zapato:0
+msgid "29"
+msgstr "29"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+#: selection:hr.employee,talla_zapato:0
+msgid "30"
+msgstr "30"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+#: selection:hr.employee,talla_zapato:0
+msgid "31"
+msgstr "31"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "32"
+msgstr "32"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "33"
+msgstr "33"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "34"
+msgstr "34"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "35"
+msgstr "35"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "36"
+msgstr "36"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "37"
+msgstr "37"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "38"
+msgstr "38"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "39"
+msgstr "39"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "40"
+msgstr "40"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "41"
+msgstr "41"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "42"
+msgstr "42"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "43"
+msgstr "43"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_bata:0
+#: selection:hr.employee,talla_pantalon:0
+msgid "44"
+msgstr "44"
+
+#. module: hr_oisa
+#: selection:hr.employee,tipo_sangre:0
+msgid "AB+"
+msgstr "AB+"
+
+#. module: hr_oisa
+#: selection:hr.employee,tipo_sangre:0
+msgid "AB-"
+msgstr "AB-"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_accion
+msgid "Accion"
+msgstr "Acción"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Actas"
+msgstr "Actas"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Actas adiminstrativas"
+msgstr "Actas administrativas"
+
+#. module: hr_oisa
+#: model:ir.actions.act_window,name:hr_oisa.action_actas
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_adm
+#: model:ir.ui.menu,name:hr_oisa.menu_actas
+#: model:ir.ui.menu,name:hr_oisa.menu_actas_child
+#: model:ir.ui.view,arch_db:hr_oisa.actas_form_view
+#: model:ir.ui.view,arch_db:hr_oisa.actas_tree_view
+msgid "Actas administrativas"
+msgstr "Actas administrativas"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_amount
+msgid "Amount"
+msgstr "Monto"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_apmat
+msgid "Apellido materno"
+msgstr "Apellido materno"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_appat
+msgid "Apellido paterno"
+msgstr "Apellido paterno"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Baja"
+msgstr "Baja"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Cuentas Bancarias"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_talla_bata
+msgid "Bata"
+msgstr "Bata"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_res_partner_bank_beneficiarios
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+#: model:ir.ui.view,arch_db:hr_oisa.view_partner_bank_form_inh
+msgid "Beneficiarios"
+msgstr "Beneficiarios"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiarios_seguro
+msgid "Beneficiarios Seguro"
+msgstr "Beneficiarios Seguro"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_faja:0
+#: selection:hr.employee,talla_playera:0
+msgid "CH Chica"
+msgstr "CH Chica"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_create_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_create_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_creditos
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Creditos"
+msgstr "Créditos"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_partner_bank_id
+msgid "Cuenta"
+msgstr "Cuenta"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_antecedentes_penales
+msgid "Cuenta con antecedentes penales"
+msgstr "Cuenta con antecedentes penales"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_direccion
+msgid "Direccion"
+msgstr "Dirección"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_display_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_documento_baja
+msgid "Documento Baja"
+msgstr "Documento Baja"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_faja:0
+#: selection:hr.employee,talla_playera:0
+msgid "EG Extra grande"
+msgstr "EG Extra grande"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_edad
+msgid "Edad"
+msgstr "Edad"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_employee_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_employee_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_employee_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_employee_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_employee_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_employee_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_employee_id
+msgid "Empleado"
+msgstr "Empleado"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_employee_ids
+#: model:ir.ui.view,arch_db:hr_oisa.actas_form_view
+msgid "Empleados"
+msgstr "Empleados"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_talla_faja
+msgid "Faja"
+msgstr "Faja"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiares
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Familiares"
+msgstr "Familiares"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Familiares que laboran o laboraron en la empresa"
+msgstr "Familiares que laboran o laboraron en la empresa"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_fecha
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_name
+msgid "Fecha"
+msgstr "Fecha"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_fecha_nacimiento
+msgid "Fecha Nacimiento"
+msgstr "Fecha Nacimiento"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_fecha_nacimiento
+msgid "Fecha de nacimiento"
+msgstr "Fecha de nacimiento"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_faja:0
+#: selection:hr.employee,talla_playera:0
+msgid "G Grande"
+msgstr "G Grande"
+
+#. module: hr_oisa
+#: selection:hr.employee.beneficiario_seguro,parentesco:0
+msgid "Hijo(a)"
+msgstr "Hijo(a)"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_offspring
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Hijos"
+msgstr "Hijos"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros
+msgid "Historico Otros"
+msgstr "Histórico Otros"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo
+msgid "Historico Sueldo"
+msgstr "Histórico Sueldo"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Histórico otros"
+msgstr "Histórico otros"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Histórico sueldo"
+msgstr "Histórico sueldo"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Histórico sueldos"
+msgstr "Histórico sueldos"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo___last_update
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_write_uid
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_write_date
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: hr_oisa
+#: selection:hr.employee,talla_faja:0
+#: selection:hr.employee,talla_playera:0
+msgid "M Mediana"
+msgstr "M Mediana"
+
+#. module: hr_oisa
+#: selection:hr.employee.beneficiario_seguro,parentesco:0
+msgid "Madre"
+msgstr "Madre"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_user_id
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_user_id
+msgid "Modificado por"
+msgstr "Modificado por"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_motivo
+msgid "Motivo"
+msgstr "Motivo"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_motivo_baja
+msgid "Motivo Baja"
+msgstr "Motivo Baja"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Móvil personal"
+msgstr "Móvil personal"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_credito_name
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_nombre
+msgid "Nombre"
+msgstr "Nombre"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_no_card
+msgid "No. Card"
+msgstr "Número de tarjeta"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_spouse
+msgid "Nombre esposo(a) o Concubino(a)"
+msgstr "Nombre esposo(a) o Concubino(a)"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_hijos_nombre_padre
+msgid "Nombre padre/madre"
+msgstr "Nombre padre/madre"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_familiar_name
+msgid "Nombre(s)"
+msgstr "Nombre(s)"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Otra información"
+msgstr "Otra información"
+
+#. module: hr_oisa
+#: selection:hr.employee.beneficiario_seguro,parentesco:0
+msgid "Otro"
+msgstr "Otro"
+
+#. module: hr_oisa
+#: selection:hr.employee.beneficiario_seguro,parentesco:0
+msgid "Padre"
+msgstr "Padre"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_talla_pantalon
+msgid "Pantalón"
+msgstr "Pantalón"
+
+#. module: hr_oisa
+#: selection:hr.employee.beneficiario_seguro,parentesco:0
+msgid "Pareja"
+msgstr "Pareja"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_parentesco
+msgid "Parentesco"
+msgstr "Parentesco"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Pensiones"
+msgstr "Pensiones"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pensiones
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Pensiones alimenticias"
+msgstr "Pensiones alimenticias"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_talla_playera
+msgid "Playera"
+msgstr "Playera"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_cuenta_porcentaje
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_beneficiario_seguro_porcentaje
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_porcentaje
+msgid "Porcentaje"
+msgstr "Porcentaje"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_poliza_seguro
+msgid "Póliza"
+msgstr "Póliza"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_actas_repercusion
+msgid "Repercusion"
+msgstr "Repercusión"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Seguro de vida"
+msgstr "Seguro de vida"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_pension_data_start_ret
+msgid "Start date withholding"
+msgstr "Fecha de inicio retención"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_sueldo_old
+msgid "Sueldo anterior"
+msgstr "Sueldo anterior"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_sueldo_sueldo_new
+msgid "Sueldo nuevo"
+msgstr "Sueldo nuevo"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Tallas"
+msgstr "Tallas"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh
+msgid "Teléfono de casa"
+msgstr "Teléfono de casa"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_tipo
+msgid "Tipo"
+msgstr "Tipo"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_tipo_sangre
+msgid "Tipo Sangre"
+msgstr "Tipo Sangre"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_valor_old
+msgid "Valor anterior"
+msgstr "Valor anterior"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_historico_otros_valor_new
+msgid "Valor nuevo"
+msgstr "Valor nuevo"
+
+#. module: hr_oisa
+#: model:ir.ui.view,arch_db:hr_oisa.view_employee_form_inh2
+msgid "Vehículo propio"
+msgstr "Vehículo propio"
+
+#. module: hr_oisa
+#: model:ir.model.fields,field_description:hr_oisa.field_hr_employee_talla_zapato
+msgid "Zapato/bota"
+msgstr "Zapato/bota"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_actas
+msgid "hr.employee.actas"
+msgstr "hr.employee.actas"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_beneficiario_cuenta
+msgid "hr.employee.beneficiario_cuenta"
+msgstr "hr.employee.beneficiario_cuenta"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_beneficiario_seguro
+msgid "hr.employee.beneficiario_seguro"
+msgstr "hr.employee.beneficiario_seguro"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_credito
+msgid "hr.employee.credito"
+msgstr "hr.employee.credito"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_familiar
+msgid "hr.employee.familiar"
+msgstr "hr.employee.familiar"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_hijos
+msgid "hr.employee.hijos"
+msgstr "hr.employee.hijos"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_historico_otros
+msgid "hr.employee.historico.otros"
+msgstr "hr.employee.historico.otros"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_historico_sueldo
+msgid "hr.employee.historico.sueldo"
+msgstr "hr.employee.historico.sueldo"
+
+#. module: hr_oisa
+#: model:ir.model,name:hr_oisa.model_hr_employee_pension
+msgid "hr.employee.pension"
+msgstr "hr.employee.pension"
