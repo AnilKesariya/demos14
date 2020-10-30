@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="hr.weekday" id="monday">
+            <field name="name">Lunes</field>
+            <field name="weekday">0</field>
+        </record>
+        <record model="hr.weekday" id="tuesday">
+            <field name="name">Martes</field>
+            <field name="weekday">1</field>
+        </record>
+        <record model="hr.weekday" id="wednesday">
+            <field name="name">Miércoles</field>
+            <field name="weekday">2</field>
+        </record>
+        <record model="hr.weekday" id="thursday">
+            <field name="name">Jueves</field>
+            <field name="weekday">3</field>
+        </record>
+        <record model="hr.weekday" id="friday">
+            <field name="name">Viernes</field>
+            <field name="weekday">4</field>
+        </record>
+        <record model="hr.weekday" id="saturday">
+            <field name="name">Sábado</field>
+            <field name="weekday">5</field>
+        </record>
+        <record model="hr.weekday" id="sunday">
+            <field name="name">Domingo</field>
+            <field name="weekday">6</field>
+        </record>
+    </data>
+
+    <!--Tabla Salario Diario Integrado-->
+    <data>
+        <record id='tabla1_fi' model='hr.tabla.fi'>
+            <field name='name'>Tabla SDI</field>
+        </record>
+
+        <record id='tabla1_fi_l_1' model='hr.tabla.fi.line'>
+            <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>1</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>6</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_2' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>2</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>8</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_3' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>3</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>10</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_4' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>4</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>12</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_9' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>9</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>14</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_14' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>14</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>16</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_19' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>19</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>18</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_24' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>24</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>20</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_29' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>29</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>22</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_34' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>34</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>24</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+        <record id='tabla1_fi_l_39' model='hr.tabla.fi.line'>
+             <field name='fi_id' ref='cfdi_nomina.tabla1_fi'/>
+            <field name='years_old'>39</field>
+            <field name='dias_aguinaldo'>15</field>
+            <field name='dias_vacaciones'>26</field>
+            <field name='prima_vacacional'>0.25</field>
+        </record>
+    </data>
+
+    <!--Tabla Vacaciones-->
+    <data>
+        <record id='tabla1_vac' model='hr.tabla.vacaciones'>
+            <field name='name'>Vacaciones 1</field>
+        </record>
+
+        <record id='tabla1_vac_l_1' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>1</field>
+            <field name='dias_vacaciones'>6</field>
+            <field name='dias_prima_vacacional'>1.5</field>
+        </record>
+        <record id='tabla1_vac_l_2' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>2</field>
+            <field name='dias_vacaciones'>8</field>
+            <field name='dias_prima_vacacional'>2.0</field>
+        </record>
+        <record id='tabla1_vac_l_3' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>3</field>
+            <field name='dias_vacaciones'>10</field>
+            <field name='dias_prima_vacacional'>2.5</field>
+        </record>
+        <record id='tabla1_vac_l_4' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>4</field>
+            <field name='dias_vacaciones'>12</field>
+            <field name='dias_prima_vacacional'>3</field>
+        </record>
+        <record id='tabla1_vac_l_5' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>5</field>
+            <field name='dias_vacaciones'>14</field>
+            <field name='dias_prima_vacacional'>3.5</field>
+        </record>
+        <record id='tabla1_vac_l_10' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>10</field>
+            <field name='dias_vacaciones'>16</field>
+            <field name='dias_prima_vacacional'>4</field>
+        </record>
+        <record id='tabla1_vac_l_15' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>15</field>
+            <field name='dias_vacaciones'>18</field>
+            <field name='dias_prima_vacacional'>4.5</field>
+        </record>
+        <record id='tabla1_vac_l_20' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>20</field>
+            <field name='dias_vacaciones'>20</field>
+            <field name='dias_prima_vacacional'>5</field>
+        </record>
+        <record id='tabla1_vac_l_25' model='hr.tabla.vacaciones.line'>
+            <field name='vac_id' ref='cfdi_nomina.tabla1_vac'/>
+            <field name='years_old'>25</field>
+            <field name='dias_vacaciones'>22</field>
+            <field name='dias_prima_vacacional'>5.5</field>
+        </record>
+    </data>
+
+    <!--Tabla Base Gravable-->
+    <data>
+        <record id='tabla_basegravable_isr' model='hr.tabla.basegravable.acum'>
+            <field name='sequence'>1</field>
+            <field name='name'>Base Gravable ISR</field>
+            <field name='data_field'>gravado</field>
+        </record>
+        <record id='tabla_basegravable_imss' model='hr.tabla.basegravable.acum'>
+            <field name='sequence'>2</field>
+            <field name='name'>Base Gravable IMSS</field>
+            <field name='data_field'>gravado_imss</field>
+        </record>
+        <record id='tabla_basegravable_infonavit' model='hr.tabla.basegravable.acum'>
+            <field name='sequence'>3</field>
+            <field name='name'>Base Gravable INFONAVIT</field>
+            <field name='data_field'>gravado_infonavit</field>
+        </record>
+        <record id='tabla_basegravable_ptu' model='hr.tabla.basegravable.acum'>
+                <field name='sequence'>4</field>
+            <field name='name'>Base Gravable PTU</field>
+            <field name='data_field'>gravado_ptu</field>
+        </record>
+        <record id='tabla_basegravable_local' model='hr.tabla.basegravable.acum'>
+            <field name='sequence'>5</field>
+            <field name='name'>Base Gravable LOCAL</field>
+            <field name='data_field'>gravado_local</field>
+        </record>
+    </data>
+
+    <!--Tabla Subsidio-->
+    <data>
+        <record id='tabla_tabla_id_1' model='hr.tabla.sube'>
+            <field name='name'>2018</field>
+        </record>
+
+        <record id='tabla_tabla_id_1_line_l_1' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+            <field name='limite_inferior' eval='0.01'/>
+            <field name='limite_superior' eval='1768.96'/>
+            <field name='subsidio' eval='407.02'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_2' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+            <field name='limite_inferior' eval='1768.97'/>
+            <field name='limite_superior' eval='2653.38'/>
+            <field name='subsidio' eval='406.83'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_3' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+            <field name='limite_inferior' eval='2653.39'/>
+            <field name='limite_superior' eval='3472.84'/>
+            <field name='subsidio' eval='406.62'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_4' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+            <field name='limite_inferior' eval='3472.85'/>
+            <field name='limite_superior' eval='3537.87'/>
+            <field name='subsidio' eval="392.77"/>
+        </record>
+        <record id='tabla_tabla_id_1_l_5' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval="3537.88"/>
+            <field name='limite_superior' eval='4446.15'/>
+            <field name='subsidio' eval='382.46'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_6' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval='4446.16'/>
+            <field name='limite_superior' eval='4717.18'/>
+            <field name='subsidio' eval='354.23'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_7' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval='4717.19'/>
+            <field name='limite_superior' eval='5335.42'/>
+            <field name='subsidio' eval='324.87'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_8' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval='5335.43'/>
+            <field name='limite_superior' eval='6224.67'/>
+            <field name='subsidio' eval='294.63'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_9' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval='6224.68'/>
+            <field name='limite_superior' eval='7113.9'/>
+            <field name='subsidio' eval='253.54'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_10' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval='7113.91'/>
+            <field name='limite_superior' eval='7382.33'/>
+            <field name='subsidio' eval='217.61'/>
+        </record>
+        <record id='tabla_tabla_id_1_l_11' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+            <field name='limite_inferior' eval='7382.34'/>
+            <field name='limite_superior' eval='999999999'/>
+            <field name='subsidio' eval='0'/>
+        </record>
+    </data>
+
+    <!--Tabla ISPT-->
+    <data>
+        <record id='tabla1_ispt' model='hr.tabla.ispt'>
+            <field name='name'>2018</field>
+        </record>
+
+        <record id='tabla1_ispt_l_1' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='0.01'/>
+            <field name='limite_superior' eval='578.52'/>
+            <field name='cuota_fija' eval='0'/>
+            <field name='porc_excedente' eval='1.92'/>
+        </record>
+
+        <record id='tabla1_ispt_l_2' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='578.53'/>
+            <field name='limite_superior' eval='4910.18'/>
+            <field name='cuota_fija' eval='11.11'/>
+            <field name='porc_excedente' eval='6.4'/>
+        </record>
+
+        <record id='tabla1_ispt_l_3' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='4910.19'/>
+            <field name='limite_superior' eval='8629.2'/>
+            <field name='cuota_fija' eval='288.33'/>
+            <field name='porc_excedente' eval='10.88'/>
+        </record>
+
+        <record id='tabla1_ispt_l_4' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_superior' eval='10031.07'/>
+            <field name='cuota_fija' eval='692.96'/>
+            <field name='porc_excedente' eval='16'/>
+        </record>
+
+        <record id='tabla1_ispt_l_5' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='10031.08'/>
+            <field name='limite_superior' eval='12009.94'/>
+            <field name='cuota_fija' eval='917.26'/>
+            <field name='porc_excedente' eval='17.92'/>
+        </record>
+
+        <record id='tabla1_ispt_l_6' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt'/>
+            <field name='limite_inferior' eval='12009.95'/>
+            <field name='limite_superior' eval='24222.31'/>
+            <field name='cuota_fija' eval='1271.87'/>
+            <field name='porc_excedente' eval='21.36'/>
+        </record>
+
+        <record id='tabla1_ispt_l_7' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='24222.32'/>
+            <field name='limite_superior' eval='38177.69'/>
+            <field name='cuota_fija' eval='3880.44'/>
+            <field name='porc_excedente' eval='23.52'/>
+        </record>
+
+        <record id='tabla1_ispt_l_8' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='38177.7'/>
+            <field name='limite_superior' eval='72887.5'/>
+            <field name='cuota_fija' eval='7162.74'/>
+            <field name='porc_excedente' eval='30'/>
+        </record>
+
+        <record id='tabla1_ispt_l_9' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='72887.51'/>
+            <field name='limite_superior' eval='97183.33'/>
+            <field name='cuota_fija' eval='17575.69'/>
+            <field name='porc_excedente' eval='32'/>
+        </record>
+
+        <record id='tabla1_ispt_l_10' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='97183.34'/>
+            <field name='limite_superior' eval='291550'/>
+            <field name='cuota_fija' eval='25350.35'/>
+            <field name='porc_excedente' eval='34'/>
+        </record>
+
+        <record id='tabla1_ispt_l_11' model='hr.tabla.ispt.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla1_ispt' />
+            <field name='limite_inferior' eval='291550.01'/>
+            <field name='limite_superior' eval='999999999'/>
+            <field name='cuota_fija' eval='91435.02'/>
+            <field name='porc_excedente' eval='35'/>
+        </record>
+
+    </data>
+
+    <!--Tipo de ausencia-->
+    <data>
+        <record id="holiday_status_retardo" model="hr.leave.type">
+
+            <field name="name">Retardo</field>
+            <!-- <field name="limit" eval="True"/> -->
+            <field name="color_name">lightyellow</field>
+        </record>
+    </data>
+
+</odoo>

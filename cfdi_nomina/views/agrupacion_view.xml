@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_rule_group_view_tree" model="ir.ui.view">
+        <field name="name">hr.salary.rule.group.view.tree</field>
+        <field name="model">hr.salary.rule.group</field>
+        <field name="arch" type="xml">
+            <tree string="Agrupación reglas" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_hr_rule_group" model="ir.actions.act_window">
+        <field name="name">Agrupación reglas</field>
+        <field name="res_model">hr.salary.rule.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="type">ir.actions.act_window</field>     
+    </record>
+
+    <menuitem action="act_open_hr_rule_group" id="menu_open_hr_rule_group"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1"/>
+
+</odoo>

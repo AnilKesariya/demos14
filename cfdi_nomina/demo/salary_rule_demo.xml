@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <!-- Group -->
+    <record id="hr_salary_rule_group_01" model="hr.salary.rule.group">
+        <field name="name">01 Sueldo</field>
+    </record>
+    <record id="hr_salary_rule_group_tot_per" model="hr.salary.rule.group">
+        <field name="name">Total percepciones</field>
+    </record>
+    <record id="hr_salary_rule_group_imss" model="hr.salary.rule.group">
+        <field name="name">Total p/IMSS</field>
+    </record>
+    <record id="hr_salary_rule_group_20" model="hr.salary.rule.group">
+        <field name="name">20 Aguinaldo exento</field>
+    </record>
+    <record id="hr_salary_rule_group_21" model="hr.salary.rule.group">
+        <field name="name">21 Aguinaldo gravado</field>
+    </record>
+    <record id="hr_salary_rule_group_28" model="hr.salary.rule.group">
+        <field name="name">28 Percep. gravable</field>
+    </record>
+    <record id="hr_salary_rule_group_23" model="hr.salary.rule.group">
+        <field name="name">23 PTU Exenta</field>
+    </record>
+    <record id="hr_salary_rule_group_32" model="hr.salary.rule.group">
+        <field name="name">32 Ayuda utiles</field>
+    </record>
+    <record id="hr_salary_rule_group_24" model="hr.salary.rule.group">
+        <field name="name">24 PTU Gravada</field>
+    </record>
+
+    <!-- Categories -->
+    <record id="hr_salary_rule_category_perception" model="hr.salary.rule.category">
+        <field name="name">Percepcion</field>
+        <field name="code">PER</field>
+    </record>
+    <record id="hr_salary_rule_ssem" model="hr.salary.rule">
+        <field name="name">Sueldo Semanal</field>
+        <field name="sequence" eval="10"/>
+        <field name="code">SSEM</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion1"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_01"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+dt = datetime.datetime
+d2 = dt.strptime(employee.fecha_alta, "%Y-%m-%d")
+d1 = dt.strptime(payslip.date_to, "%Y-%m-%d")
+dias_desde_ingreso = (d1-d2).days
+if dias_desde_ingreso &lt; 7:
+    dias_a_pagar=dias_desde_ingreso
+else:
+    dias_a_pagar=worked_days.WORK100.number_of_days
+
+#z=0
+#z=payslip.finiquito
+if GRANEX &lt;&gt; 0 or GRANGR &lt;&gt; 0 or GRATGR &lt;&gt; 0 or GRANEX &lt;&gt; 0 or REUTEX &lt;&gt; 0 or AYUTI &lt;&gt; 0 or REUTGR &lt;&gt; 0:
+    result=0
+#elif z:
+#    result=0
+else:
+    result = contract.wage * dias_a_pagar
+result=round(result,2)
+        </field>
+    </record>
+    <record id="hr_salary_rule_GRANEX" model="hr.salary.rule">
+        <field name="name">Gratificacion Anual Exenta Semanal</field>
+        <field name="sequence" eval="9"/>
+        <field name="code">GRANEX</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion2"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_20"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">exento</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.GRANEX.amount * contract.wage
+result=round(result,2)
+        </field>
+    </record>
+    <record id="hr_salary_rule_GRANGR" model="hr.salary.rule">
+        <field name="name">Gratificacion Anual Gravable Semanal</field>
+        <field name="sequence" eval="8"/>
+        <field name="code">GRANGR</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion2"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_21"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.GRANGR.amount * contract.wage
+result=round(result,2)
+        </field>
+    </record>
+    <record id="hr_salary_rule_GRATGR" model="hr.salary.rule">
+        <field name="name">Gratificacion Gravable</field>
+        <field name="sequence" eval="8"/>
+        <field name="code">GRATGR</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion33"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_28"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.GRATGR.amount
+        </field>
+    </record>
+    <record id="hr_salary_rule_REUTEX" model="hr.salary.rule">
+        <field name="name">Reparto de Utilidad Exento Semanal</field>
+        <field name="sequence" eval="9"/>
+        <field name="code">REUTEX</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion3"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_23"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">exento</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.REUTEX.amount
+        </field>
+    </record>
+    <record id="hr_salary_rule_AYUTI" model="hr.salary.rule">
+        <field name="name">Ayuda de Utiles Semanal</field>
+        <field name="sequence" eval="8"/>
+        <field name="code">AYUTI</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion29"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_32"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.AYUTI.amount
+        </field>
+    </record>
+    <record id="hr_salary_rule_REUTGR" model="hr.salary.rule">
+        <field name="name">Reparto de Utilidad Gravable Semanal</field>
+        <field name="sequence" eval="9"/>
+        <field name="code">REUTGR</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion3"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_24"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.REUTGR.amount
+        </field>
+    </record>
+    <record id="hr_salary_rule_B_SSEM" model="hr.salary.rule">
+        <field name="name">Sueldo Quincenal Base</field>
+        <field name="sequence" eval="10"/>
+        <field name="code">B_SSEM</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion1"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_01"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+dt = datetime.datetime
+d2 = dt.strptime(employee.fecha_alta, "%Y-%m-%d")
+d1 = dt.strptime(payslip.date_to, "%Y-%m-%d")
+dias_desde_ingreso = (d1-d2).days
+if dias_desde_ingreso &lt; 7:
+    dias_a_pagar=dias_desde_ingreso
+else:
+    dias_a_pagar=worked_days.WORK100.number_of_days
+
+#z=0
+#z=payslip.finiquito
+if B_GRANEX &lt;&gt; 0 or B_GRANGR &lt;&gt; 0 or B_GRATGR &lt;&gt; 0 or B_GRANEX &lt;&gt; 0 or B_REUTEX &lt;&gt; 0 or B_AYUTI &lt;&gt; 0 or B_REUTGR &lt;&gt; 0:
+    result=0
+#elif z:
+#    result=0
+else:
+    result = contract.wage * dias_a_pagar
+result=round(result,2)
+        </field>
+    </record>
+    <record id="hr_salary_rule_B_GRANEX" model="hr.salary.rule">
+        <field name="name">Gratificacion Anual Exenta Base</field>
+        <field name="sequence" eval="9"/>
+        <field name="code">B_GRANEX</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion2"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_20"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">exento</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.B_GRANEX.amount * contract.wage
+result=round(result,2)
+        </field>
+    </record>
+    <record id="hr_salary_rule_B_GRANGR" model="hr.salary.rule">
+        <field name="name">Gratificacion Anual Gravable Base</field>
+        <field name="sequence" eval="8"/>
+        <field name="code">B_GRANGR</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion2"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_21"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.B_GRANGR.amount * contract.wage
+result=round(result,2)
+        </field>
+    </record>
+    <record id="hr_salary_rule_B_GRATGR" model="hr.salary.rule">
+        <field name="name">Gratificacion Gravable</field>
+        <field name="sequence" eval="8"/>
+        <field name="code">B_GRATGR</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion33"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_28"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">gravado</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.B_GRATGR.amount
+        </field>
+    </record>
+    <record id="hr_salary_rule_B_REUTEX" model="hr.salary.rule">
+        <field name="name">Reparto de Utilidad Exento Base</field>
+        <field name="sequence" eval="9"/>
+        <field name="code">B_REUTEX</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception"/>
+        <field name="tipo_id" ref="catalogo_tipo_percepcion"/>
+        <field name="codigo_agrupador" ref="catalogo_percepcion3"/>
+        <field name="agrupacion" ref="hr_salary_rule_group_23"/>
+        <field name="tipo_de_percepcion">fijo</field>
+        <field name="gravado_o_exento">exento</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = inputs.B_REUTEX.amount
+        </field>
+    </record>
+
+</odoo>

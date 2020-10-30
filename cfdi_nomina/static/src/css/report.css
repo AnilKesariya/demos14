@@ -1,0 +1,67 @@
+.head-blue {
+    color: white;
+    background-color: #034e7f;
+    font-weight: bold;
+    font-size: 12px;
+}
+.head-blue-med {
+    color: white;
+    background-color: #034e7f;
+    font-weight: bold;
+    font-size: 14px ;
+    text-align: center ;
+}
+.head-blue-big {
+    color: white;
+    background-color: #034e7f;
+    font-weight: bold;
+    font-size: 20px ;
+    text-align: center ;
+    vertical-align: middle;
+    line-height: 80px;
+    min-height: 80px ;
+}
+.space {
+    color: white;
+    line-height: 10px;
+    min-height: 10px ;
+}
+.space_line {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #034e7f;
+}
+
+#barcode_cbb {
+    img {
+        height: 180;
+        width: 180;
+    }
+}
+
+#sellos {
+    font-size: 8px;
+    width: 95%;
+    text-align: left;
+    word-break: break-all;
+    margin-top: 5px;
+}
+
+.tabla_empleado td{
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.tb_nomina {
+    font-size: 8px;
+    padding-left: 1px;
+}
+
+.tb_nomina td{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.tb_nomina table{
+    margin: 0px !important;
+}

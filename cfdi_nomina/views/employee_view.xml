@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr.open_view_employee_list_my" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_kanban_view_employees_inherit">
+        <field name="name">employees.kanban.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="nombre_completo"/>
+            </field>
+            <field name="name" position="attributes">
+                 <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_tree_inherit">
+        <field name="name">view.employee.tree.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="cod_emp"/>
+                <field name="appat"/>
+                <field name="apmat"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="candidato_con_apellidos_form_view">
+        <field name="name">candidato.con.apellidos.form.view</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h2[hasclass('o_row')]/div[1]" position="replace">
+                <div>
+                    <label for="partner_first_name" class="oe_edit_only"/>
+                    <field name="partner_first_name" string="Nombre" placeholder="Nombre"/>
+                    <field name="appat" string="Ap. paterno" placeholder="Apellido paterno"/>
+                    <field name="apmat" string="Ap. materno" placeholder="Apellido materno"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="candidato_con_apellidos_tree_view">
+        <field name="name">candidato.con.apellidos.tree.view</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="arch" type="xml">
+            <field name="partner_name" position="replace">
+                <field name="partner_first_name"/>
+                <field name="appat"/>
+                <field name="apmat"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_filter_inherit">
+        <field name="name">view.employee.filter.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="replace">
+                <field name="name" string="Nombre"/>
+                <field name="appat" string="Ap. paterno"/>
+                <field name="apmat" string="Ap. materno"/>
+                <field name="cod_emp" string="Código de empleado"/>
+            </field>
+            <filter name="group_job" position="after">
+                 <filter name="marital" string="Estado Civil" domain="[]" context="{'group_by':'marital'}"/>
+                 <filter name="children" string="Numero de hijos" domain="[]" context="{'group_by':'children'}"/>
+                 <filter name="escolaridad" string="Escolaridad" domain="[]" context="{'group_by':'escolaridad'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_form_hrmxext">
+        <field name="name">hr.employee.form.hrmxext</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="%(act_hr_employee_2_hr_transfer)d"
+                        class="oe_stat_button"
+                        icon="fa-exchange"
+                        type="action"
+                        groups="hr.group_hr_manager">
+                        <field name="transfers_count" widget="statinfo" string="Transferencias"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='job_title']" position="before">
+                    <field name="appat" placeholder="Ap. Paterno" class="oe_inline"/>
+                    ,
+                    <field name="apmat" placeholder="Ap. Materno" class="oe_inline"/>
+                </xpath>
+
+                <xpath expr="//field[@name='category_ids']" position="after"> 
+                    <group>
+                        <group>
+                            <field name="nombre_compelto"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <field name="job_id" position="after">
+                    <field name="escolaridad"/>
+                </field>
+               
+                <field name="resource_calendar_id" position="after">
+                    <field name="dias_descanso_ids" widget="many2many_tags" options="{'no_create_edit': True, 'no_create':True}"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Campos adicionales MX">
+                        <group>
+                            <group>
+                                <field name="status_imss"/>
+                                <field name="fecha_alta"/>
+                                <field name="fecha_baja"/>
+                                <field name="anos_servicio"/>
+                                <field name="cod_emp"/>
+                                <field name="registro_patronal"/>
+                                <field name="tipo_jornada"/>
+                                <field name="sindicalizado"/>
+                            </group>
+                            <group>
+                                <field name="curp"/>
+                                <field name="imss"/>
+                                <field name="rfc"/>
+                                <field name="infonavit"/>
+                                <field name="sar"/>
+                                <field name="no_fonacot"/>
+                                <field name="tipo_cuenta"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="tipo_sueldo"/>
+                                <field name="tarjeta_nomina"/>
+                                <field name="zona_salario"/>
+                                <field name="tabla_sdi_id"/>
+                                <field name="tabla_vacaciones_id"/>
+                            </group>
+                            <group>
+                                <field name="sueldo_diario"/>
+                                <field name="sueldo_imss" />
+                                <field name="sueldo_imss_bimestre_actual" />
+                                <field name="sueldo_info"/>
+                                <field name="retiro_parcialidad"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Histórico IMSS" name="historico_imss">
+                        <group string="SDI">
+                            <field name="historico_sueldo_imss" nolabel="1" >
+                                <tree string="Histórico sueldo" editable="bottom" delete="0">
+                                    <field name="name"/>
+                                    <field name="sueldo_old"/>
+                                    <field name="sueldo_new"/>
+                                    <field name="user_id"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                    </page>
+                    <page string="INE">
+                        <group>
+                            <field name="ife_numero"/>
+                            <field name="ife_anverso" widget="image"/>
+                            <field name="ife_reverso" widget="image"/>
+                        </group>
+                    </page>
+                    <page string="Licencia de conducir">
+                        <group>
+                            <field name="licencia_numero"/>
+                            <field name="licencia_vigencia"/>
+                            <field name="licencia_anverso" widget="image"/>
+                            <field name="licencia_reverso" widget="image"/>
+                        </group>
+                    </page>
+                    <page string="Servicio médico">
+                        <group>
+                            <field name="med_actividad"/>
+                            <field name="med_antecedentes_1"/>
+                            <field name="med_antecedentes_2"/>
+                            <field name="med_antecedentes_3"/>
+                            <field name="med_padecimiento"/>
+                            <field name="med_exploracion"/>
+                            <field name="med_diagnostico"/>
+                            <field name="med_apto"/>
+                        </group>
+                    </page>
+                </notebook>
+            </data>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_hr_employee_view_inh_oisa">
+        <field name="name">hr.hr.employee.view.oisa</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_oisa.view_employee_form_inh"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='documento_baja']" position="after">
+                    <field name="causa_baja"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="hr_hr_employee_view_inh_form2" model="ir.ui.view">
+        <field name="name">hr.hr.employee.view.form2</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='vehicle']" position="after">
+                    <field name="vehicle_distance" string="Distancia en minutos"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

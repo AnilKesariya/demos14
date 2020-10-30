@@ -1,0 +1,11 @@
+id,code,name
+catalogo_periodicidad1,01,Diario
+catalogo_periodicidad2,02,Semanal
+catalogo_periodicidad3,03,Catorcenal
+catalogo_periodicidad4,04,Quincenal
+catalogo_periodicidad5,05,Mensual
+catalogo_periodicidad6,06,Bimestral
+catalogo_periodicidad7,07,Unidad obra
+catalogo_periodicidad8,08,Comisión
+catalogo_periodicidad9,09,Precio alzado
+catalogo_periodicidad10,99,Otra Periodicidad

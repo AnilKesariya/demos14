@@ -1,0 +1,4 @@
+id,name,code
+catalogo_origen_recurso1,Ingresos propios,IP
+catalogo_origen_recurso2,Ingresos federales,IF
+catalogo_origen_recurso3,Ingresos mixtos,IM

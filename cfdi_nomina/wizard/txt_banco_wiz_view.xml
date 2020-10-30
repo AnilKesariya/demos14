@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_txtbanco">
+        <field name="name">txt.banco.wiz.form</field>
+        <field name="model">txt.banco.wiz</field>
+        <field name="arch" type="xml">
+            <form version="7.0">
+                <group attrs="{'invisible':[('data_fname','=','X')]}">
+                    <group>
+                        <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"
+                              attrs="{'invisible':[('data_fname','!=',False)]}"/>
+                        <field name="id_concepto" options="{'no_create': True}"
+                              attrs="{'readonly':[('data_fname','!=',False)]}"/>
+                    </group>
+                    <group>
+                        <field name="opt_tipo_pago" widget="radio"
+                               attrs="{'readonly':[('data_fname','!=',False)]}"/>
+                        <field name="data_file"  filename="data_fname"
+                               attrs="{'invisible':[('data_fname','=',False)]}"/>
+                        <field name="data_fname"  invisible="1" />
+                    </group>
+                </group>
+                <group attrs="{'invisible':[('data_fname','!=','X')]}">
+                    <group>
+                        <field name="uma"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_update" string="Actualiza" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('data_fname','!=','X')]}"/>
+                    <button name="gen_txt" string="Generar TXT de Dispersión" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('data_fname','!=',False)]}"/>
+
+                    o
+                    <button string="Descartar"  special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--<record id="action_hr_txtbanco" model="ir.actions.act_window">-->
+        <!--<field name="name">Dispersión Banco</field>-->
+        <!--<field name="type">ir.actions.act_window</field>-->
+        <!--<field name="res_model">txt.banco.wiz</field>-->
+        <!--<field name="view_type">form</field>-->
+        <!--<field name="view_mode">form</field>-->
+        <!--<field name="target">new</field>-->
+    <!--</record>-->
+
+    <!--<record id="hr_payslip_run_txtbanco_form" model="ir.ui.view">-->
+        <!--<field name="name">hr.payslip.run.txtbanco.form</field>-->
+        <!--<field name="model">hr.payslip.run</field>-->
+        <!--<field name="inherit_id" ref="cfdi_nomina.hr_payslip_run_total_form"/>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<button name="%(action_batch_cfdi)d" position="after" >-->
+                <!--<button string="Dispersión Banco" name="%(action_hr_txtbanco)d" type="action" class="oe_highlight"/>-->
+            <!--</button>-->
+        <!--</field>-->
+    <!--</record>-->
+
+
+    <record id="action_hr_action_hr_txtbanco" model="ir.actions.act_window">
+        <field name="name">Dispersión Banco</field>
+        <field name="res_model">txt.banco.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_payslip_run"/>
+        <field name="binding_view_types">form</field>
+    </record>
+
+    <!--Temporal.. luego lo quitaremos-->
+
+     <record id="action_hr_update_cuotas_obrero_patronal" model="ir.actions.act_window">
+        <field name="name">Actualizar Cuotas Obrero-Patronal</field>
+        <field name="res_model">txt.banco.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_payslip_run"/>
+        <field name="binding_view_types">form</field>
+        <field name="context">{'cuotas_obrero_patronal': True}</field>
+    </record>
+
+    <!-- multi=False and key2=None -->
+
+</odoo>

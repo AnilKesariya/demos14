@@ -1,0 +1,10 @@
+id,code,name
+catalogo_regimen_contratacion_2,"02",Sueldos y salarios 
+catalogo_regimen_contratacion_3,"03",Jubilados 
+catalogo_regimen_contratacion_4,"04",Pensionados 
+catalogo_regimen_contratacion_5,"05","Asimilados a salarios, Miembros de las Sociedades Cooperativas de Producción. "
+catalogo_regimen_contratacion_6,"06","Asimilados a salarios, Integrantes de Sociedades y Asociaciones Civiles "
+catalogo_regimen_contratacion_7,"07","Asimilados a salarios, Miembros de consejos directivos, de vigilancia, consultivos, honorarios a administradores, comisarios y gerentes generales. "
+catalogo_regimen_contratacion_8,"08","Asimilados a salarios, Actividad empresarial (comisionistas) "
+catalogo_regimen_contratacion_9,"09","Asimilados a salarios, Honorarios asimilados a salarios "
+catalogo_regimen_contratacion_10,10,"Asimilados a salarios, Ingresos acciones o títulos valor "

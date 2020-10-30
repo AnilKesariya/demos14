@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_idsec_wiz_form">
+        <field name="name">hr.employee.transfer.wiz.form</field>
+        <field name="model">hr.employee.transfer.wiz</field>
+        <field name="arch" type="xml">
+            <form version="7.0">
+                <group>
+                    <group>
+                        <field name="date" attrs="{'readonly':[('state','!=','step1')]}"/>
+                        <field name="employee_id"
+                               attrs="{'readonly':[('state','!=','step1')]}"
+                               options='{"no_create": True}'/>
+                    </group>
+                    <group>
+                        <field name="sueldo_diario"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="company_id" options='{"no_create": True}'/>
+                        <field name="registro_patronal_id"/>
+                    </group>
+                    <group>
+                        <field name="company_dest_id"
+                               domain="[('id','!=',company_id)]"
+                               attrs="{'readonly':[('state','!=','step1')]}"
+                               options='{"no_create": True}'/>
+                        <field name="registro_patronal_dest_id"/>
+                        <field name="state" invisible="1"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+<!--                               domain="[('company_id','!=',company_dest_id)]"-->
+                        <field name="department_id"
+                               attrs="{'readonly':[('state','!=','step1')]}"
+                               options='{"no_create": True}'/>
+                        <field name="job_id"
+                               attrs="{'readonly':[('state','!=','step1')]}"
+                               options='{"no_create": True}'/>
+                    </group>
+                    <group>
+                        <field name="contract_id"/>
+                        <field name="date_start"/>
+                        <!-- <field name="type_id"/> -->
+                        <field name="wage" attrs="{'readonly':[('state','!=','step1')]}"/>
+                    </group>
+                </group>
+                <div states="step2">
+                    <separator string="Bimestre Anterior"/>
+                    <field name="bim_anterior"/>
+                    <field name="nomina_bim_anterior_ids">
+                        <tree>
+                            <field name="registro_patronal_codigo_new"/>
+                            <field name="registro_patronal_codigo"/>
+                            <field name="number"/>
+                            <field name="cod_emp"/>
+                            <field name="name"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="total"/>
+                            <field name="state"/>
+                            <field name="company_id"/>
+                        </tree>
+                    </field>
+                    <separator string="Bimestre Actual"/>
+                    <field name="bim_actual"/>
+                    <field name="nomina_bim_actual_ids">
+                        <tree>
+                            <field name="registro_patronal_codigo_new"/>
+                            <field name="registro_patronal_codigo"/>
+                            <field name="number"/>
+                            <field name="cod_emp"/>
+                            <field name="name"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="total"/>
+                            <field name="state"/>
+                            <field name="company_id"/>
+                        </tree>
+                    </field>
+                </div>
+                <footer>
+                    <button string="Descartar"  special="cancel" />
+                    <button name="do_step2" string="Continuar" states="step1" type="object" class="oe_highlight" />
+                    <button name="do_step1" string="Regresar" states="step2" type="object" class="oe_highlight" />
+                    <button name="cambiar" string="Confirmar"  states="step2" type="object" class="oe_highlight" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_employee_transfer_wiz" model="ir.actions.act_window">
+        <field name="name">Transferencia de Almacén</field>
+        <field name="res_model">hr.employee.transfer.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_view_types">form</field>
+    </record>
+   
+</odoo>

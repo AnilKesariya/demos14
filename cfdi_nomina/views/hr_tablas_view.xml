@@ -1,0 +1,426 @@
+<odoo>
+    <!--Catalogos en Configuracion H.R.-->
+
+    <!--Registro Patronal-->
+
+    <record id="regpat_tree" model="ir.ui.view">
+        <field name="name">regpat.tree</field>
+        <field name="model">hr.ext.mx.regpat</field>
+        <field name="arch" type="xml">
+            <tree string="Registro patronal">
+                <field name="name"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="regpat_form" model="ir.ui.view">
+        <field name="name">regpat.form</field>
+        <field name="model">hr.ext.mx.regpat</field>
+        <field name="arch" type="xml">
+            <form string="Registro Patronal">
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="UMA"/>
+                        <field name="PRT"/>
+                        <field name="SUB_IMSS"/>
+                    </group>
+                    <group>
+                        <field name="AG"/>
+                        <field name="CP"/>
+                        <field name="EXPED"/>
+                        <field name="company_id"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page name="cuotas_imss" string="Cuotas IMSS">
+                        <group col="4">
+                           <!--  <label string=""/>
+                            <label string="Tope (SF)"/>
+                            <label string="% Patrón"/>
+                            <label string="% Empleado"/>
+ -->
+                            <label for="PRT_SF" string="Riesgos del Trabajo"/>
+                            <field name="PRT_SF" nolabel="1"/>
+                            <field name="PRT" nolabel="1"/>
+<!--                             <label string="-"/>
+ -->
+                            <hr  class="btn-primary" colspan="4" />
+                            <separator colspan="4" string="Enfermedad y maternidad"/>
+
+                            <label for="PE_SF" string="Prestaciones en especie"/>
+                            <field name="PE_SF" nolabel="1"/>
+                            <field name="PE_PATRON" nolabel="1"/>
+<!--                             <label string="-"/>
+ -->
+                            <label for="AE3_SF" string="Prest.esp.(mayor 3UMA)"/>
+                            <field name="AE3_SF" nolabel="1"/>
+                            <field name="AE3_PATRON" nolabel="1"/>
+                            <field name="AE3_TRAB" nolabel="1"/>
+
+                            <label for="ED_SF" string="Prestaciones en dinero"/>
+                            <field name="ED_SF" nolabel="1"/>
+                            <field name="ED_PATRON" nolabel="1"/>
+                            <field name="ED_TRAB" nolabel="1"/>
+
+                            <hr  class="btn-primary" colspan="4" />
+
+                            <label for="IV_SF" string="Invalidéz y Vida"/>
+                            <field name="IV_SF" nolabel="1"/>
+                            <field name="IV_PATRON" nolabel="1"/>
+                            <field name="IV_TRAB" nolabel="1"/>
+
+                            <label for="RET_SF" string="Retiro"/>
+                            <field name="RET_SF" nolabel="1"/>
+                            <field name="RET_PATRON" nolabel="1"/>
+<!--                             <label string="-"/>
+ -->
+                            <label for="CEAV_SF" string="Cesantía Edad y Vejéz"/>
+                            <field name="CEAV_SF" nolabel="1"/>
+                            <field name="CEAV_PATRON" nolabel="1"/>
+                            <field name="CEAV_TRAB" nolabel="1"/>
+
+                            <label for="GUA_SF" string="Guarderías"/>
+                            <field name="GUA_SF" nolabel="1"/>
+                            <field name="GUA_PATRON" nolabel="1"/>
+<!--                             <label string="-"/>
+ -->
+                            <label for="GMP_SF" string="Gastos Médicos para Pens."/>
+                            <field name="GMP_SF" nolabel="1"/>
+                            <field name="GMP_PATRON" nolabel="1"/>
+                            <field name="GMP_TRAB" nolabel="1"/>
+
+                            <label for="INFONAVIT_SF" string="INFONAVIT"/>
+                            <field name="INFONAVIT_SF" nolabel="1"/>
+                            <field name="INFONAVIT_PATRON" nolabel="1"/>
+<!--                             <label string="-"/>
+ -->
+                        </group>
+
+
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_open_regpat" model="ir.actions.act_window">
+        <field name="name">Registro patronal</field>
+        <field name="res_model">hr.ext.mx.regpat</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="type">ir.actions.act_window</field>       
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_regpat" id="menu_open_regpat"
+        parent="hr.menu_human_resources_configuration" sequence="40" groups="hr.group_hr_manager"/>
+
+
+    <!--Factor de Integración-->
+    <record id="hr_tabla_factor_integ_form" model="ir.ui.view">
+        <field name="name">hr.tabla.factor.integracion.form</field>
+        <field name="model">hr.tabla.fi</field>
+        <field name="arch" type="xml">
+            <form string="Tabla de Factor de Integracion">
+                <label for="name" class="oe_edit_only"/>
+                <h1><field name="name"/></h1>
+                <group>
+                    <group>
+                        <field name="year_days"/>
+                    </group>
+                    <group></group>
+                </group>
+                <group>
+                    <field name="fi_line_ids" nolabel="1">
+                        <form>
+                            <group>
+                                <field name="years_old"/>
+                                <field name="dias_aguinaldo"/>
+                                <field name="dias_vacaciones"/>
+                                <field name="prima_vacacional"/>
+                                <field name="factor_integracion"/>
+                            </group>
+                        </form>
+                        <tree string="Tabla factor de integración" editable="top">
+                            <field name="years_old"/>
+                            <field name="dias_aguinaldo"/>
+                            <field name="dias_vacaciones"/>
+                            <field name="prima_vacacional"/>
+                            <field name="factor_integracion"/>
+                        </tree>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="hr_tabla_factor_integ_tree" model="ir.ui.view">
+        <field name="name">hr.tabla.factor.integracion.tree</field>
+        <field name="model">hr.tabla.fi</field>
+        <field name="arch" type="xml">
+            <tree string="Tabla factor de integración">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_tabla_factor_integ" model="ir.actions.act_window">
+        <field name="name">Tabla factor de integración</field>
+        <field name="res_model">hr.tabla.fi</field>
+        <field name="type">ir.actions.act_window</field>
+       <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_tabla_factor_integ" id="menu_open_tabla_factor_integ"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
+
+    <!--Tabla Vacaciones-->
+    <record id="hr_tabla_vacaciones_form" model="ir.ui.view">
+        <field name="name">hr.tabla.vacaciones.form</field>
+        <field name="model">hr.tabla.vacaciones</field>
+        <field name="arch" type="xml">
+            <form string="Tabla de Vacaciones">
+                <label for="name" class="oe_edit_only"/>
+                <h1><field name="name"/></h1>
+                <group>
+                    <group></group>
+                    <group></group>
+                </group>
+                <group>
+                    <field name="vac_line_ids" nolabel="1">
+                        <form>
+                            <group>
+                                <field name="years_old"/>
+                                <field name="dias_vacaciones"/>
+                                <field name="dias_prima_vacacional"/>
+                            </group>
+                        </form>
+                        <tree string="Tabla factor de integración" editable="top">
+                            <field name="years_old"/>
+                            <field name="dias_vacaciones"/>
+                            <field name="dias_prima_vacacional"/>
+                        </tree>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="hr_tabla_vacaciones_tree" model="ir.ui.view">
+        <field name="name">hr.tabla.vacaciones.tree</field>
+        <field name="model">hr.tabla.vacaciones</field>
+        <field name="arch" type="xml">
+            <tree string="Tabla vacaciones">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_tabla_vacaciones" model="ir.actions.act_window">
+        <field name="name">Tabla vacaciones</field>
+        <field name="res_model">hr.tabla.vacaciones</field>
+<field name="type">ir.actions.act_window</field>       <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_tabla_vacaciones" id="menu_open_tabla_vacaciones"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
+
+    <!--Tabla Calendario-->
+    <record id="hr_tabla_calend_form" model="ir.ui.view">
+        <field name="name">hr.tabla.calendar.form</field>
+        <field name="model">hr.tabla.calendar.acum</field>
+        <field name="arch" type="xml">
+            <form string="Tabla Calendario">
+                <sheet>
+                <div class="oe_button_box" name="calendar">
+                        <button name="fill"
+                                type="object"
+                                string="Llenar"
+                                class="oe_stat_button"
+                                icon="fa-archive">
+                        </button>
+                </div>
+                <label for="name" class="oe_edit_only"/>
+                <h1><field name="name"/></h1>
+                <group>
+                    <group>
+                        <field name="fecha_inicio"/>
+                        <field name="periodo"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <group>
+                    <field name="cal_line_ids" nolabel="1"
+                           context="{'default_fecha_inicio': fecha_inicio, 'cal_line_ids': cal_line_ids, 'periodo': periodo}">
+                        <form>
+                            <group>
+                                <field name="sequence" />
+                                <field name="fecha_inicio"/>
+                                <field name="fecha_fin"/>
+                            </group>
+                        </form>
+                        <tree string="Tabla calendario" editable="bottom">
+                            <field name="sequence" readonly="1" force_save="1"/>
+                            <field name="fecha_inicio" readonly="1" force_save="1"/>
+                            <field name="fecha_fin"/>
+                        </tree>
+                    </field>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="hr_tabla_calend_tree" model="ir.ui.view">
+        <field name="name">hr.tabla.calendar.tree</field>
+        <field name="model">hr.tabla.calendar.acum</field>
+        <field name="arch" type="xml">
+            <tree string="Tabla calendario">
+                <field name="name"/>
+                <field name="fecha_inicio"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_tabla_calend" model="ir.actions.act_window">
+        <field name="name">Tabla Calendario</field>
+        <field name="res_model">hr.tabla.calendar.acum</field>
+<field name="type">ir.actions.act_window</field>       <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_tabla_calend" id="menu_open_tabla_calend"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
+
+    <!--Tabla Base Gravable Acumulados-->
+
+    <record id="hr_tabla_basegravable_tree" model="ir.ui.view">
+        <field name="name">hr.tabla.basegravable.tree</field>
+        <field name="model">hr.tabla.basegravable.acum</field>
+        <field name="arch" type="xml">
+            <tree string="Tabla calendario" editable="bottom" create="false" delete="false">
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="acum_calendar_id" options="{'no_create_edit': True, 'no_create':True}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_tabla_basegravable" model="ir.actions.act_window">
+        <field name="name">Tabla Base Gravable</field>
+        <field name="res_model">hr.tabla.basegravable.acum</field>
+        <!-- <field name="view_type">form</field> -->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_tabla_basegravable" id="menu_open_tabla_basegravable"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
+
+    <!--Tabla Subsidio para el empleo-->
+
+    <record id="hr_tabla_sube_form" model="ir.ui.view">
+        <field name="name">hr.tabla.sube.form</field>
+        <field name="model">hr.tabla.sube</field>
+        <field name="arch" type="xml">
+            <form string="Tabla Calendario">
+                <sheet>
+                <label for="name" class="oe_edit_only"/>
+                <h1><field name="name"/></h1>
+                <group>
+                    <field name="tabla_line" nolabel="1" context="{'tabla_line': tabla_line}">
+                        <form>
+                            <group>
+                                <field name="limite_inferior" />
+                                <field name="limite_superior"/>
+                                <field name="subsidio"/>
+                            </group>
+                        </form>
+                        <tree string="Tabla subsidio" editable="bottom">
+                            <field name="limite_inferior" readonly="0" force_save="1"/>
+                            <field name="limite_superior"/>
+                            <field name="subsidio"/>
+                        </tree>
+                    </field>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_tabla_sube_tree" model="ir.ui.view">
+        <field name="name">hr.tabla.sube.tree</field>
+        <field name="model">hr.tabla.sube</field>
+        <field name="arch" type="xml">
+            <tree string="Tabla subsidio">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_tabla_sube" model="ir.actions.act_window">
+        <field name="name">Tabla Subsidio</field>
+        <field name="res_model">hr.tabla.sube</field>
+        <!-- <field name="view_type">form</field> -->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_tabla_sube" id="menu_open_tabla_sube"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
+
+    <!--Tabla ISPT-->
+
+    <record id="hr_tabla_ispt_form" model="ir.ui.view">
+        <field name="name">hr.tabla.ispt.form</field>
+        <field name="model">hr.tabla.ispt</field>
+        <field name="arch" type="xml">
+            <form string="Tabla ISPT">
+                <sheet>
+                <label for="name" class="oe_edit_only"/>
+                <h1><field name="name"/></h1>
+                <group>
+                    <field name="tabla_line" nolabel="1" context="{'tabla_line': tabla_line}">
+                        <form>
+                            <group>
+                                <field name="limite_inferior" />
+                                <field name="limite_superior"/>
+                                <field name="cuota_fija"/>
+                                <field name="porc_excedente"/>
+                            </group>
+                        </form>
+                        <tree string="Tabla ispt" editable="bottom">
+                            <field name="limite_inferior" readonly="0" force_save="1"/>
+                            <field name="limite_superior"/>
+                            <field name="cuota_fija"/>
+                            <field name="porc_excedente"/>
+                        </tree>
+                    </field>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_tabla_ispt_tree" model="ir.ui.view">
+        <field name="name">hr.tabla.ispt.tree</field>
+        <field name="model">hr.tabla.ispt</field>
+        <field name="arch" type="xml">
+            <tree string="Tabla ISR">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="act_open_tabla_ispt" model="ir.actions.act_window">
+        <field name="name">Tabla ISR</field>
+        <field name="res_model">hr.tabla.ispt</field>
+<field name="type">ir.actions.act_window</field>       <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_tabla_ispt" id="menu_open_tabla_ispt"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
+
+</odoo>

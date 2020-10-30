@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="reporte_acumulado2_view_form">
+        <field name="name">reporte.acumulado2.view.form</field>
+        <field name="model">cfdi_nomina.reporte.acumulado2</field>
+        <field name="arch" type="xml">
+            <form string="Reporte acumulado por estructura">
+                <!-- <group string="Periodo"> -->
+                <!--     <field name="period_id"/> -->
+                <!-- </group> -->
+                <!-- <group string="Nóminas"> -->
+                <!--     <field name="slip_ids" domain="[('period_id','=',period_id)]" nolabel="1"/> -->
+                <!-- </group> -->
+                <group string="Agrupaciones de reglas">
+                    <field name="rule_group_ids" nolabel="1"/>
+                </group>
+                <group string="Empleados">
+                    <field name="employee_ids" nolabel="1"/>
+                </group>
+                <group>
+                    <field name="fname" invisible="1"/>
+                    <field name="datas" readonly="1" filename="fname" attrs="{'invisible':[('datas','=',False)]}"/>
+                </group>
+                <footer>
+                    <!-- <button type="special" special="cancel" string="Cerrar" icon="gtk-cancel"/>
+                    <button type="object" string="Generar reporte" name="action_reporte" icon="gtk-execute"/> -->
+
+                    <button type="special" special="cancel" string="Cerrar" icon="fa-times"/>
+                    <button type="object" string="Generar reporte" name="action_reporte" icon="fa-check-square"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_reporte_acumulado2" model="ir.actions.act_window">
+        <field name="name">Reporte Acu. por Estructura</field>
+        <field name="res_model">cfdi_nomina.reporte.acumulado2</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="reporte_acumulado2_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_reporte_acumulado2" parent="hr_work_entry_contract.menu_hr_payroll_root"
+        action="action_reporte_acumulado2"/>
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--Email template -->
+        <record id="email_template_payslip_cfdi" model="mail.template">
+            <field name="name">Recibo Nómina - Correo</field>
+            <field name="email_from">${(ctx.company.email and '&quot;%s&quot; &lt;%s&gt;' % (ctx.company.name, ctx.company.email) or '')|safe}</field>
+            <field name="subject">${ctx.company.name}, adjunta recibo de nómina (Ref ${object.number or 'N/D' })</field>
+            <field name="partner_to">${object.employee_id.address_home_id.id}</field>
+            <field name="email_to">${object.employee_id.address_home_id.email}</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template"/>
+            <field name="report_name"/>
+            <field name="lang">${object.employee_id.address_home_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>Hola ${object.employee_id.name} ,</p>
+<p>
+Anexo se envia Recibo correspondiente de ${object.payslip_run_id.name}
+del ${object.date_start} al ${object.date_end} de:
+${object.employee_id.nombre_completo}
+
+por <strong>${format_amount(object.total, ctx.company.currency_id)}</strong>
+
+</p>
+
+<p>Cualquier duda, no dude en contactar al departamento administrativo.</p>
+<p>Saludos cordiales,</p>
+
+<p style="color:#888888;">
+% if user and user.signature:
+${user.signature | safe}
+% endif
+</p>
+
+
+]]></field>
+        </record>
+
+
+    </data>
+</odoo>
