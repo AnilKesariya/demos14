@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- Tabla bancos -->
+
+        <record id="bancos_view_tree_code_sat" model="ir.ui.view">
+            <field name="name">bancos.view.tree.code.sat</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after" >
+                    <field name="code_sat"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!--Menu para cuentas bancarias-->
+
+        <record id="action_nomina_res_partner_bank" model="ir.actions.act_window">
+            <field name="name">Cuentas Bancarias</field>
+            <field name="res_model">res.partner.bank</field>
+            <field name="type">ir.actions.act_window</field>            
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Cuentas Bancarias"
+            id="menu_cuentas_bancarias"
+            parent="hr.menu_human_resources_configuration"
+            action="action_nomina_res_partner_bank"/>
+    
+    </data>
+</openerp>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_partner_bank_form_inh">
+        <field name="name">view partner bank form inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group string="Beneficiarios">
+                    <field name="beneficiarios" nolabel="1">
+                        <tree string="Beneficiarios" editable="bottom">
+                            <field name="name"/>
+                            <field name="porcentaje"/>
+                            <field name="direccion"/>
+                            <field name="fecha_nacimiento"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_form_inh">
+        <field name="name">hr.employee.form.inh</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Tallas">
+                    <group style="width:40%%">
+                        <field name="talla_pantalon"/>
+                        <field name="talla_bata"/>
+                        <field name="talla_zapato"/>
+                        <field name="talla_playera"/>
+                        <field name="talla_faja"/>
+                    </group>
+                </page>
+                <page string="Baja">
+                    <group>
+                        <field name="documento_baja"/>
+                        <field name="motivo_baja"/>
+                    </group>
+                </page>
+                <page string="Pensiones alimenticias">
+                    <group>
+                        <field name="pensiones" nolabel="1">
+                            <tree string="Pensiones" editable="bottom">
+                                <field name="name"/>
+                                <field name="porcentaje"/>
+                                <field name="no_card"/>
+                                <field name="data_start_ret"/>
+                                <field name="amount"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+                <page string="Seguro de vida">
+                    <group>
+                        <field name="poliza_seguro"/>
+                    </group>
+                    <separator string="Beneficiarios"/>
+                    <field name="beneficiarios_seguro">
+                        <tree string="Beneficiarios" editable="bottom">
+                            <field name="name"/>
+                            <field name="parentesco"/>
+                            <field name="porcentaje"/>
+                            <field name="fecha_nacimiento"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Familiares">
+                    <h2>Familiares que laboran o laboraron en la empresa</h2>
+                    <newline/>
+                    <field name="familiares">
+                        <tree string="Familiares" editable="bottom">
+                            <field name="name"/>
+                            <field name="appat"/>
+                            <field name="apmat"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Histórico sueldos">
+                    <group>
+                        <field name="historico_sueldo">
+                            <tree string="Histórico sueldo">
+                                <field name="name"/>
+                                <field name="sueldo_old"/>
+                                <field name="sueldo_new"/>
+                                <field name="user_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+                <page string="Histórico otros">
+                    <group>
+                        <field name="historico_otros">
+                            <tree string="Histórico otros">
+                                <field name="name"/>
+                                <field name="tipo"/>
+                                <field name="valor_old"/>
+                                <field name="valor_new"/>
+                                <field name="user_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+                <page string="Actas adiminstrativas">
+                    <group>
+                        <field name="actas_adm" readonly="1">
+                            <tree string="Actas">
+                                <field name="fecha"/>
+                                <field name="motivo"/>
+                                <field name="repercusion"/>
+                                <field name="accion"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </notebook>
+            <field name="work_phone" position="attributes">
+                <attribute name="string">Teléfono de casa</attribute>
+            </field>
+            <field name="mobile_phone" position="attributes">
+                <attribute name="string">Móvil personal</attribute>
+            </field>
+            <field name="work_location" position="replace"/>
+            <xpath expr="//page[@name='personal_information']" position="inside">
+                <group string="Hijos">
+                    <field name="offspring" nolabel="1">
+                        <tree string="Hijos" editable="bottom">
+                            <field name="nombre"/>
+                            <field name="edad"/>
+                            <field name="nombre_padre"/>
+                        </tree>
+                    </field>
+                </group>
+                <group string="Otra información">
+                    <field name="tipo_sangre"/>
+                    <field name="antecedentes_penales"/>
+                    <field name="creditos">
+                        <tree string="Creditos" editable="bottom">
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+            <field name="marital" position="after">
+                <field name="spouse"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_form_inh12">
+        <field name="name">view employee form inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="inside">
+                <group string="Current Contract" cols="2">
+                    <field name="vehicle" string="Vehículo propio"/>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']/group/group[4]" position="replace">
+            </xpath>
+        </field>
+    </record>
+</odoo>

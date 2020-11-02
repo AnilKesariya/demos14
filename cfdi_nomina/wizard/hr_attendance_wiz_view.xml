@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_attendance_wiz_form">
+        <field name="name">hr.attendance.gen.wiz.form</field>
+        <field name="model">hr.attendance.gen.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Faltas desde Checador" version="7.0">
+                <group col="4">
+                   <field name="date_from" attrs="{'readonly': [('resultado_txt','!=',False)]}"/>
+                   <field name="date_to" attrs="{'readonly': [('resultado_txt','!=',False)]}"/>
+                </group>
+                <field name="resultado_txt" attrs="{'invisible': [('resultado_txt','=',False)]}"/>
+                <footer>
+                    <div attrs="{'invisible': [('resultado_txt','!=',False)]}">
+                        <button name="buscar_faltas" string="Verificar" type="object" class="oe_highlight"/>
+                        o
+                        <button string="Cancelar"  special="cancel" />
+                        </div>
+                    <div attrs="{'invisible': [('resultado_txt','=',False)]}">
+                        <button string="Terminar"  special="cancel" />
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_attendance_search" model="ir.actions.act_window">
+        <field name="name">Faltas desde Checador</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.attendance.gen.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        name="Faltas desde Checador"
+        parent="hr_attendance.menu_hr_attendance_root"
+        action="act_attendance_search"
+        sequence="250"
+        id="menu_attendance_search"
+       />
+
+    <record id="view_hr_attendance_summary_employee" model="ir.ui.view">
+        <field name="name">hr.attendance.summary.employee.form</field>
+        <field name="model">hr.attendance.employee</field>
+        <field name="arch" type="xml">
+            <form string="Asistencia">
+                <group col="4" colspan="6">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <newline/>
+                    <field name="emp" invisible="True"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_attendance_summary_employee" model="ir.actions.act_window">
+        <field name="name">Asistencia</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.attendance.employee</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

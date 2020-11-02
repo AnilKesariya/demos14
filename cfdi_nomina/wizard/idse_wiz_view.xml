@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_idsec_wizard_form">
+        <field name="name">hr.idsec.wiz.form</field>
+        <field name="model">hr.idsec.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Generar IDSE" version="7.0">
+                <group>
+                    <group>
+                        <field name="date_from" class="oe_inline"
+                               attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="tipo"
+                               attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="bimestre"
+                               attrs="{'invisible':[('tipo','!=','modifcaciones')],'readonly': [('state','!=','draft')]}"/>
+                        <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"
+                               attrs="{'invisible':[('data_fname','!=',False)]}"/>
+                    </group>
+                    <group>
+                        <field name="date_to" class="oe_inline"
+                               attrs="{'readonly': [('state','!=','draft')],'invisible':[('bimestre','=','bim_actual')]}"/>
+                        <field name="guia" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="umf" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="data_file"  filename="data_fname" states="done"/>
+                        <field name="data_fname"  invisible="1" />
+                        <field name="state" invisible="1"/>
+                    </group>
+                </group>
+                <field name="mensaje" states="done"/>
+                <footer>
+                    <button string="Descartar"  special="cancel" />
+                    <button name="gen_idse" string="Generar" type="object" class="oe_highlight" states="draft" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--                        <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"-->
+<!--                              attrs="{'invisible':[('data_fname','!=',False)]}"/>-->
+
+    <record id="action_idsec_open" model="ir.actions.act_window">
+        <field name="name">IDSE</field>
+        <field name="res_model">hr.idsec.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_imss" parent="hr.menu_hr_root" name="IMSS"/>
+    <menuitem id="menu_idsec" parent="menu_imss" name="IDSE" action="action_idsec_open"/>
+
+
+</odoo>

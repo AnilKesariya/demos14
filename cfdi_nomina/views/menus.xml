@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- Acciones y menus -->
+    <record id="act_open_zonasalario" model="ir.actions.act_window">
+        <field name="name">Zona Salario</field>
+        <field name="res_model">hr.ext.mx.zonasalario</field>
+<!--         <field name="view_type">form</field>
+ -->        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="act_open_zonasalario" id="menu_open_zonasalario"
+        parent="hr.menu_human_resources_configuration" sequence="20" groups="hr.group_hr_manager"/>
+
+    <!--Mostrar Menu de Nómina solo al grupo Administrador de Nómina-->
+    <record model="ir.ui.menu" id="hr_work_entry_contract.menu_hr_payroll_root">
+        <field name="groups_id" eval="[(6, 0, [ref('hr_payroll.group_hr_payroll_manager')])]"/>
+    </record>
+
+</odoo>

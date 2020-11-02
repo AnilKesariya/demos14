@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record model="ir.ui.view" id="batch_mail_view_form">
+            <field name="name">batch.mail.view.form</field>
+            <field name="model">cfdi_nomina.batch.mail</field>
+            <field name="arch" type="xml">
+                <form string="Enviar por correo XML y PDF">
+                    <group>
+                        <field name="nominas"/>
+                    </group>
+                    <footer>
+                        <button type="special" special="cancel" string="Cerrar"/>
+                        <button type="object" string="Enviar correo" name="action_batch_mail" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_batch_mail" model="ir.actions.act_window">
+            <field name="name">Enviar nóminas por correo</field>
+            <field name="res_model">cfdi_nomina.batch.mail</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="batch_mail_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_batch_mail" parent="hr_work_entry_contract.menu_hr_payroll_root"
+            action="action_batch_mail"/>
+
+</odoo>

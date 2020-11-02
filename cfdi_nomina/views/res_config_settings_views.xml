@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form_cfdinomina" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.cfdinomina</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="hr_payroll.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-string='Payroll']" position="inside">
+                    <h2>CFDI Nómina</h2>
+                    <div class="row mt16 o_settings_container" id="hr_payroll_cfdi">
+                        <div class="col-md-6 col-xs-12 o_setting_box">
+                             <div class="o_setting_right_pane">
+                                 <h5>Valores globales</h5>
+                                    <span class="fa fa-lg fa-building-o" title="Valores globales para nómina." />
+                                    <div class="text-muted">
+                                        Valores predefinidos para cálculo de nómina
+                                    </div>
+                                    <div class="content-group">
+                                         <div class="row mt16">
+                                            <label string="Diario de Salarios" for="nomina_journal" class="col-md-3 o_light_label"/>
+                                            <field name="nomina_journal" />
+                                        </div>
+                                        <div class="row">
+                                            <label string="Días por Año" for="nomina_year_days" class="col-md-3 o_light_label"/>
+                                            <field name="nomina_year_days"/>
+                                        </div>
+                                        <div class="row">
+                                            <label string="Salario Mínimo DF" for="nomina_sf" class="col-md-3 o_light_label"/>
+                                            <field name="nomina_sf" />
+                                        </div>
+                                        <div class="row">
+                                            <label string="UMA" for="nomina_uma" class="col-md-3 o_light_label"/>
+                                            <field name="nomina_uma" />
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 o_setting_box" title=".">
+                                <div class="o_setting_right_pane">
+                                    <h5> Tablas </h5>
+                                    <span class="fa fa-lg fa-building-o" title="Valores para determinar tablas de cálculo de Nómina." />
+                                    <div class="text-muted">
+                                        Tablas para cálculo
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="ISR Mensual" for="ispt_mensual_id" colspan="4" class="col-md-3 o_light_label"/>
+                                            <field name="ispt_mensual_id" />
+                                        </div>
+                                        <div class="row mt16">
+                                            <label string="ISR Anual" for="ispt_anual_id" colspan="4" class="col-md-3 o_light_label"/>
+                                            <field name="ispt_anual_id" />
+                                        </div>
+                                        <newline/>
+                                        <div class="row mt16">
+                                            <label string="Subsidio para el empleo" for="sube_id" colspan="4" class="col-md-3 o_light_label"/>
+                                            <field name="sube_id" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="res_config_settings_view_form_attendance" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.cfdinomina</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='hr_attendance']" position="inside">
+                    <h2>Checador</h2>
+                    <div class="row mt16 o_settings_container" id="hr_attendance_check">
+                        <div class="col-md-6 col-xs-12 o_setting_box">
+                             <div class="o_setting_right_pane">
+                                 <h5> string='Asistencia'</h5>
+                                    <span class="fa fa-lg" title="Valores globales para nómina." />
+                                    <div class="text-muted">
+                                        Rango en minutos para considerar asistencia
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Rango asistencia" for="attendance_range"
+                                                   class="col-md-3 o_light_label"/>
+                                            <field name="attendance_range"/>
+                                        </div>
+                                    </div>
+                                    <div class="text-muted">
+                                        Numero de retardos a ser considerados como falta
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Num de retardos"
+                                                   for="attendance_nretardos" class="col-md-3 o_light_label"/>
+                                            <field name="attendance_nretardos"/>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

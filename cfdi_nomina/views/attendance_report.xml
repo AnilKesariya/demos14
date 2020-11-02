@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Templates -->
+    <template id="attendance_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="cfdi_nomina.contract_external_layout">
+                    <div class="page something">
+                       <t t-set="info" t-value="get_holidays_status"/>
+                        <div class="row" style="font-size: 14px; font-weight: bold;">
+                            <div class="col-xs-4">
+                                Empleado
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        Fecha
+                                    </div>
+                                    <div class="col-xs-2">
+                                        Entrada
+                                    </div>
+                                    <div class="col-xs-2">
+                                        Salida
+                                    </div>
+                                    <div class="col-xs-2">
+                                        Entrada
+                                    </div>
+                                    <div class="col-xs-2">
+                                        Salida
+                                    </div>
+                                    <div class="col-xs-2">
+                                        Tiempo
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="row" style="font-size: 12px;">
+                                    <span t-field="o.nombre_completo"/>
+                                </div>
+                                <div class="row text-center">
+                                    <img t-if="o.image" t-att-src="'data:image/png;base64,%s' % to_text(o.image)" style="max-height: 90; max-width: auto;"/>
+                                </div>
+                                <div class="row">
+                                    <p>Conozco y estoy de acuerdo con los tiempos y horas reflejados en el presente documento y firmo de conformidad a continuación:</p>
+                                </div>
+                                <br/><br/><br/><br/><br/><br/>
+                                <div class="row">
+                                    __________________________________<br/>
+                                    <span t-field="o.nombre_completo"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <t t-foreach="get_range_days" t-as="day">
+                                    <div class="row" style="font-size: 12px;">
+                                    <div class="col-xs-2">
+                                        <span t-esc="day"/>
+                                        <t t-set="att" t-value="get_attendance_day(day, o)"/>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <t t-if="len(att.get('check')) > 0" >
+                                            <span t-esc="att.get('check')[0].strftime('%H:%M') if att.get('check')[0] else '-'"/>
+                                        </t>
+                                    </div>
+                                    <div class="col-xs-2">
+                                       <t t-if="len(att.get('check')) > 1" >
+                                            <span t-esc="att.get('check')[1].strftime('%H:%M') if att.get('check')[1] else '-'"/>
+                                        </t>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <t t-if="len(att.get('check')) > 2" >
+                                            <span t-esc="att.get('check')[2].strftime('%H:%M') if att.get('check')[2] else '-'"/>
+                                        </t>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <t t-if="len(att.get('check')) > 3" >
+                                            <span t-esc="att.get('check')[3].strftime('%H:%M') if att.get('check')[3] else '-'"/>
+                                        </t>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <t t-set="total" t-value="att.get('total',0)"/>
+                                        <span t-esc="'%s:%s' % (int(total/3600), int((total-(int(total/3600)*3600))/60))"/>
+                                    </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="print_contract_time_pdf" model="ir.actions.report">
+            <field name="name">Reporte de asistencia</field>
+            <field name="model">hr.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cfdi_nomina.attendance_report</field>
+            <field name="report_file">cfdi_nomina.attendance_report</field>
+            <field name="print_report_name">Reporte de asistencia</field>
+            <field name="binding_model_id" ref="model_hr_employee"/>
+            <field name="binding_type">report</field>
+        </record>
+</odoo>

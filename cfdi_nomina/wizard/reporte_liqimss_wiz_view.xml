@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_rpt_liqimss_wiz_form">
+        <field name="name">hr.reporte.liqimss.wiz.form</field>
+        <field name="model">hr.reporte.liqimss.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Liquidación IMSS" version="7.0">
+                <group col="4">
+                   <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                   <field name="department_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button name="print_reporte" string="Imprimir" type="object" class="oe_highlight"/>
+                    o
+                    <button string="Descartar"  special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_rpt_liqimss" model="ir.actions.act_window">
+        <field name="name">Reporte Liquidación IMSS</field>
+        <field name="res_model">hr.reporte.liqimss.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_payslip_run"/>
+        <field name="binding_view_types">form</field>
+    </record>
+   
+    <!--key2="client_action_multi"-->
+
+</odoo>

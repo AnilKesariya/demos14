@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="batch_cfdi_view_form">
+        <field name="name">batch.cfdi.view.form</field>
+        <field name="model">cfdi_nomina.batch.cfdi</field>
+        <field name="arch" type="xml">
+            <form string="Generar XMLs">
+                <group>
+                    <field name="fecha_pago"/>
+                    <field name="concepto"/>
+                    <field name="nominas"/>
+                </group>
+                <footer>
+                    <button special="cancel" class="oe_link" string="Cerrar"/>
+                    <button type="object" string="Crear CFDIs" name="action_batch_cfdi" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_batch_cfdi" model="ir.actions.act_window">
+        <field name="name">Generar CFDIs</field>
+        <field name="res_model">cfdi_nomina.batch.cfdi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="batch_cfdi_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_batch_cfdi" parent="hr_work_entry_contract.menu_hr_payroll_root"
+        action="action_batch_cfdi"/>
+
+</odoo>
