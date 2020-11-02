@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--&lt;!&ndash; css &ndash;&gt;-->
+        <!--<template id="report_styles" inherit_id="web.report_assets_common">-->
+            <!--<xpath expr=".">-->
+                <!--<link rel="stylesheet"-->
+                  <!--type="text/css"-->
+                  <!--href="/cfdi_nomina/static/src/css/report.css"-->
+                <!--/>-->
+            <!--</xpath>-->
+        <!--</template>-->
+
+    <!-- Templates -->
+    <template id="reporte_liqimss">
+        <t t-call="web.html_container">
+            <t t-call="cfdi_nomina.contract_external_layout">
+            <!--<t t-call="web.external_layout">-->
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span t-esc="res_company.name" />
+                                <span t-esc="res_company.city" />
+                                <span t-esc="res_company.state_id.name" /> 
+                                <span t-esc="res_company.country_id.name" /><br/>
+                                <span><b>R.F.C.</b></span>
+                                <span t-esc="res_company.vat" />
+                            </div>
+                        </div>
+                        <div class="row head-blue-med">
+                            <div class="col-xs-12">
+                                <span>Liquidación del IMSS</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span><b>Periodo:</b></span><span t-field="o.date_start" />-<span t-field="o.date_end" /><br/>
+                                <span><b>Departamentos:</b></span><span t-esc="data['departamentos']" /><br/>
+                                <span><b>Compañías[Registro Patronal]:</b></span><span style="font-size:10px" t-esc="data['companies']" />
+                            </div>
+
+                        </div>
+                        <div class="row space"/>
+                        <!--Encabezado Datos-->
+                        <div class="row space_line tb_nomina">
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    <strong>Fecha</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>N.S.S.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>Cve</strong>
+                                </div>
+                                <div class="col-xs-5">
+                                    <strong>Nombre Trabajador</strong>
+                                </div>
+                                <div class="col-xs-2">
+                                    <strong>RFC</strong>
+                                </div>
+                                <div class="col-xs-2">
+                                    <strong>CURP</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12" style="text-align: center ;">
+                                    <center>
+                                    <strong style="font-size: 14px ;">
+                                        Enfermedades y Maternidad
+                                    </strong>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    <strong>Días</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>Inc.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>Aus.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>SDI</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>C.F.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>Exc.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>P.D.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>G.M.P.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>R.T.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>I.V.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>G.P.S.</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    <strong>Suma</strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--Datos-->
+                        <t t-foreach="data['payslips']" t-as="p">
+                            <t t-set="val" t-value="calc_val(p)" />
+                            <div class="row tb_nomina">
+                                <div class="row">
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.date_to" />
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-field="p.employee_id.imss" />
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.employee_id.cod_emp" />
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <span t-field="p.employee_id" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span t-field="p.employee_id.rfc" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span t-esc="p.employee_id.curp" />
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-xs-1">
+                                        <span t-esc="val.dias_trabajados" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="val.inc"/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="val.aus"/>
+                                    </div>
+                                     <div class="col-xs-1">
+                                        <span t-esc="p.sdi" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.pe_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.ae3_patron + p.ae3_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.ed_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.gmp_patron + p.gmp_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.rt_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.iv_patron + p.iv_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.gua_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="val.suma_patron + val.suma_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-xs-5">
+                                        <span>Cuota patrón</span>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.ae3_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.ed_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.gmp_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.rt_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.iv_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.gua_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="val.suma_patron" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-xs-5">
+                                        <span>Cuota trabajador</span>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.ae3_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.ed_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.gmp_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="p.iv_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <span t-esc="val.suma_trab" t-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row space_line"/>
+                        </t>
+
+
+                    </div>
+
+                    <!-- Report footer content -->
+                    <div class="row space"/>
+                    <div class="row head-blue-med">
+                        <div class="col-xs-12">
+                            <span>RESUMEN</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                        Total de registros: <t t-esc="len(data['payslips'])" />
+                        </div>
+                        <div class="col-2" />
+                        <div class="col-2" />
+                        <div class="col-3" />
+                        <div class="col-2" />
+                    </div>
+
+
+                    <t t-set="val" t-value="get_total(o)"/>
+                    <div class="row head-blue-med" >
+                        <div class="col-xs-6">
+                            <strong>Base Cotizacion</strong>
+                        </div>
+                        <div class="col-xs-6">
+                            <strong>Total</strong>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>SDI Salario diario integrado</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_sdi" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>Inc. Incapacidades</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_inc"/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>Aus. Ausentismo</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_aus"/>
+                        </div>
+                    </div>
+                    <div class="row space_line"/>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>C.F. Cuota fija</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_pe" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>Exc. Excedente 3 SMGDF</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_ae3" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>Exc. Prestaciones en dinero</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_ed" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>G.M.P. Gastos médicos para pensionados</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_gmp" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>R.T. Riesgo de trabajo</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_rt" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>I.V. Invalidez y vida</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_iv" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-6">
+                            <strong>G.P.S. Guarderias y prestaciones sociales</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_gua" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                    <div class="row head-blue-med" >
+                        <div class="col-xs-6">
+                            <strong>Total</strong>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right;">
+                            <span t-esc="val.t_total" t-options='{"widget": "float", "precision": 2}'/>
+                        </div>
+                    </div>
+                 </t>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="action_reporte_liqimss" model="ir.actions.report">
+        <field name="name">Liquidacion IMSS</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cfdi_nomina.reporte_liqimss</field>
+        <field name="report_file">cfdi_nomina.reporte_liqimss</field>
+        <field name="print_report_name">'LiqIMSS-%s' % (object.name).replace('/', '')</field>
+        <field name="binding_model_id" ref="model_hr_payslip"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

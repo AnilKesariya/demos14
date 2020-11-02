@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_transfer_view_tree" model="ir.ui.view">
+        <field name="name">hr.employee.transfer.tree</field>
+        <field name="model">hr.employee.transfer</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date"/>
+                <field name="employee_id"/>
+                <field name="company_id"/>
+                <field name="company_dest_id"/>
+                <field name="wage"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_transfer_filter" model="ir.ui.view">
+        <field name="name">hr.transfer.select</field>
+        <field name="model">hr.employee.transfer</field>
+        <field name="arch" type="xml">
+            <search string="Transferencias">
+                <field name="date" string="Fecha" filter_domain="[('date','=',date]"/>
+                <field name="employee_id"/>
+                <group expand="0" string="Agrupar Por">
+                    <filter string="Empleado" name="employee_id" context="{'group_by':'employee_id'}"/>
+                    <filter string="Fecha" name="transfer_run_id" context="{'group_by':'date'}"/>
+                    <filter string="Almacen Origen" name="company_id" groups="base.group_multi_company" context="{'group_by':'company_id'}"/>
+                    <filter string="Almacen Destino" name="company_id" groups="base.group_multi_company" context="{'group_by':'company_dest_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="act_hr_employee_2_hr_transfer" model="ir.actions.act_window">
+        <field name="name">Transferencias</field>
+        <field name="res_model">hr.employee.transfer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_employee_id': [active_id],
+            'default_employee_id': active_id,
+        }</field>
+    </record>
+
+<!--    <menuitem action="act_open_hr_tipo" id="menu_open_hr_tipo" groups="hr.group_hr_manager"-->
+<!--        parent="hr_payroll.menu_hr_payroll_configuration"/>-->
+
+</odoo>

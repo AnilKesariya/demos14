@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--#    Coded by: Jose Osuna (joseg.osuna@gmail.com)-->
+    <!--El los id de res.bank estan marcados como noupdate. Para poder modficarlos con data,-->
+    <!--se debe cambiar este valor en la tabla ir_model_data con la funcion siguiente-->
+    <data noupdate="0">
+        <function name="write" model="ir.model.data">
+            <!-- First we need to find the record...-->
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'res.bank')]"/>
+            </function>
+           <!-- ...and temporarily set the noupdate field to False-->
+            <value eval="{'noupdate': False}" />
+        </function>
+    </data>
+
+    <data noupdate="0">
+        <record model="res.bank" id="base.res_bank_1">
+            <field name="name">N/A</field>
+            <field name="code_sat">999</field>
+        </record>
+    </data>
+
+    <data noupdate="0">
+        <function name="write" model="ir.model.data">
+            <!-- find the record...-->
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'res.bank')]"/>
+            </function>
+           <!-- ...and back noupdate field to True-->
+            <value eval="{'noupdate': True}" />
+        </function>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record id="payroll_structure_demo_mx" model="hr.payroll.structure">
+        <field name='name'>Structure Data CFDI</field>
+        <field name='code'>Data CFDI Payroll</field>
+        <field eval="[(6, 0, [
+            ref('hr_salary_rule_ssem'),
+            ref('hr_salary_rule_GRANEX'),
+            ref('hr_salary_rule_GRANGR'),
+            ref('hr_salary_rule_GRATGR'),
+            ref('hr_salary_rule_REUTEX'),
+            ref('hr_salary_rule_AYUTI'),
+            ref('hr_salary_rule_REUTGR'),
+            ])]"
+            name="rule_ids"/>
+    </record>
+</odoo>

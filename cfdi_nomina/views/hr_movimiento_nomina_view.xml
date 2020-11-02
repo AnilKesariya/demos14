@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_movnomina_tree">
+        <field name="name">view.hr.mov.nomina</field>
+        <field name="model">hr.mov.nomina</field>
+        <field name="arch" type="xml">
+            <tree string="Movimientos Nómina">
+                <field name="name"/>
+                <field name="rule_id"/>
+                <field name="rule_code"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_hr_movnomina_form">
+        <field name="name">view.hr.mov.nomina.form</field>
+        <field name="model">hr.mov.nomina</field>
+        <field name="arch" type="xml">
+            <form string="Movimientos Nómina" version="7.0">
+                <header>
+                    <field name="state" widget="statusbar" clickable="True"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_baja" type="object" class="oe_inline oe_stat_button"
+                                states="alta"
+                                icon="fa-archive">
+                            <span>Dar baja</span>
+                        </button>
+                        <button name="action_alta" type="object" class="oe_inline oe_stat_button"
+                                states="baja"
+                                icon="fa-archive">
+                            <span>Dar Alta</span>
+                        </button>
+                        <button name="action_vaciar" type="object" class="oe_inline oe_stat_button"
+                                states="baja"
+                                confirm="Esto dejará sin registros este documento. ¿Continuar?"
+                                icon="fa-archive">
+                            <span>Vaciar lineas</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nombre" />
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="rule_id"/>
+                            <field name="rule_code"/>
+                        </group>
+                        <group>
+                            <field name="amount_python_compute"/>
+                        </group>
+                    </group>
+                    <field name="mov_nomina_lines">
+                        <tree>
+                            <field name="employee_id"/>
+                            <field name="amount_python_compute"/>
+                            <field name="date_deadline"/>
+                        </tree>
+                        <form version="7.0">
+                            <group>
+                                <group>
+                                    <field name="employee_id"/>
+                                    <field name="amount_python_compute"/>
+                                </group>
+                                <group>
+                                    <field name="date_deadline"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_mov_nomina" model="ir.actions.act_window">
+        <field name="name">Movimientos Nómina</field>
+        <field name="res_model">hr.mov.nomina</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_hr_movnomina_tree"/>
+        <field name="domain">[]</field>
+    </record>
+
+    <record id="act_open_pendientes_view" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="act_window_id" ref="act_open_pendientes"/>
+        <field name="view_id" ref="view_hr_payslip_tree_pendientes"/>
+    </record>
+
+    <menuitem action="act_mov_nomina" id="menu_mov_nomina"
+        parent="hr_work_entry_contract.menu_hr_payroll_root"/>
+
+</odoo>
+
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_journal_form_cfd">
+        <field name="name">account_journal_form_cfd</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="CFDI">
+                    <group>
+                        <field name="lugar" />
+                        <field name="serie" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

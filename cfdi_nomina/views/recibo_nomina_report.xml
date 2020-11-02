@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- css -->
+        <template id="report_styles" inherit_id="web.report_assets_common">
+            <xpath expr=".">
+                <link rel="stylesheet"
+                  type="text/css"
+                  href="/cfdi_nomina/static/src/css/report.css"
+                />
+            </xpath>
+        </template>
+
+    <!-- Templates -->
+    <template id="nomina_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="cfdi_nomina.contract_external_layout">
+                <!--<t t-call="web.external_layout">-->
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <span><b>Emisor:</b><span t-esc="get_company_name(o)" /></span>
+                                <span t-field="o.company_id.city" /> <span t-field="o.company_id.state_id" /> <span t-field="o.company_id.country_id" /><br/>
+                                <strong>C.P.</strong><span t-field="o.company_id.zip" /><br/>
+                                <span><b>R.F.C. </b></span><span t-field="o.company_id.vat" /><br/>
+                                <span><b>Regimen Fiscal. </b></span><span t-field="o.company_id.partner_id.property_account_position_id" /><br/>
+
+                            </div>
+                            <div t-if="not o.finiquito" class="col-xs-4 head-blue-big">
+                                <span >RECIBO DE NÓMINA</span>
+                            </div>
+                            <div t-if="o.finiquito" class="col-xs-4 head-blue-med">
+                                <span >FINIQUITO DE TRABAJADORES</span>
+                            </div>
+                        </div>
+                        <div class="row space"/>
+                        <div class="row tabla_empleado">
+                            <div class="col-xs-6">
+                                <table>
+                                    <tr>
+                                        <th>No. Trab</th>
+                                        <td><span t-field="o.employee_id.barcode" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td><span t-field="o.employee_id" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CURP</th>
+                                        <td><span t-field="o.employee_id.curp" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>RFC</th>
+                                        <td><span t-field="o.employee_id.rfc" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>IMSS</th>
+                                        <td><span t-field="o.employee_id.imss" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Régimen Trabajador</th>
+                                        <td><span t-field="o.contract_id.regimen_contratacion.code" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-6">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>Depto</th>
+                                        <td><span t-field="o.employee_id.department_id.name" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Puesto</th>
+                                        <td><span t-field="o.employee_id.job_id" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>No.Nómina</th>
+                                        <td><span t-field="o.number" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Periodo</th>
+                                        <td><span t-field="o.date_from" /> al <span t-field="o.date_to" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Días trabajados</th>
+                                        <td><span t-esc="get_dias_trabajados(o)" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Faltas</th>
+                                        <td><span t-esc="get_faltas(o)" /></td>
+                                    </tr>
+                                    <tr t-if="o.finiquito">
+                                        <th>Fecha Alta</th>
+                                        <td><span t-field="o.employee_id.fecha_alta" /></td>
+                                    </tr>
+                                    <tr t-if="o.finiquito">
+                                        <th>Fecha Baja</th>
+                                        <td><span t-field="o.employee_id.fecha_baja" /></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row head-blue-med" >
+                            <div class="col-xs-6">
+                                <span>PERCEPCIONES</span>
+                            </div>
+                             <div class="col-xs-6">
+                                <span>DEDUCCIONES</span>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-xs-6">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr t-foreach="get_percepciones_lines(o)" t-as="line">
+                                        <td><span t-esc="line.get('code')"/></td>
+                                        <td><span t-esc="line.get('name')"/></td>
+                                        <td>
+                                            <span style="text-align: right;"
+                                                  t-esc="line.get('total')"
+                                                  t-esc-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+
+                                        </tr>
+                                        <t t-if="get_total_otros(o)">
+                                            <tr>
+                                                <th colspan="3">OTROS</th>
+                                            </tr>
+
+                                            <tr t-foreach="get_otros_pagos_lines(o)" t-as="line">
+                                            <td><span t-esc="line.get('code')"/></td>
+                                            <td><span t-esc="line.get('name')"/></td>
+                                            <td>
+                                                <span style="text-align: right;"
+                                                      t-esc="line.get('total')"
+                                                      t-esc-options='{"widget": "float", "precision": 2}'/>
+                                            </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                             <div class="col-xs-6">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr t-foreach="get_deducciones_lines(o)" t-as="line">
+                                        <td><span t-esc="line.get('code')"/></td>
+                                        <td><span t-esc="line.get('name')"/></td>
+                                        <td>
+                                            <span style="text-align: right;"
+                                                  t-esc="line.get('total')"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                         </div>
+                        <div class="row space_line"/>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr>
+                                        <th colspan="2">Total Percepciones</th>
+                                        <td style="text-align: rigth;" >
+                                            <span t-esc="get_total_percepciones(o)"
+                                                  t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+
+                                        </tr>
+                                        <tr t-if="get_total_otros(o)">
+                                        <th colspan="2">Total Otros pagos</th>
+                                        <td style="text-align: rigth;" >
+                                            <span t-esc="get_total_otros(o)"
+                                                  t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><strong>Neto pagado:</strong></td>
+                                            <td>
+                                                <span style="text-align: right;"
+                                                      t-esc="get_total_neto(o)"
+                                                      t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><strong>Total en efectivo:</strong></td>
+                                            <td>
+                                                <span style="text-align: right;"
+                                                      t-esc="get_total_efectivo(o)"
+                                                      t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                           <div class="col-xs-6">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr>
+                                        <th colspan="2">Total Deducciones</th>
+                                        <td style="text-align: rigth;">
+                                            <span t-esc="get_total_deducciones(o)"
+                                                  t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <t t-if="not o.finiquito">
+                            <div class="row space"/>
+                            <div class="row space"/>
+                            <p class="text-right"><strong>Firma: ____________________________________________</strong></p>
+                        </t>
+                        <t t-if="o.finiquito">
+                            <div class="row">
+                                <p class="text-justify">
+RECIBÍ DE OFIX SA DE CV LA CANTIDAD DE:
+<strong t-esc="o.l10n_mx_edi_amount_to_text(float(get_total_efectivo(o)))" />
+POR CONCEPTO DE PRESTACIONES TOTALES DETALLADAS EN LA LIQUIDACIÓN ARRIBA
+INDICADA, POR MOTIVO DE LA RENUNCIA, DE TRABAJO QUE DESEMPEÑÉ EN EL PUESTO DE:
+<strong t-esc="o.employee_id.job_id.name.upper()[:-3]"/>. EN EL QUE HE VENIDO PRESTANDO MIS SERVICIOS HASTA LA FECHA. </p>
+<p class="text-justify"> "AL MISMO TIEMPO, ME ES SATISFACTORIO HACER CONSTAR QUE
+OFIX SA DE CV CUMPLIÓ
+CON TODAS LAS PRESTACIONES DERIVADAS A MI FAVOR EN EL CONTRATO DE TRABAJO Y
+EN CONSECUENCIA NO TENGO ALGUNA RECLAMACIÓN PENDIENTE CON LA CITADA EMPRESA, POR NINGÚN CONCEPTO. </p>
+                            </div>
+                            <div class="row space"/>
+                            <div class="row space"/>
+                            <p class="text-center"><strong>____________________________________________</strong></p>
+                            <p class="text-center"><strong t-field="o.employee_id"/></p>
+                        </t>
+
+                        <div class="row head-blue" >
+                            <div class="col-xs-12">
+                                <span>Comprobante Fiscal Digital por Internet</span>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div t-if="o.uuid" class="col-xs-6">
+                                <div class="row" >
+                                    <strong>Folio Fiscal:</strong>
+                                    <span t-field="o.uuid"/>
+                                </div>
+                                <div class="row" >
+                                    <strong>Fecha y hora de certificación:</strong>
+                                    <span t-field="o.fecha_sat"/>
+                                </div>
+                                <div class="row" >
+                                    <strong>No de Serie del CSD del SAT:</strong>
+                                    <span t-field="o.certificado_sat"/>
+                                </div>
+                                <div class="row" >
+                                    <strong>Forma de Pago:</strong>
+                                    <span t-esc="comprobante_data(o, 'FormaPago')"/>
+                                </div>
+                                <div class="row" >
+                                    <div id="barcode_cbb">
+                                        <img t-att-src="'/report/barcode/?type=QR&amp;value=%s' % quote_plus(
+                                    'https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?' + keep_query(
+                                        re=o.company_id.vat, rr=o.employee_id.rfc,
+                                        tt=o.total, id=o.uuid)
+                                        + '&amp;fe=%s' % quote_plus(
+                                            sello, 'utf-8', 'strict', '=/').replace('%2B', '+'))"
+                                        width="180" height="180"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="row" >
+                                    <strong>Lugar de emisión:</strong>
+                                    <span t-field="o.company_id.zip" />
+                                </div>
+                                <div class="row" >
+                                    <strong>Fecha y hora de emisión:</strong>
+                                    <span t-esc="comprobante_data(o, 'Fecha')" />
+                                </div>
+                                <div class="row" >
+                                    <strong>No.Serie del CSD del emisor:</strong>
+                                    <span t-esc="comprobante_data(o,'NoCertificado')"/>
+                                </div>
+                                <div class="row" >
+                                    <strong>Serie y Folio interno:</strong>
+                                    <span t-esc="comprobante_data(o,'Serie')"/>
+                                    <span t-esc="comprobante_data(o,'Folio')"/>
+                                </div>
+                                <div class="row" >
+                                    <div class="col-xs-6">
+                                        <strong>Total percepciones:</strong>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <span t-esc="float(nomina_data(o,'TotalPercepciones','0'))"
+                                        t-esc-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                </div>
+                                <div class="row space_line"/>
+                                <div class="row" >
+                                    <div class="col-xs-6">
+                                        <strong>Total otros pagos:</strong>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <span t-esc="float(nomina_data(o,'TotalOtrosPagos','0'))"
+                                        t-esc-options='{"widget": "float", "precision": 2}'/><span>+</span>
+                                    </div>
+                                </div>
+                                <div class="row" t-foreach="get_otros_pagos_lines(o)" t-as="line" style="font-size:10px;">
+                                    <div class="col-xs-6">
+                                        <strong t-esc="line.get('name')" style="padding-left: 10px;"/>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <span t-esc="line.get('total')" t-esc-options='{"widget": "float", "precision": 2}'/>
+                                    </div>
+                                </div>
+                                <div class="row space_line"/>
+                                <div class="row" >
+                                    <div class="col-xs-6">
+                                        <strong>Total deducciones sin ISR:</strong>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <span t-field="o.descuento"
+                                        t-esc-options='{"widget": "float", "precision": 2}'/><span>-</span>
+                                    </div>
+                                </div>
+                                <div class="row space_line"/>
+                                <div class="row" >
+                                    <div class="col-xs-6">
+                                        <strong>ISR retenido:</strong>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <span t-field="o.retenido"
+                                        t-esc-options='{"widget": "float", "precision": 2}'/><span>-</span>
+                                    </div>
+                                </div>
+                                <div class="row space_line"/>
+                                <div class="row" >
+                                    <div class="col-xs-6">
+                                        <strong>Total:</strong>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <span t-esc="float(comprobante_data(o,'Total','0'))"
+                                        t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                        <span>=</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row space"/>
+                        <div t-if="o.uuid">
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <strong>Sello Digital del Contribuyente Emisor</strong>
+                                </div>
+                            </div>
+                            <div class="row" id="sellos">
+                                <div class="col-xs-12">
+                                    <span t-esc="timbre_data(o, 'SelloCFD')"/>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <strong>Sello Digital del SAT</strong>
+                                </div>
+                            </div>
+                            <div class="row" id="sellos">
+                                <div class="col-xs-12">
+                                    <span t-esc="timbre_data(o, 'SelloSAT')"/>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <strong>Cadena Original del complemento de certificacione digital del SAT</strong>
+                                </div>
+                            </div>
+                            <div class="row" id="sellos">
+                                <div class="col-xs-12">
+                                    <span t-esc="o.cadena_sat.replace('\n', '')"/>
+                                </div>
+                            </div>
+                            <div class="row space"/>
+                            <div class="row space"/>
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <strong>Este documento es una representación impresa de un CFDI</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    
+    <record id="action_report_payslip" model="ir.actions.report">
+            <field name="name">CFDI Recibo Nómina</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cfdi_nomina.nomina_report</field>
+            <field name="report_file">cfdi_nomina.nomina_report</field>
+            <field name="print_report_name">'CFDI-%s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="binding_type">report</field>
+        </record>
+        <!--attachment="'CFDI_Nomina_%s.pdf' % (object.number).replace('/', '')"-->
+    <!--Quitar adjunto -->
+    <data>
+        <record model="ir.actions.report" id="cfdi_nomina.action_report_payslip">
+            <field name="attachment_use" eval="0"/>
+            <field name="attachment"/>
+        </record>
+    </data>
+
+</odoo>

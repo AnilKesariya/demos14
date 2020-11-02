@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_gen_laypoliza_wiz_form">
+        <field name="name">hr.genera.laypoliza.wiz.form</field>
+        <field name="model">hr.genera.laypoliza.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Layout Poliza" version="7.0">
+                <group>
+                    <group>
+                       <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"
+                              attrs="{'invisible':[('data_fname','!=',False)]}"/>
+                        <field name="avisos" attrs="{'invisible':[('data_fname','=',False)]}"/>
+                    </group>
+                    <group>
+                        <field name="data_file"  filename="data_fname"
+                               attrs="{'invisible':[('data_fname','=',False)]}"/>
+                        <field name="data_fname"  invisible="1" />
+                    </group>
+                </group>
+                <footer>
+                    <button string="Descartar"  special="cancel" />
+
+                    <button name="gen_laypoliza" string="Generar" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('data_fname','!=',False)]}"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_gen_laypoliza" model="ir.actions.act_window">
+        <field name="name">Genera Layout Poliza</field>
+        <field name="res_model">hr.genera.laypoliza.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_payslip_run"/>
+        <field name="binding_view_types">form</field>
+    </record>
+
+</odoo>

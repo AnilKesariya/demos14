@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Templates -->
+    <template id="contract_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="cfdi_nomina.contract_external_layout">
+                    <div class="page something">
+                        <div class="text-justify">
+                            <p class="text-center"><strong>CONTRATO INDIVIDUAL DE TRABAJO POR OBRA O TIEMPO DETERMINADO</strong></p>
+                            <p>Que celebran por una parte Ofix, S.A. de C.V., a quien en éste contrato se designará como "La Empresa",
+                            representada por la Lic. Silvia Remes Ojeda y <strong><u><span t-field="o.employee_id.nombre_completo"/></u></strong> por su propio derecho, a
+                            quien se le designará como “El Empleado”, conforme a las declaraciones y cláusulas siguientes:</p>
+                            <p class="text-center"><strong>DECLARACIONES</strong></p>
+                            <p><strong>Primera.</strong> Ofix, S.A. de C.V., es una empresa legalmente constituida, de nacionalidad mexicana, duración indefinida
+                            y con domicilio en Av. Urano No. 585, Local 1, Col. Ylang Ylang, Boca del Rio, Veracruz; C.P. 94298.</p>
+                            <p><strong>Segunda.</strong> El empleado nació el <strong><u><span t-field="o.employee_id.birthday" t-field-options="{'format': 'd'}"/></u></strong> de <strong><u><span t-field="o.employee_id.birthday" t-field-options="{'format': 'MMMM'}"/></u></strong> de <strong><u><span t-field="o.employee_id.birthday" t-field-options="{'format': 'Y'}"/></u></strong>, cuenta con <strong><u><span t-esc="o.employee_id._get_age()"/></u></strong> años de edad
+                            cumplidos, es del sexo <strong><u><span t-field="o.employee_id.gender"/></u></strong>, de nacionalidad <strong><u><span t-field="o.employee_id.country_id"/></u></strong>, de estado civil <strong><u><span t-field="o.employee_id.marital"/></u></strong>, con
+                            Clave Única de Registro de Población <strong><u><span t-field="o.employee_id.curp"/></u></strong>, con Registro Federal de Contribuyentes
+                            <strong><u><span t-field="o.employee_id.rfc"/></u></strong> y tiene su domicilio en <strong><u><span t-field="o.employee_id.address_home_id.street"/> <span t-field="o.employee_id.address_home_id.l10n_mx_edi_colony"/> CP. <span t-field="o.employee_id.address_home_id.zip"/> <span t-field="o.employee_id.address_home_id.city"/> <span t-field="o.employee_id.address_home_id.state_id"/></u></strong>.</p>
+                            <p><strong>Tercera.</strong> Ambas partes formalizan el presente Contrato Individual de Trabajo de Capacitación Inicial de
+                            conformidad con las siguientes:</p>
+                            <p class="text-center"><strong>CLÁUSULAS</strong></p>
+                            <p><strong>Primera.</strong> El empleado conviene en prestar sus servicios personales en forma subordinada a la empresa, bajo la
+                            dirección y mando de los funcionarios designados al efecto por la misma y por el tiempo que cubra el presente
+                            contrato en calidad de __________________________ y que se origina en virtud de
+                            ____________________________________________________________, es decir, una vez concluido, se dará por
+                            terminada la relación laboral.</p>
+                            <p><strong>Segunda.</strong> El empleado prestará sus servicios a la empresa en <strong><u><span t-field="o.job_id.address_id.name"/> <span t-field="o.job_id.address_id.street"/> <span t-field="o.job_id.address_id.l10n_mx_edi_colony"/> CP. <span t-field="o.job_id.address_id.zip"/> <span t-field="o.job_id.address_id.city"/> <span t-field="o.job_id.address_id.state_id"/></u></strong> o en
+                            cualquiera de sus oficinas instaladas en _________________________________.</p>
+                            <p><strong>Tercera.</strong> La empresa contrata al empleado por tiempo determinado y por el periodo comprendido entre la fecha de
+                            éste contrato y el día <strong><u><span t-field="o.date_end" t-field-options="{'format': 'd'}"/></u></strong> del mes de <strong><u><span t-field="o.date_end" t-field-options="{'format': 'MMMM'}"/></u></strong> de <strong><u><span t-field="o.date_end" t-field-options="{'format': 'Y'}"/></u></strong> para los efectos que señala la
+                            cláusula primera.</p>
+                            <p>En consecuencia, para dar cumplimiento al artículo 25 fracción II, 31, 35, 37 y 53 fracción III de la Ley Federal del
+                            Trabajo vigente, empresa y empleado convienen en que éste contrato se celebre por tiempo determinado en virtud
+                            de que su celebración resulta de la naturaleza de los servicios temporales que la empresa tienen necesidad de
+                            utilizar. Al término del tiempo antes determinado, el contrato concluirá sin responsabilidad para la empresa.</p>
+                            <p><strong>Cuarta.</strong> Por otra parte, el empleado se obliga a avisar con 15 días de anticipación, en caso de renuncia voluntaria.</p>
+                            <p><strong>Quinta.</strong> El presente contrato se suspenderá, rescindirá o terminará en los casos a que se refieren los capítulos III,
+                            IV y V del título segundo o análogo de la Ley Federal del Trabajo. El empleado se obliga a observar tanto los
+                            lineamientos del Reglamento Interior de Trabajo, como las demás disposiciones relativas a la administración de
+                            personal que la empresa establezca.</p>
+                            <p><strong>Sexta.</strong> Ambas partes convienen en fijar 48 horas como duración semanaria de labores, distribuidas entre los días de
+                            la semana pero sin que la jornada exceda los límites señalados en los artículos 59, 60 y 61 de la Ley Federal del
+                            Trabajo. La distribución de las horas de trabajo durante la semana y la hora de entrada y salida, las determinará la
+                            empresa; sin perjuicio de que pueda modificarse en cualquier época por la propia empresa según sus necesidades,
+                            comunicándolo por escrito con 24 horas de anticipación.</p>
+                            <p><strong>Séptima.</strong> La jornada de trabajo podrá prolongarse extraordinariamente cuando las condiciones de trabajo lo
+                            requieran, mediante la orden específica suscrita por el Jefe de departamento, de la persona que haga las veces de
+                            éste o de aquella en quien la empresa haya delegado las funciones respectivas, de acuerdo a los artículos 66 y 67
+                            de la Ley Federal del Trabajo.</p>
+                            <p><strong>Octava.</strong> El empleado conviene en que utilizará en el desempeño de sus labores todo el tiempo necesario de la
+                            jornada diaria para que no haya atraso en las mismas debiendo prestar sus servicios para los que se contrata con el
+                            esmero y forma que la empresa indique.</p>
+                            <p><strong>Novena.</strong> El empleado gozará de un día de descanso semanal señalado por la empresa y de los días de descanso
+                            obligatorios establecidos por la Ley Federal del Trabajo. El empleado está de acuerdo que por necesidades de la
+                            empresa se tenga que cambiar el día de descanso, comunicándosele con una semana de anticipación por escrito.</p>
+                            <p><strong>Décima.</strong> El empleado tendrá derecho a un periodo de vacaciones en los términos que marca la Ley Federal del
+                            Trabajo en proporción al número de días trabajados.</p>
+                            <p><strong>Décima Primera.</strong> La retribución que se pagará al empleado por concepto de cuota diaria expresada en términos de
+                            sueldo fijo mensual, será de <strong><u><span t-field="o.wage"/></u></strong> mensuales.</p>
+                            <p>El empleado acepta que el pago se hará por medio de depósito en cuenta bancaria y/o tarjeta de débito, por
+                            quincenas vencidas los días 15 y último de cada mes.</p>
+                            <p><strong>Décima Segunda.</strong> Los empleados se obligan a otorgar recibos a favor de la empresa por la totalidad de los sueldos
+                            devengados hasta la fecha del otorgamiento de los mismos, en el entendido de que ese otorgamiento implica
+                            conformidad del empleado con el tiempo trabajado y la remuneración que se acusen.</p>
+                            <p><strong>Décima Tercera.</strong> El empleado se sujetará al programa de capacitación y evaluación que otorgue la empresa de
+                            acuerdo con los planes que la misma señale, para acreditar competencia, de conformidad con lo establecido en la
+                            Ley Federal del Trabajo.</p>
+                            <p><strong>Décima Cuarta.</strong> Ambas partes convienen en que cualquier cuestión que surja con motivo de la interpretación o
+                            cumplimiento de éste contrato, se someterá a lo que sobre el particular resuelva la correspondiente junta de
+                            conciliación y arbitraje.</p>
+                             <p><strong>Décima Quinta.</strong> El trabajador <strong><u><span t-field="o.employee_id.nombre_completo"/></u></strong>, designa 
+                            para el pago de salarios y prestaciones devengadas, dando cumplimiento con lo establecido en el artículo 25 fracción X de 
+                            la Ley Federal del Trabajo, a los siguientes beneficiarios y sus porcentajes: </p>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p>Nombre</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Parentesco</p>
+                                </div>
+                                <div class="col-xs-2 ">
+                                    <p>Porcentaje</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p>___________________________________________________</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>_______________________________</p>
+                                </div>
+                                <div class="col-xs-2">
+                                    <p>_________%</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p>___________________________________________________</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>_______________________________</p>
+                                </div>
+                                <div class="col-xs-2">
+                                    <p>_________%</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p>___________________________________________________</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>_______________________________</p>
+                                </div>
+                                <div class="col-xs-2">
+                                    <p>_________%</p>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-xs-6">
+                                    <p>___________________________________________________</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>_______________________________</p>
+                                </div>
+                                <div class="col-xs-2">
+                                    <p>_________%</p>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-xs-10 text-right">
+                                    <p>Total</p>
+                                </div>
+                                <div class="col-xs-2 text-center">
+                                    <p>100 %</p>
+                                </div>
+                            </div><br/>
+                            <p>El presente contrato se extiende y firma por duplicado en la ciudad de Boca del Río, Veracruz; el día
+                                
+                            <t t-if="o.employee_id.fecha_alta">
+                                <strong><u><span t-esc="context_timestamp(datetime.datetime.strptime(str(o.employee_id.fecha_alta),'%Y-%m-%d'))"/></u></strong>
+                            </t>
+
+                            <!-- <strong><u><span t-esc="context_timestamp(datetime.datetime.strptime(o.employee_id.fecha_alta,'%Y-%m-%d')).strftime('%d del mes de %B del año %Y')"/></u></strong> -->
+                            conservando el original la empresa y el duplicado el empleado.</p>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                    <p>"El Empleado"</p>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <p>"La empresa"</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                    <p>________________________</p>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <p>________________________</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <span t-field="o.company_id.name"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="contract_external_layout">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+        <t t-call="cfdi_nomina.main_external_layout"><t t-raw="0"/></t>
+    </template>
+
+    <template id="main_external_layout">
+        <div class="header o_clean_header" style="font-size:9pt">
+            <div class="row">
+                <div class="col-xs-6">
+                    <br/>
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 70; max-width: auto;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer" style="font-size:9pt">
+            <div class="row">
+            </div>
+        </div>
+    </template>
+
+    <template id="contract_initial_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="cfdi_nomina.contract_external_layout">
+                    <div class="page something">
+                        <div class="text-justify">
+                            <p class="text-center"><strong>CONTRATO INDIVIDUAL DE TRABAJO DE CAPACITACIÓN INICIAL</strong></p>
+                            <p>Que celebran por una parte Ofix, S.A. de C.V., a quien en éste contrato se designará como “La Empresa”,
+                            representada por la Lic. Silvia Remes Ojeda y <strong><u><span t-field="o.employee_id.nombre_completo"/></u></strong> por su propio derecho, a
+                            quien se le designará como “El Empleado”, conforme a las declaraciones y cláusulas siguientes:</p>
+                            <p class="text-center"><strong>DECLARACIONES</strong></p>
+                            <p><strong>Primera.</strong> Ofix, S.A. de C.V., es una empresa legalmente constituida, de nacionalidad mexicana, duración indefinida
+                            y con domicilio en Av. Urano No. 585, Local 1, Col. Ylang Ylang, Boca del Rio, Veracruz; C.P. 94298.</p>
+                            <p><strong>Segunda.</strong> El empleado nació el <strong><u><span t-field="o.employee_id.birthday" t-field-options="{'format': 'd'}"/></u></strong> de <strong><u><span t-field="o.employee_id.birthday" t-field-options="{'format': 'MMMM'}"/></u></strong> de <strong><u><span t-field="o.employee_id.birthday" t-field-options="{'format': 'Y'}"/></u></strong>, cuenta con <strong><u><span t-esc="o.employee_id._get_age()"/></u></strong> años de edad
+                            cumplidos, es del sexo <strong><u><span t-field="o.employee_id.gender"/></u></strong>, de nacionalidad <strong><u><span t-field="o.employee_id.country_id"/></u></strong>, de estado civil <strong><u><span t-field="o.employee_id.marital"/></u></strong>, con
+                            Clave Única de Registro de Población <strong><u><span t-field="o.employee_id.curp"/></u></strong>, con Registro Federal de Contribuyentes
+                            <strong><u><span t-field="o.employee_id.rfc"/></u></strong> y tiene su domicilio en <strong><u><span t-field="o.employee_id.address_home_id.street"/> <span t-field="o.employee_id.address_home_id.l10n_mx_edi_colony"/> CP. <span t-field="o.employee_id.address_home_id.zip"/> <span t-field="o.employee_id.address_home_id.city"/> <span t-field="o.employee_id.address_home_id.state_id"/></u></strong>.</p>
+                            <p><strong>Tercera.</strong> Ambas partes formalizan el presente Contrato Individual de Trabajo de Capacitación Inicial de
+                            conformidad con las siguientes:</p>
+                            <p class="text-center"><strong>CLÁUSULAS</strong></p>
+                            <p><strong>Primera.</strong> El empleado conviene en prestar sus servicios personales en forma subordinada a la empresa, bajo la
+                            dirección y mando de los funcionarios designados al efecto por la misma y por el tiempo que cubra el presente
+                            contrato, con el fin de adquirir los conocimientos o habilidades necesarios para desarrollar las actividades inherentes
+                            al puesto de <strong><u><span t-esc="''.join(i for i in o.employee_id.job_id.name if not i.isdigit())"/></u></strong>, con las funciones que se encuentran consignadas en el ANEXO 1 del presente
+                            contrato, el cual firmado por las partes formara parte del mismo; dicha capacitación la recibirá con la mayor
+                            disponibilidad y esmero.</p>
+                            <p><strong>Segunda.</strong> El empleado prestará sus servicios a la empresa en <strong><u><span t-field="o.job_id.address_id.name"/> <span t-field="o.job_id.address_id.street"/> <span t-field="o.job_id.address_id.l10n_mx_edi_colony"/> CP. <span t-field="o.job_id.address_id.zip"/> <span t-field="o.job_id.address_id.city"/> <span t-field="o.job_id.address_id.state_id"/></u></strong> o en
+                            cualquiera de sus oficinas instaladas en el interior de la Republica Mexicana.</p>
+                            <p><strong>Tercera.</strong> La empresa contrata al empleado en la modalidad de capacitación inicial, por el periodo comprendido
+                            entre la fecha de éste contrato y el día <strong><u><span t-field="o.date_end" t-field-options="{'format': 'd'}"/></u></strong> del mes de <strong><u><span t-field="o.date_end" t-field-options="{'format': 'MMMM'}"/></u></strong> de <strong><u><span t-field="o.date_end" t-field-options="{'format': 'Y'}"/></u></strong> para los efectos
+                            que señala la cláusula primera.</p>
+                            <p>En consecuencia, para dar cumplimiento al artículo 25 fracción II, 31, 35, 39-B, 39-C, 39-D Y 39-E de la Ley Federal
+                            del Trabajo vigente, empresa y empleado convienen en que éste contrato se celebre en la modalidad de
+                            capacitación inicial, con el fin de adquirir los conocimientos o habilidades necesarios para desarrollar las actividades
+                            inherentes al puesto de <strong><u><span t-esc="''.join(i for i in o.employee_id.job_id.name if not i.isdigit())"/></u></strong>.</p>
+                            <p>Al término del período de capacitación inicial, de no acreditar competencia el empleado, a juicio de la empresa,
+                            tomando en cuenta la opinión de la comisión mixta de productividad, capacitación y adiestramiento, en los términos
+                            de ley, así como a la naturaleza de la categoría y puesto, se dará por terminada la relación de trabajo, sin
+                            responsabilidad para la empresa.</p>
+                            <p>Asimismo, en el caso que al concluir el período de capacitación inicial, el empleado acredite competencia, a juicio de
+                            la empresa, tomando en cuenta la opinión de la comisión mixta de productividad, capacitación y adiestramiento, en
+                            los términos de ley, así como a la naturaleza de la categoría y puesto, la relación de trabajo subsistirá e
+                            inmediatamente se considerará por tiempo indeterminado y el tiempo laborado de capacitación se computará para
+                            efectos del cálculo de la antigüedad.</p>
+                            <p><strong>Cuarta.</strong> Por otra parte, el empleado se obliga a avisar con 15 días de anticipación, en caso de renuncia voluntaria.</p>
+                            <p><strong>Quinta.</strong> El presente contrato se suspenderá, rescindirá o terminará en los casos a que se refieren los capítulos III,
+                            IV y V del título segundo o análogo de la Ley Federal del Trabajo. El empleado se obliga a observar tanto los
+                            lineamientos del Reglamento Interior de Trabajo, como las demás disposiciones relativas a la administración de
+                            personal que la empresa establezca.</p>
+                            <p><strong>Sexta.</strong> Ambas partes convienen en fijar 48 horas como duración semanaria de labores, distribuidas entre los días de
+                            la semana pero sin que la jornada exceda los límites señalados en los artículos 59, 60 y 61 de la Ley Federal del
+                            Trabajo. La distribución de las horas de trabajo durante la semana y la hora de entrada y salida, las determinará la
+                            empresa; sin perjuicio de que pueda modificarse en cualquier época por la propia empresa según sus necesidades,
+                            comunicándolo por escrito con 24 horas de anticipación.</p>
+                            <p><strong>Séptima.</strong> La jornada de trabajo podrá prolongarse extraordinariamente cuando las condiciones de trabajo lo
+                            requieran, mediante la orden específica suscrita por el Jefe de departamento, de la persona que haga las veces de
+                            éste o de aquella en quien la empresa haya delegado las funciones respectivas, de acuerdo a los artículos 66 y 67
+                            de la Ley Federal del Trabajo.</p>
+                            <p><strong>Octava.</strong> El empleado conviene en que utilizará en el desempeño de sus labores todo el tiempo necesario de la
+                            jornada diaria para que no haya atraso en las mismas debiendo prestar sus servicios para los que se contrata con el
+                            esmero y forma que la empresa indique.</p>
+                            <p><strong>Novena.</strong> El empleado gozará de un día de descanso semanal señalado por la empresa y de los días de descanso
+                            obligatorios establecidos por la Ley Federal del Trabajo. El empleado está de acuerdo que por necesidades de la
+                            empresa se tenga que cambiar el día de descanso, comunicándosele con una semana de anticipación por escrito.</p>
+                            <p><strong>Décima.</strong> El empleado tendrá derecho a un periodo de vacaciones en los términos que marca la Ley Federal del
+                            Trabajo en proporción al número de días trabajados.</p>
+                            <p><strong>Décima Primera.</strong> La retribución que se pagará al empleado por concepto de cuota diaria expresada en términos de
+                            sueldo fijo mensual, será de <strong><u><span t-field="o.monthly_wage"/></u></strong> mensuales.</p>
+                            <p>El empleado acepta que el pago se hará por medio de depósito en cuenta bancaria y/o tarjeta de débito, por
+                            quincenas vencidas los días 15 y último de cada mes.</p>
+                            <p><strong>Décima Segunda.</strong> Los empleados se obligan a otorgar recibos a favor de la empresa por la totalidad de los sueldos
+                            devengados hasta la fecha del otorgamiento de los mismos, en el entendido de que ese otorgamiento implica
+                            conformidad del empleado con el tiempo trabajado y la remuneración que se acusen.</p>
+                            <p><strong>Décima Tercera.</strong> El empleado se sujetará al programa de capacitación y evaluación que otorgue la empresa de
+                            acuerdo con los planes que la misma señale, para acreditar competencia, de conformidad con lo establecido en la
+                            Ley Federal del Trabajo.</p>
+                            <p><strong>Décima Cuarta.</strong> Ambas partes convienen en que cualquier cuestión que surja con motivo de la interpretación o
+                            cumplimiento de éste contrato, se someterá a lo que sobre el particular resuelva la correspondiente junta de
+                            conciliación y arbitraje.</p>
+                            <p>El presente contrato se extiende y firma por duplicado en la ciudad de Boca del Río, Veracruz; el día
+
+                            <strong><u><span t-esc="context_timestamp(datetime.datetime.strptime(str(o.date_start),'%Y-%m-%d'))"/></u></strong>
+
+                            <!-- <strong><u><span t-esc="context_timestamp(datetime.datetime.strptime(o.date_start,'%Y-%m-%d')).strftime('%d del mes de %B del año %Y')"/></u></strong> -->
+                            conservando el original la empresa y el duplicado el empleado.</p>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                    <p>"El Empleado"</p>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <p>"La empresa"</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                    <p>________________________</p>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <p>________________________</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <span>Ofix, S.A. de C.V.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    
+    <record id="print_contract_pdf" model="ir.actions.report">
+        <field name="name">CONTRATO INDIVIDUAL DE TRABAJO POR OBRA O TIEMPO DETERMINADO</field>
+        <field name="model">hr.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cfdi_nomina.contract_pdf</field>
+        <field name="report_file">cfdi_nomina.contract_pdf</field>
+        <field name="print_report_name">'CONTRATO INDIVIDUAL DE TRABAJO POR OBRA O TIEMPO DETERMINADO'</field>
+        <field name="binding_model_id" ref="model_hr_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+  
+
+    <record id="print_contract_initial_pdf" model="ir.actions.report">
+            <field name="name">CONTRATO INDIVIDUAL DE TRABAJO DE CAPACITACIÓN INICIAL</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cfdi_nomina.contract_initial_pdf</field>
+            <field name="report_file">cfdi_nomina.contract_initial_pdf</field>
+            <field name="print_report_name">'CONTRATO INDIVIDUAL DE TRABAJO DE CAPACITACIÓN INICIAL'</field>
+            <field name="binding_model_id" ref="model_hr_contract"/>
+            <field name="binding_type">report</field>
+        </record>
+</odoo>

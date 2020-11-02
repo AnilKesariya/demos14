@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- hr.payslip.run -->
+    <record id="hr_payslip_run_total_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.run.total.tree</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="total" readonly="1" />
+                <button string="Compute Amount Total" name="compute_sheet_run" type="object" states="draft"/>
+                <button string="Confirm Payslips" name="confirm_sheet_run" type="object" states="draft"/>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="hr_payslip_run_total_form" model="ir.ui.view">
+        <field name="name">hr.payslip.run.total.form</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <data><button name="action_open_payslips" position="after">
+                <button string="Importar Faltas" name="importar_faltas" type="object" states="draft"/>
+                <button string="Compute Amount Total" name="compute_sheet_run" type="object" states="draft" class="oe_highlight"/>
+                <button string="Confirm Payslips" name="confirm_sheet_run" type="object" states="draft" class="oe_highlight"/>
+                <button string="Timbrar nóminas" name="%(action_batch_cfdi)d" states="draft" type="action"/>
+                <button string="Enviar Correo" name="send_mail" type="object" class="oe_highlight"/>
+                <button string="Calcular SDI Bimestre Actual" name="action_calculate_sdi_last" attrs="{'invisible':[('tipo_calculo','not in',['ajustado', 'anual'])]}" type="object"/>
+            </button>
+            <field name="credit_note" position="after">
+                <field name="total" readonly="1"/>
+            </field>
+            <field name="credit_note" position="before">
+                <field name="tipo_calculo"/>
+            </field>
+            <xpath expr="//field[@name='credit_note']" position="before">
+                <label for="date_from" string="Faltas"/>
+                 <div>
+                       <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                 </div>
+            </xpath>
+            <xpath expr="//field[@name='credit_note']" position="before">
+                <field name="fecha_pago"/>
+                <field name="struct_id"/>
+            </xpath>
+            <xpath expr="//sheet" position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </xpath>
+        </data></field>
+    </record>
+
+    <!-- hr.payslip -->
+    <record id="view_hr_payslip_total_form" model="ir.ui.view">
+        <field name="name">hr.payslip.total.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <button name="compute_sheet" position="after">
+                <button string="Compute Sheet (TOTAL)" name="compute_sheet_total" type="object" states="draft" class="oe_highlight"/>
+            </button>
+            <field name="credit_note" position="before" >
+                <field name="total" readonly="1" />
+            </field>
+
+            <xpath expr='//sheet' position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_hr_payslip_total_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.total.tree</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before" >
+                <field name="total" string="Total" sum="Total Amount" readonly="1" />
+            </field>
+        </field>
+    </record>
+
+    <!-- <record id="view_hr_payslip_total01_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.total01.tree</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="colors"><![CDATA[blue:state in ('confirm','hr_check','accont_check');black:state=='new';gray:state=='cancel';green:total<=0.0;]]></attribute>
+            </xpath>
+        </field>
+    </record>
+ -->
+
+</odoo>

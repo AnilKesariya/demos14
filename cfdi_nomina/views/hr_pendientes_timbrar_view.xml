@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hr_payslip_tree_pendientes">
+        <field name="name">view.hr.payslip.form.inherit pendientes</field>
+        <field name="model">hr.payslip</field>
+        <field name="arch" type="xml">
+            <tree string="Pendientes de timbrar">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="payslip_run_id"/>
+                <field name="estado_timbrado"/>
+                <field name="error_timbrado"/>
+                <field name="fecha_ultimo_estatus"/>
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+        <field name="priority" eval="100"/>
+    </record>
+
+    <record id="act_open_pendientes" model="ir.actions.act_window">
+        <field name="name">Pendientes timbrar</field>
+        <field name="res_model">hr.payslip</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_hr_payslip_tree_pendientes"/>
+        <field name="domain">[('estado_timbrado','!=','timbrada')]</field>
+    </record>
+
+    <record id="act_open_pendientes_view" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="act_window_id" ref="act_open_pendientes"/>
+        <field name="view_id" ref="view_hr_payslip_tree_pendientes"/>
+    </record>
+
+    <menuitem action="act_open_pendientes" id="menu_open_pendientes"
+        parent="hr_work_entry_contract.menu_hr_payroll_root"/>
+
+</odoo>

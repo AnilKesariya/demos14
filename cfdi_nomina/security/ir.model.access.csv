@@ -1,0 +1,56 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_cfdi_nomina_regimen_contratacion","access_cfdi_nomina_regimen_contratacion","model_cfdi_nomina_regimen_contratacion",,1,1,1,1
+"access_cfdi_nomina_riesgo_puesto","access_cfdi_nomina_riesgo_puesto","model_cfdi_nomina_riesgo_puesto",,1,1,1,1
+"access_cfdi_nomina_tipo","access_cfdi_nomina_tipo","model_cfdi_nomina_tipo",,1,1,1,1
+"access_cfdi_nomina_codigo_agrupador","access_cfdi_nomina_codigo_agrupador","model_cfdi_nomina_codigo_agrupador",,1,1,1,1
+"access_hr_salary_rule_group","access_hr_salary_rule_group","model_hr_salary_rule_group",,1,1,1,1
+"access_hr_ext_mx_zonasalario","access_hr_ext_mx_zonasalario","cfdi_nomina.model_hr_ext_mx_zonasalario","hr.group_hr_manager",1,1,1,1
+"access_hr_ext_mx_regpat","access_hr_ext_mx_regpat","cfdi_nomina.model_hr_ext_mx_regpat","hr.group_hr_manager",1,1,1,1
+"access_hr_ext_mx_tipojornada","access_hr_ext_mx_tipojornada","cfdi_nomina.model_hr_ext_mx_tipojornada",,1,1,1,1
+"access_user_weekday","access_hr_weekday","cfdi_nomina.model_hr_weekday",,1,0,0,0
+"access_hr_mov_nomina","access_hr_mov_nomina","cfdi_nomina.model_hr_mov_nomina","hr.group_hr_manager",1,1,1,1
+"access_hr_mov_nomina_l","access_hr_mov_nomina_l","cfdi_nomina.model_hr_mov_nomina_line","hr.group_hr_manager",1,1,1,1
+"access_user_hr_mov_nomina","access_user_hr_mov_nomina","cfdi_nomina.model_hr_mov_nomina",,1,0,0,0
+"access_user_hr_mov_nomina_l","access_user_hr_mov_nomina_l","cfdi_nomina.model_hr_mov_nomina_line",,1,0,0,0
+"access_user_hr_factor_integracion","access_hr_tabla_fi user","cfdi_nomina.model_hr_tabla_fi",,1,0,0,0
+"access_hr_factor_integracion","access_hr_tabla_fi admin","cfdi_nomina.model_hr_tabla_fi","hr.group_hr_manager",1,1,1,1
+"access_user_hr_factor_integracion_l","access_hr_tabla_fi_line user","cfdi_nomina.model_hr_tabla_fi_line",,1,0,0,0
+"access_hr_factor_integracion_l","access_hr_tabla_fi_line admin","cfdi_nomina.model_hr_tabla_fi_line","hr.group_hr_manager",1,1,1,1
+"access_user_employee_historico_imss","access_hr_employee_historico_imss","cfdi_nomina.model_hr_employee_historico_imss",,1,1,1,1
+"access_admin_employee_historico_imss","access_hr_employee_historico_imss admin","cfdi_nomina.model_hr_employee_historico_imss","hr.group_hr_manager",1,1,1,1
+"access_user_employee_transfer","access_hr_employee_transfer","cfdi_nomina.model_hr_employee_transfer",,1,0,0,0
+"access_admin_employee_transfer","access_hr_employee_transfer admin","cfdi_nomina.model_hr_employee_transfer","hr.group_hr_manager",1,1,1,1
+access_cfdi_nomina_tipo_percepcion,access_cfdi_nomina_tipo_percepcion,model_cfdi_nomina_tipo_percepcion,base.group_user,1,1,1,1
+access_hr_other_inputs,access_hr_other_inputs,model_hr_other_inputs,base.group_user,1,1,1,1
+access_hr_payslip_info,access_hr_payslip_info,model_hr_payslip_info,base.group_user,1,1,1,1
+access_hr_payslip_acumulado,access_hr_payslip_acumulado,model_hr_payslip_acumulado,base.group_user,1,1,1,1
+access_hr_rule_input,access_hr_rule_input,model_hr_rule_input,base.group_user,1,1,1,1
+access_hr_contract_type,access_hr_contract_type,model_hr_contract_type,base.group_user,1,1,1,1                                        
+access_hr_tabla_sube_line,access_hr_tabla_sube_line,model_hr_tabla_sube_line,base.group_user,1,1,1,1
+access_hr_tabla_ispt,access_hr_tabla_ispt,model_hr_tabla_ispt,base.group_user,1,1,1,1
+access_hr_tabla_ispt_line,access_hr_tabla_ispt_line,model_hr_tabla_ispt_line,base.group_user,1,1,1,1
+access_cfdi_nomina_periodicidad_pago,access_cfdi_nomina_periodicidad_pago,model_cfdi_nomina_periodicidad_pago,base.group_user,1,1,1,1
+access_cfdi_nomina_origen_recurso,access_cfdi_nomina_origen_recurso,model_cfdi_nomina_origen_recurso,base.group_user,1,1,1,1
+access_hr_tabla_vacaciones,access_hr_tabla_vacaciones,model_hr_tabla_vacaciones,base.group_user,1,1,1,1
+access_hr_tabla_vacaciones_line,access_hr_tabla_vacaciones_line,model_hr_tabla_vacaciones_line,base.group_user,1,1,1,1
+access_hr_tabla_calendar_acum,access_hr_tabla_calendar_acum,model_hr_tabla_calendar_acum,base.group_user,1,1,1,1
+access_hr_tabla_calendar_acum_line,access_hr_tabla_calendar_acum_line,model_hr_tabla_calendar_acum_line,base.group_user,1,1,1,1
+access_hr_tabla_basegravable_acum,access_hr_tabla_basegravable_acum,model_hr_tabla_basegravable_acum,base.group_user,1,1,1,1                     
+access_hr_tabla_basegravable_acum,access_hr_tabla_basegravable_acum,model_hr_tabla_basegravable_acum,base.group_user,1,1,1,1
+access_hr_tabla_sube,access_hr_tabla_sube,model_hr_tabla_sube,base.group_user,1,1,1,1
+access_cfdi_nomina_tipo_horas,access_cfdi_nomina_tipo_horas,model_cfdi_nomina_tipo_horas,base.group_user,1,1,1,1
+access_cfdi_nomina_tipo_incapacidad,access_cfdi_nomina_tipo_incapacidad,model_cfdi_nomina_tipo_incapacidad,base.group_user,1,1,1,1
+access_cfdi_nomina_tipo_deduccion,access_cfdi_nomina_tipo_deduccion,model_cfdi_nomina_tipo_deduccion,base.group_user,1,1,1,1
+access_cfdi_nomina_tipo_jornada,access_cfdi_nomina_tipo_jornada,model_cfdi_nomina_tipo_jornada,base.group_user,1,1,1,1 
+access_cfdi_nomina_tipo_otro_pago,access_cfdi_nomina_tipo_otro_pago,model_cfdi_nomina_tipo_otro_pago,base.group_user,1,1,1,1
+access_hr_genera_laypoliza_wiz,access_hr_genera_laypoliza_wiz,model_hr_genera_laypoliza_wiz,base.group_user,1,1,1,1
+access_hr_idsec_wiz,access_hr_idsec_wiz,model_hr_idsec_wiz,base.group_user,1,1,1,1 
+access_cfdi_nomina_batch_cfdi,access_cfdi_nomina_batch_cfdi,model_cfdi_nomina_batch_cfdi,base.group_user,1,1,1,1
+access_cfdi_nomina_batch_mail,access_cfdi_nomina_batch_mail,model_cfdi_nomina_batch_mail,base.group_user,1,1,1,1
+access_cfdi_nomina_reporte_acumulado2,access_cfdi_nomina_reporte_acumulado2,model_cfdi_nomina_reporte_acumulado2,base.group_user,1,1,1,1
+access_hr_attendance_gen_wiz,access_hr_attendance_gen_wiz,model_hr_attendance_gen_wiz,base.group_user,1,1,1,1
+access_hr_attendance_employee,access_hr_attendance_employee,model_hr_attendance_employee,base.group_user,1,1,1,1
+access_txt_banco_wiz,access_txt_banco_wiz,model_txt_banco_wiz,base.group_user,1,1,1,1
+access_hr_reporte_nominas_wiz,access_hr_reporte_nominas_wiz,model_hr_reporte_nominas_wiz,base.group_user,1,1,1,1
+access_hr_reporte_liqimss_wiz,access_hr_reporte_liqimss_wiz,model_hr_reporte_liqimss_wiz,base.group_user,1,1,1,1
+access_hr_employee_transfer_wiz,access_hr_employee_transfer_wiz,model_hr_employee_transfer_wiz,base.group_user,1,1,1,1

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_pension,access_hr_employee_pension,model_hr_employee_pension,,1,1,1,1
+access_hr_employee_familiar,access_hr_employee_familiar,model_hr_employee_familiar,,1,1,1,1
+access_hr_employee_hijos,access_hr_employee_hijos,model_hr_employee_hijos,,1,1,1,1
+access_hr_employee_actas,access_hr_employee_actas,model_hr_employee_actas,,1,1,1,1
+access_hr_employee_beneficiario_segurohr,access_hr_employee_beneficiario_segurohr,model_hr_employee_beneficiario_seguro,,1,1,1,1
+access_hr_employee_historico_sueldo,access_hr_employee_historico_sueldo,model_hr_employee_historico_sueldo,,1,1,1,1
+access_hr_employee_historico_otros,access_hr_employee_historico_otros,model_hr_employee_historico_otros,,1,1,1,1
+access_hr_employee_credito,access_hr_employee_credito,model_hr_employee_credito,,1,1,1,1
+access_hr_employee_beneficiario_cuenta,access_hr_employee_beneficiario_cuenta,model_hr_employee_beneficiario_cuenta,,1,1,1,1
