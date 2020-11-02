@@ -208,73 +208,83 @@
     </data>
 
     <!--Tabla Subsidio-->
-    <data>
-        <record id='tabla_tabla_id_1' model='hr.tabla.sube'>
+    <data noupdate="1">
+        <record id='tabla_tabla_id' model='hr.tabla.sube'>
             <field name='name'>2018</field>
         </record>
 
-        <record id='tabla_tabla_id_1_line_l_1' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+        <record id='tabla_sube_line_demo1' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id'/>
             <field name='limite_inferior' eval='0.01'/>
             <field name='limite_superior' eval='1768.96'/>
             <field name='subsidio' eval='407.02'/>
         </record>
-        <record id='tabla_tabla_id_1_l_2' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+
+        <record id='tabla_sube_line_demo2' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id'/>
             <field name='limite_inferior' eval='1768.97'/>
             <field name='limite_superior' eval='2653.38'/>
             <field name='subsidio' eval='406.83'/>
         </record>
-        <record id='tabla_tabla_id_1_l_3' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+
+        <record id='tabla_sube_line_demo4' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id'/>
             <field name='limite_inferior' eval='2653.39'/>
             <field name='limite_superior' eval='3472.84'/>
             <field name='subsidio' eval='406.62'/>
         </record>
-        <record id='tabla_tabla_id_1_l_4' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1'/>
+
+        <record id='tabla_sube_line_demo5' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id'/>
             <field name='limite_inferior' eval='3472.85'/>
             <field name='limite_superior' eval='3537.87'/>
             <field name='subsidio' eval="392.77"/>
         </record>
-        <record id='tabla_tabla_id_1_l_5' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo6' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval="3537.88"/>
             <field name='limite_superior' eval='4446.15'/>
             <field name='subsidio' eval='382.46'/>
         </record>
-        <record id='tabla_tabla_id_1_l_6' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo7' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval='4446.16'/>
             <field name='limite_superior' eval='4717.18'/>
             <field name='subsidio' eval='354.23'/>
         </record>
-        <record id='tabla_tabla_id_1_l_7' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo8' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval='4717.19'/>
             <field name='limite_superior' eval='5335.42'/>
             <field name='subsidio' eval='324.87'/>
         </record>
-        <record id='tabla_tabla_id_1_l_8' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo9' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval='5335.43'/>
             <field name='limite_superior' eval='6224.67'/>
             <field name='subsidio' eval='294.63'/>
         </record>
-        <record id='tabla_tabla_id_1_l_9' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo10' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval='6224.68'/>
             <field name='limite_superior' eval='7113.9'/>
             <field name='subsidio' eval='253.54'/>
         </record>
-        <record id='tabla_tabla_id_1_l_10' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo11' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval='7113.91'/>
             <field name='limite_superior' eval='7382.33'/>
             <field name='subsidio' eval='217.61'/>
         </record>
-        <record id='tabla_tabla_id_1_l_11' model='hr.tabla.sube.line'>
-            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id_1' />
+
+        <record id='tabla_sube_line_demo12' model='hr.tabla.sube.line'>
+            <field name='tabla_id' ref='cfdi_nomina.tabla_tabla_id' />
             <field name='limite_inferior' eval='7382.34'/>
             <field name='limite_superior' eval='999999999'/>
             <field name='subsidio' eval='0'/>
