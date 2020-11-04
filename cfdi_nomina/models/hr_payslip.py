@@ -66,7 +66,7 @@ class HrPaySlipInfo(models.Model):
 
 class HrPaySlipAcumulado(models.Model):
     _name = 'hr.payslip.acumulado'
-    _description = 'hr payslip acumulado'
+    _description = 'hr payslip accumulated'
 
     slip_id = fields.Many2one('hr.payslip')
     name = fields.Char("Nombre")
@@ -744,7 +744,7 @@ class HrPayslip(models.Model):
             # Buscar los ultimos 2 meses completos de nomina confirmadas.
             # de acuerdo al calendario de la tabla IMSS
             tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
-            tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+            tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
             if not tbgrv:
                 raise UserError(
                     'No hay tabla Base Gravable con id %s' % tabla_id)
@@ -925,7 +925,7 @@ class HrPayslip(models.Model):
             # Buscar los ultimos 2 meses completos de nomina confirmadas.
             # de acuerdo al calendario de la tabla IMSS
             tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
-            tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+            tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
             if not tbgrv:
                 raise UserError(
                     'No hay tabla Base Gravable con id %s' % tabla_id)
@@ -1132,7 +1132,7 @@ class HrPayslip(models.Model):
             # Buscar los ultimos 2 meses completos de nomina confirmadas.
             # de acuerdo al calendario de la tabla IMSS
             tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
-            tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+            tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
             if not tbgrv:
                 raise UserError(
                     'No hay tabla Base Gravable con id %s' % tabla_id)
@@ -1248,7 +1248,7 @@ class HrPayslip(models.Model):
     def get_acumulado_tabla(self, anual_lines, tabla_id, name=None, field_name=None):
         self.ensure_one()
         payslip = self
-        tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+        tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
 
@@ -1303,7 +1303,7 @@ class HrPayslip(models.Model):
         self.ensure_one()
         payslip = self
         field_name = 'number_of_days'
-        tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+        tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
 
@@ -1360,7 +1360,7 @@ class HrPayslip(models.Model):
         payslip = self
         tabla_basegrv_imss_id = self.env.ref(
             'cfdi_nomina.tabla_basegravable_imss').id
-        tbgrv = self.env['hr.tabla.basegravable.acum'].browse(
+        tbgrv = self.env['hr.basegravable.acum'].browse(
             tabla_basegrv_imss_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' %
@@ -1649,7 +1649,7 @@ class HrPayslip(models.Model):
         payslip = self
 
         tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_isr').id
-        tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+        tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
 
@@ -1698,7 +1698,7 @@ class HrPayslip(models.Model):
         payslip = self
 
         tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_isr').id
-        tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+        tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
 
@@ -1747,7 +1747,7 @@ class HrPayslip(models.Model):
         payslip = self
 
         tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_isr').id
-        tbgrv = self.env['hr.tabla.basegravable.acum'].browse(tabla_id)
+        tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
 
@@ -1940,9 +1940,9 @@ class HrPayslip(models.Model):
                     _logger.info("total_grv_isr_mensuaL calc: {}".format(
                         total_grv_isr_mensuaL))
 
-                    # subex = self.env['hr.tabla.sube'].get_valor(total_grv_isr_mensuaL, tabla_sube_id)
+                    # subex = self.env['hr.tabla.employment'].get_valor(total_grv_isr_mensuaL, tabla_sube_id)
                     # _logger.info("subex {}, sube {}".format(subex, slip.sube))
-                    ispt = self.env['hr.tabla.ispt'].get_valor(
+                    ispt = self.env['hr.ispt'].get_valor(
                         total_grv_isr_mensuaL, tabla_isr_id)
 
                     slip.ispt = round(ispt, 2)

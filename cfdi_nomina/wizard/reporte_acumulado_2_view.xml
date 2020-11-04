@@ -5,7 +5,7 @@
         <field name="name">reporte.acumulado2.view.form</field>
         <field name="model">cfdi_nomina.reporte.acumulado2</field>
         <field name="arch" type="xml">
-            <form string="Reporte acumulado por estructura">
+            <form string="Accumulated report by structure">
                 <!-- <group string="Periodo"> -->
                 <!--     <field name="period_id"/> -->
                 <!-- </group> -->

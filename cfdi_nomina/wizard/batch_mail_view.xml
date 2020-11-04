@@ -5,7 +5,7 @@
             <field name="name">batch.mail.view.form</field>
             <field name="model">cfdi_nomina.batch.mail</field>
             <field name="arch" type="xml">
-                <form string="Enviar por correo XML y PDF">
+                <form string="Send by mail XML and PDF">
                     <group>
                         <field name="nominas"/>
                     </group>

@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 class HrMovNomina(models.Model):
     _name = 'hr.mov.nomina'
-    _description = 'Movimientos de Nomina pre configurados'
+    _description = 'Payroll movements pre-configured'
     _rec_name = 'name'
 
     name = fields.Char('Nombre', required=True)
@@ -35,7 +35,7 @@ class HrMovNomina(models.Model):
 
 class HrMovNominaLinea(models.Model):
     _name = 'hr.mov.nomina.line'
-    _description = 'Lineas de Movimientos de Nomina pre configurados'
+    _description = 'Payroll Movement Lines pre-configured'
 
     mov_nomina_id = fields.Many2one('hr.mov.nomina')
     employee_id = fields.Many2one('hr.employee', 'Empleado', required=True)

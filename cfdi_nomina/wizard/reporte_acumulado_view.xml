@@ -6,7 +6,7 @@
             <field name="name">reporte.acumulado.view.form</field>
             <field name="model">cfdi_nomina.reporte.acumulado</field>
             <field name="arch" type="xml">
-                <form string="Reporte acumulados" version="7.0">
+                <form string="Accumulated reports" version="7.0">
                     <group string="Periodo">
                         <field name="period_id" style="width:33%%"/>
                     </group>

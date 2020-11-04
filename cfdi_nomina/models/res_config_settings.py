@@ -20,9 +20,9 @@ class ResConfigSettings(models.TransientModel):
     nomina_journal = fields.Many2one(
         'account.journal', 'Diario de Nóminas', required=True)
 
-    ispt_mensual_id = fields.Many2one('hr.tabla.ispt', 'Tabla ISPT mensual')
-    ispt_anual_id = fields.Many2one('hr.tabla.ispt', 'Tabla ISPT anual')
-    sube_id = fields.Many2one('hr.tabla.sube', 'Tabla subsidio para el empleo')
+    ispt_mensual_id = fields.Many2one('hr.ispt', 'Tabla ISPT mensual')
+    ispt_anual_id = fields.Many2one('hr.ispt', 'Tabla ISPT anual')
+    sube_id = fields.Many2one('hr.employment.sube', 'Tabla subsidio para el empleo')
 
     @api.model
     def get_values(self):

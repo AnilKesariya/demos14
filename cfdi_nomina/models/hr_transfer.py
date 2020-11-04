@@ -8,7 +8,7 @@ from odoo import api, models, fields
 class HrEmployeeTransfer(models.Model):
     _name = "hr.employee.transfer"
     _rec_name = 'date'
-    _description = 'Transferencias del empleado'
+    _description = 'Employee transfers'
 
     date = fields.Date('Fecha', required=True, default=datetime.datetime.now())
     employee_id = fields.Many2one('hr.employee', string='Empleado', required=True)

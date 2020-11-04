@@ -32,8 +32,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="candidato_con_apellidos_form_view">
-        <field name="name">candidato.con.apellidos.form.view</field>
+    <record model="ir.ui.view" id="candidate_with_lastname_form_view">
+        <field name="name">candidate.with.lastname.form.view</field>
         <field name="model">hr.applicant</field>
         <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
         <field name="arch" type="xml">
@@ -48,8 +48,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="candidato_con_apellidos_tree_view">
-        <field name="name">candidato.con.apellidos.tree.view</field>
+    <record model="ir.ui.view" id="candidate_with_lastname_tree_view">
+        <field name="name">candidate.with.lastname.tree.view</field>
         <field name="model">hr.applicant</field>
         <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
         <field name="arch" type="xml">

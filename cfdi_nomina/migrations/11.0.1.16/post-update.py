@@ -61,7 +61,7 @@ def migrate(cr, version):
 
                 _logger.info("total_grv_isr_mensuaL calc: {}".format(total_grv_isr_mensuaL))
 
-                ispt = env['hr.tabla.ispt'].get_valor(total_grv_isr_mensuaL, tabla_isr_id)
+                ispt = env['hr.ispt'].get_valor(total_grv_isr_mensuaL, tabla_isr_id)
 
                 slip.ispt = round(ispt, 2)
                 ispt_calc = slip._get_ispt_calc()

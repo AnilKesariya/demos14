@@ -4,8 +4,8 @@
 
     <!-- Tabla bancos -->
 
-        <record id="bancos_view_tree_code_sat" model="ir.ui.view">
-            <field name="name">bancos.view.tree.code.sat</field>
+        <record id="banks_view_tree_code_sat" model="ir.ui.view">
+            <field name="name">banks.view.tree.code.sat</field>
             <field name="model">res.bank</field>
             <field name="inherit_id" ref="base.view_res_bank_form"/>
             <field name="arch" type="xml">

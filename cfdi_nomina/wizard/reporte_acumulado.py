@@ -5,7 +5,7 @@ import base64
 
 class reporte_acumulado(osv.TransientModel):
     _name = "cfdi_nomina.reporte.acumulado"
-    _description = 'reporte acumulado'
+    _description = 'aggregate report'
 
     _columns = {
         'fecha_inicio': fields.date("Fecha inicio"),

@@ -5,7 +5,7 @@
         <field name="name">view.hr.payslip.form.inherit pendientes</field>
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
-            <tree string="Pendientes de timbrar">
+            <tree string="Earrings for stamping">
                 <field name="name"/>
                 <field name="employee_id"/>
                 <field name="payslip_run_id"/>

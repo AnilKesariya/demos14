@@ -7,7 +7,7 @@
         <field name="name">regpat.tree</field>
         <field name="model">hr.ext.mx.regpat</field>
         <field name="arch" type="xml">
-            <tree string="Registro patronal">
+            <tree string="Employer Registration">
                 <field name="name"/>
                 <field name="company_id"/>
             </tree>
@@ -18,7 +18,7 @@
         <field name="name">regpat.form</field>
         <field name="model">hr.ext.mx.regpat</field>
         <field name="arch" type="xml">
-            <form string="Registro Patronal">
+            <form string="Employer Registration">
                 <group>
                     <group>
                         <field name="name"/>
@@ -84,8 +84,8 @@
                             <label for="GUA_SF" string="Guarderías"/>
                             <field name="GUA_SF" nolabel="1"/>
                             <field name="GUA_PATRON" nolabel="1"/>
-<!--                             <label string="-"/>
- -->
+                            <!-- <label string="-"/> -->
+
                             <label for="GMP_SF" string="Gastos Médicos para Pens."/>
                             <field name="GMP_SF" nolabel="1"/>
                             <field name="GMP_PATRON" nolabel="1"/>
@@ -94,11 +94,8 @@
                             <label for="INFONAVIT_SF" string="INFONAVIT"/>
                             <field name="INFONAVIT_SF" nolabel="1"/>
                             <field name="INFONAVIT_PATRON" nolabel="1"/>
-<!--                             <label string="-"/>
- -->
+                            <!-- <label string="-"/> -->
                         </group>
-
-
                     </page>
                 </notebook>
             </form>
@@ -120,9 +117,9 @@
     <!--Factor de Integración-->
     <record id="hr_tabla_factor_integ_form" model="ir.ui.view">
         <field name="name">hr.tabla.factor.integracion.form</field>
-        <field name="model">hr.tabla.fi</field>
+        <field name="model">hr.factor</field>
         <field name="arch" type="xml">
-            <form string="Tabla de Factor de Integracion">
+            <form string="Integration Factor Table">
                 <label for="name" class="oe_edit_only"/>
                 <h1><field name="name"/></h1>
                 <group>
@@ -158,9 +155,9 @@
 
     <record id="hr_tabla_factor_integ_tree" model="ir.ui.view">
         <field name="name">hr.tabla.factor.integracion.tree</field>
-        <field name="model">hr.tabla.fi</field>
+        <field name="model">hr.factor</field>
         <field name="arch" type="xml">
-            <tree string="Tabla factor de integración">
+            <tree string="Integration factor table">
                 <field name="name"/>
             </tree>
         </field>
@@ -168,7 +165,7 @@
 
     <record id="act_open_tabla_factor_integ" model="ir.actions.act_window">
         <field name="name">Tabla factor de integración</field>
-        <field name="res_model">hr.tabla.fi</field>
+        <field name="res_model">hr.factor</field>
         <field name="type">ir.actions.act_window</field>
        <field name="view_mode">tree,form</field>
     </record>
@@ -177,11 +174,11 @@
         parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
 
     <!--Tabla Vacaciones-->
-    <record id="hr_tabla_vacaciones_form" model="ir.ui.view">
-        <field name="name">hr.tabla.vacaciones.form</field>
-        <field name="model">hr.tabla.vacaciones</field>
+    <record id="hr_vacation_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.form</field>
+        <field name="model">hr.vacation</field>
         <field name="arch" type="xml">
-            <form string="Tabla de Vacaciones">
+            <form string="Vacation Table">
                 <label for="name" class="oe_edit_only"/>
                 <h1><field name="name"/></h1>
                 <group>
@@ -209,9 +206,9 @@
     </record>
 
 
-    <record id="hr_tabla_vacaciones_tree" model="ir.ui.view">
-        <field name="name">hr.tabla.vacaciones.tree</field>
-        <field name="model">hr.tabla.vacaciones</field>
+    <record id="hr_vacation_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.tree.view</field>
+        <field name="model">hr.vacation</field>
         <field name="arch" type="xml">
             <tree string="Tabla vacaciones">
                 <field name="name"/>
@@ -219,29 +216,30 @@
         </field>
     </record>
 
-    <record id="act_open_tabla_vacaciones" model="ir.actions.act_window">
+    <record id="hr_vacation_action" model="ir.actions.act_window">
         <field name="name">Tabla vacaciones</field>
-        <field name="res_model">hr.tabla.vacaciones</field>
-<field name="type">ir.actions.act_window</field>       <field name="view_mode">tree,form</field>
+        <field name="res_model">hr.vacation</field>
+        <field name="type">ir.actions.act_window</field>       
+        <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="act_open_tabla_vacaciones" id="menu_open_tabla_vacaciones"
+    <menuitem action="hr_vacation_action" id="menu_open_tabla_vacaciones"
         parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
 
     <!--Tabla Calendario-->
-    <record id="hr_tabla_calend_form" model="ir.ui.view">
+    <record id="hr_calendar_form_view" model="ir.ui.view">
         <field name="name">hr.tabla.calendar.form</field>
-        <field name="model">hr.tabla.calendar.acum</field>
+        <field name="model">hr.calendar.acum</field>
         <field name="arch" type="xml">
-            <form string="Tabla Calendario">
+            <form string="Calendar Table">
                 <sheet>
                 <div class="oe_button_box" name="calendar">
-                        <button name="fill"
-                                type="object"
-                                string="Llenar"
-                                class="oe_stat_button"
-                                icon="fa-archive">
-                        </button>
+                    <button name="fill"
+                            type="object"
+                            string="Llenar"
+                            class="oe_stat_button"
+                            icon="fa-archive">
+                    </button>
                 </div>
                 <label for="name" class="oe_edit_only"/>
                 <h1><field name="name"/></h1>
@@ -263,7 +261,7 @@
                                 <field name="fecha_fin"/>
                             </group>
                         </form>
-                        <tree string="Tabla calendario" editable="bottom">
+                        <tree string="Calendar table" editable="bottom">
                             <field name="sequence" readonly="1" force_save="1"/>
                             <field name="fecha_inicio" readonly="1" force_save="1"/>
                             <field name="fecha_fin"/>
@@ -276,33 +274,34 @@
     </record>
 
 
-    <record id="hr_tabla_calend_tree" model="ir.ui.view">
+    <record id="hr_calendar_acum_tree_view" model="ir.ui.view">
         <field name="name">hr.tabla.calendar.tree</field>
-        <field name="model">hr.tabla.calendar.acum</field>
+        <field name="model">hr.calendar.acum</field>
         <field name="arch" type="xml">
-            <tree string="Tabla calendario">
+            <tree string="Calendar table">
                 <field name="name"/>
                 <field name="fecha_inicio"/>
             </tree>
         </field>
     </record>
 
-    <record id="act_open_tabla_calend" model="ir.actions.act_window">
+    <record id="hr_calendar_acum_action" model="ir.actions.act_window">
         <field name="name">Tabla Calendario</field>
-        <field name="res_model">hr.tabla.calendar.acum</field>
-<field name="type">ir.actions.act_window</field>       <field name="view_mode">tree,form</field>
+        <field name="res_model">hr.calendar.acum</field>
+        <field name="type">ir.actions.act_window</field>     
+        <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="act_open_tabla_calend" id="menu_open_tabla_calend"
+    <menuitem action="hr_calendar_acum_action" id="menu_open_tabla_calend"
         parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
 
     <!--Tabla Base Gravable Acumulados-->
 
     <record id="hr_tabla_basegravable_tree" model="ir.ui.view">
         <field name="name">hr.tabla.basegravable.tree</field>
-        <field name="model">hr.tabla.basegravable.acum</field>
+        <field name="model">hr.basegravable.acum</field>
         <field name="arch" type="xml">
-            <tree string="Tabla calendario" editable="bottom" create="false" delete="false">
+            <tree string="Calendar table" editable="bottom" create="false" delete="false">
                 <field name="sequence"/>
                 <field name="name"/>
                 <field name="acum_calendar_id" options="{'no_create_edit': True, 'no_create':True}"/>
@@ -312,8 +311,7 @@
 
     <record id="act_open_tabla_basegravable" model="ir.actions.act_window">
         <field name="name">Tabla Base Gravable</field>
-        <field name="res_model">hr.tabla.basegravable.acum</field>
-        <!-- <field name="view_type">form</field> -->
+        <field name="res_model">hr.basegravable.acum</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -322,11 +320,11 @@
 
     <!--Tabla Subsidio para el empleo-->
 
-    <record id="hr_tabla_sube_form" model="ir.ui.view">
-        <field name="name">hr.tabla.sube.form</field>
-        <field name="model">hr.tabla.sube</field>
+    <record id="hr_employment_sube_form" model="ir.ui.view">
+        <field name="name">hr.employment.sube.form</field>
+        <field name="model">hr.employment.sube</field>
         <field name="arch" type="xml">
-            <form string="Tabla Calendario">
+            <form string="Hr Sube">
                 <sheet>
                 <label for="name" class="oe_edit_only"/>
                 <h1><field name="name"/></h1>
@@ -351,31 +349,31 @@
         </field>
     </record>
 
-    <record id="hr_tabla_sube_tree" model="ir.ui.view">
-        <field name="name">hr.tabla.sube.tree</field>
-        <field name="model">hr.tabla.sube</field>
+    <record id="hr_employment_sube_tree" model="ir.ui.view">
+        <field name="name">hr.employment.sube.tree</field>
+        <field name="model">hr.employment.sube</field>
         <field name="arch" type="xml">
-            <tree string="Tabla subsidio">
+            <tree string="Hr Sube">
                 <field name="name"/>
             </tree>
         </field>
     </record>
 
-    <record id="act_open_tabla_sube" model="ir.actions.act_window">
+    <record id="hr_employment_sube_action" model="ir.actions.act_window">
         <field name="name">Tabla Subsidio</field>
-        <field name="res_model">hr.tabla.sube</field>
+        <field name="res_model">hr.employment.sube</field>
         <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="act_open_tabla_sube" id="menu_open_tabla_sube"
+    <menuitem action="hr_employment_sube_action" id="menu_open_tabla_sube"
         parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1" groups="hr.group_hr_manager"/>
 
     <!--Tabla ISPT-->
 
     <record id="hr_tabla_ispt_form" model="ir.ui.view">
-        <field name="name">hr.tabla.ispt.form</field>
-        <field name="model">hr.tabla.ispt</field>
+        <field name="name">hr.ispt.form</field>
+        <field name="model">hr.ispt</field>
         <field name="arch" type="xml">
             <form string="Tabla ISPT">
                 <sheet>
@@ -405,8 +403,8 @@
     </record>
 
     <record id="hr_tabla_ispt_tree" model="ir.ui.view">
-        <field name="name">hr.tabla.ispt.tree</field>
-        <field name="model">hr.tabla.ispt</field>
+        <field name="name">hr.ispt.tree</field>
+        <field name="model">hr.ispt</field>
         <field name="arch" type="xml">
             <tree string="Tabla ISR">
                 <field name="name"/>
@@ -416,8 +414,9 @@
 
     <record id="act_open_tabla_ispt" model="ir.actions.act_window">
         <field name="name">Tabla ISR</field>
-        <field name="res_model">hr.tabla.ispt</field>
-<field name="type">ir.actions.act_window</field>       <field name="view_mode">tree,form</field>
+        <field name="res_model">hr.ispt</field>
+        <field name="type">ir.actions.act_window</field>       
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem action="act_open_tabla_ispt" id="menu_open_tabla_ispt"

@@ -3,103 +3,105 @@
 from odoo import models, fields
 
 
-class periodicidad_pago(models.Model):
+class PaymentPeriodicity(models.Model):
     _name = "cfdi_nomina.periodicidad_pago"
-    _description = "Periodicidad Pago"
+    _description = "Payment Periodicity"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class origen_recurso(models.Model):
+class ResourceResource(models.Model):
     _name = "cfdi_nomina.origen_recurso"
-    _description = "Origen recurso"
+    _description = "Resource origin"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class regimen_contratacion(models.Model):
+class Recruitment(models.Model):
     _name = "cfdi_nomina.regimen.contratacion"
-    _description = "Regimen contratacion"
+    _description = "Recruitment regime"
 
     name = fields.Char(u"Descripción", required=True)
     code = fields.Char("Código catálogo SAT", required=True)
 
 
-class clase_riesgo(models.Model):
+class Risk(models.Model):
     _name = "cfdi_nomina.riesgo.puesto"
-    _description = 'clase_riesgo'
+    _description = 'risk_class'
 
     name = fields.Char(u"Descripción", required=True)
     code = fields.Char("Código catálogo SAT", required=True)
 
 
-class TipoRegla(models.Model):
+class TypeRule(models.Model):
     _name = "cfdi_nomina.tipo"
-    _description = 'TipoRegla'
+    _description = 'TypeRule'
+
     name = fields.Char("Tipo")
 
 
-class codigo_agrupador(models.Model):
+class GrouperCode(models.Model):
     _name = "cfdi_nomina.codigo.agrupador"
-    _description = 'codigo_agrupador'
+    _description = 'grouper_code'
+
     name = fields.Char("Nombre", required=True)
     code = fields.Char("Código catálogo SAT", required=True)
     tipo_id = fields.Many2one("cfdi_nomina.tipo", string="Tipo", required=True)
 
 
-class tipo_horas(models.Model):
+class HoursType(models.Model):
     _name = "cfdi_nomina.tipo_horas"
-    _description = "Tipo horas"
+    _description = "Hours type"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class tipo_incapacidad(models.Model):
+class DisabilityType(models.Model):
     _name = "cfdi_nomina.tipo_incapacidad"
-    _description = "Tipo incapacidad"
+    _description = "Disability type"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class tipo_deduccion(models.Model):
+class DeductionType(models.Model):
     _name = "cfdi_nomina.tipo_deduccion"
-    _description = "Tipo deduccion"
+    _description = "Type of deduction"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class tipo_jornada(models.Model):
+class DayType(models.Model):
     _name = "cfdi_nomina.tipo_jornada"
-    _description = "Tipo jornada"
+    _description = "Day type"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class tipo_otro_pago(models.Model):
+class OtherPaymentType(models.Model):
     _name = "cfdi_nomina.tipo_otro_pago"
-    _description = "Tipo Otro Pago"
+    _description = "Type Other Payment"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class tipo_percepcion(models.Model):
+class PerceptionType(models.Model):
     _name = "cfdi_nomina.tipo_percepcion"
-    _description = "Tipo Percepcion"
+    _description = "Perception Type"
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código catálogo SAT", required=True)
 
 
-class TipoJornada(models.Model):
+class TypeWokingDay(models.Model):
     _name = "hr.ext.mx.tipojornada"
-    _description = 'Tipo Jornada'
+    _description = 'Day Type'
 
     name = fields.Char("Nombre", required=True)
     code = fields.Char(u"Código SAT")

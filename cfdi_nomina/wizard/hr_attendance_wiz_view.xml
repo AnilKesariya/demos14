@@ -5,7 +5,7 @@
         <field name="name">hr.attendance.gen.wiz.form</field>
         <field name="model">hr.attendance.gen.wiz</field>
         <field name="arch" type="xml">
-            <form string="Faltas desde Checador" version="7.0">
+            <form string="Faults from Checador" version="7.0">
                 <group col="4">
                    <field name="date_from" attrs="{'readonly': [('resultado_txt','!=',False)]}"/>
                    <field name="date_to" attrs="{'readonly': [('resultado_txt','!=',False)]}"/>
@@ -45,7 +45,7 @@
         <field name="name">hr.attendance.summary.employee.form</field>
         <field name="model">hr.attendance.employee</field>
         <field name="arch" type="xml">
-            <form string="Asistencia">
+            <form string="Assistance">
                 <group col="4" colspan="6">
                     <field name="date_from"/>
                     <field name="date_to"/>

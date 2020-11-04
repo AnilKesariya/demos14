@@ -8,8 +8,8 @@
             <notebook position="inside">
                 <page string="CFDI">
                     <group>
-                        <field name="lugar" />
-                        <field name="serie" />
+                        <field name="place"/>
+                        <field name="serie"/>
                     </group>
                 </page>
             </notebook>

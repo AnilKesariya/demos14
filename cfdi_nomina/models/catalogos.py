@@ -10,7 +10,7 @@ from odoo import api, models, fields, _
 
 class RegistroPatronal(models.Model):
     _name = 'hr.ext.mx.regpat'
-    _description = 'Registro Patronal'
+    _description = 'Employer Registry'
 
     name = fields.Char("Numero", size=64, required=True)
     company_id = fields.Many2one("res.company", string="Company")
@@ -85,26 +85,28 @@ class RegistroPatronal(models.Model):
 
 class ZonaSalario(models.Model):
     _name = 'hr.ext.mx.zonasalario'
-    _description = 'ZonaSalario'
+    _description = 'Salary Zone'
+
     name = fields.Char("Nombre", size=64, required=True)
     sm = fields.Float("Salario Mínimo de la Zona")
 
 
 class DiaSemana(models.Model):
     _name = 'hr.weekday'
-    _description = 'DiaSemana'
+    _description = 'Day week'
+
     name = fields.Char("Día", size=10, required=True)
     weekday = fields.Integer("Número", required=True)
 
 
-class TablaFactorIntegracion(models.Model):
-    _name = "hr.tabla.fi"
-    _description = 'Tabla Factor Integracion'
+class HrFactor(models.Model):
+    _name = "hr.factor"
+    _description = 'Integration Factor Table'
 
     name = fields.Char("Nombre")
     year_days = fields.Integer("Días del Año", default=365)
     fi_line_ids = fields.One2many(
-        comodel_name="hr.tabla.fi.line", inverse_name="fi_id", string="Tabla", required=False,)
+        comodel_name="hr.factor.line", inverse_name="fi_id", string="Tabla", required=False,)
 
     @api.constrains('year_days')
     def _check_year_days(self):
@@ -149,12 +151,12 @@ class TablaFactorIntegracion(models.Model):
         return aguinaldo_days
 
 
-class TablaFactorIntegracionLine(models.Model):
-    _name = "hr.tabla.fi.line"
+class HrFactorLine(models.Model):
+    _name = "hr.factor.line"
     _order = "years_old ASC"
-    _description = 'Tabla Factor Integracion Line'
+    _description = 'Table Facor Integration Line'
 
-    fi_id = fields.Many2one("hr.tabla.fi")
+    fi_id = fields.Many2one("hr.factor")
     years_old = fields.Integer(u"Años antigüedad",
                                help="Rango: valor mayor que la linea anterior y menor o igual al valor de esta linea")
     dias_aguinaldo = fields.Integer("Días aguinaldo")
@@ -172,14 +174,14 @@ class TablaFactorIntegracionLine(models.Model):
             record.factor_integracion = 1 + b + c
 
 
-class TablaVacaciones(models.Model):
-    _name = "hr.tabla.vacaciones"
-    _description = 'Tabla Vacaciones'
+class HrVaction(models.Model):
+    _name = "hr.vacation"
+    _description = 'Vacation Table'
 
     name = fields.Char("Nombre")
     year_days = fields.Integer("Días del Año", default=365)
     vac_line_ids = fields.One2many(
-        comodel_name="hr.tabla.vacaciones.line", inverse_name="vac_id", string="Tabla", required=False,)
+        comodel_name="hr.vacation.line", inverse_name="vac_id", string="Tabla", required=False,)
 
     def get_vacation_days(self, years_old):
         """
@@ -216,21 +218,21 @@ class TablaVacaciones(models.Model):
         return prima_vacation_days
 
 
-class TablaVacacionesLine(models.Model):
-    _name = "hr.tabla.vacaciones.line"
+class HrVactionLine(models.Model):
+    _name = "hr.vacation.line"
     _order = "years_old ASC"
-    _description = 'Tabla Vacaciones Line'
+    _description = 'Line Holidays Table'
 
-    vac_id = fields.Many2one("hr.tabla.vacaciones")
+    vac_id = fields.Many2one("hr.vacation")
     years_old = fields.Integer(u"Años antigüedad (lim inf)",
                                help="Rango: valor mayor que la linea anterior y menor o igual al valor de esta linea")
     dias_vacaciones = fields.Float("Días vacaciones")
     dias_prima_vacacional = fields.Float("Días Prima vacacional")
 
 
-class TablaCalendarAcum(models.Model):
-    _name = "hr.tabla.calendar.acum"
-    _description = "Para configurar los calendarios y periodos para acumular"
+class HrCalendar(models.Model):
+    _name = "hr.calendar.acum"
+    _description = "To configure calendars and periods to accumulate"
 
     name = fields.Char("Nombre", required=True)
     fecha_inicio = fields.Date("Fecha Inicio", default=datetime(
@@ -241,7 +243,7 @@ class TablaCalendarAcum(models.Model):
         ('3', 'Trimestral'),
         ('6', 'Semestral'),
     ], 'Periodo', default='1')
-    cal_line_ids = fields.One2many(comodel_name="hr.tabla.calendar.acum.line", inverse_name="cal_id", string="Tabla",
+    cal_line_ids = fields.One2many(comodel_name="hr.calendar.acum.line", inverse_name="cal_id", string="Tabla",
                                    required=False, )
 
     def fill(self):
@@ -299,11 +301,12 @@ class TablaCalendarAcum(models.Model):
         return periodo[0].fecha_inicio, periodo[0].fecha_fin
 
 
-class TablaCalendarAcumLine(models.Model):
-    _name = "hr.tabla.calendar.acum.line"
+class HrCalendarLine(models.Model):
+    _name = "hr.calendar.acum.line"
     _order = "cal_id, sequence"
-    _description = 'Tabla Calendar Acum Line'
-    cal_id = fields.Many2one("hr.tabla.calendar.acum")
+    _description = 'Calendar Acum Line Table'
+
+    cal_id = fields.Many2one("hr.calendar.acum")
     sequence = fields.Integer("Secuencia", required=True)
     fecha_inicio = fields.Date("Fecha Inicio", required=True)
     fecha_fin = fields.Date("Fecha Fin", required=True)
@@ -311,7 +314,7 @@ class TablaCalendarAcumLine(models.Model):
     @api.model
     def default_get(self, fields):
         res = super(TablaCalendarAcumLine, self).default_get(fields)
-        lines = self.env['hr.tabla.calendar.acum'].new(
+        lines = self.env['hr.calendar.acum'].new(
             'cal_line_ids', self._context.get('cal_line_ids'), ['fecha_fin'])
 
         period = int(self._context.get('periodo', '1'))
@@ -332,80 +335,81 @@ class TablaCalendarAcumLine(models.Model):
         return res
 
 
-class TablaBaseGravableAcum(models.Model):
-    _name = "hr.tabla.basegravable.acum"
+class HrTaxableBase(models.Model):
+    _name = "hr.basegravable.acum"
     _order = "sequence"
-    _description = 'Tabla Base Gravable Acum'
+    _description = 'Acum Taxable Base Table'
+
     sequence = fields.Integer("Secuencia", readonly=1)
     name = fields.Char("Nombre", readonly=1)
     data_field = fields.Char("Campo", help='Campo cuyo valor se va a acumular')
-    acum_calendar_id = fields.Many2one('hr.tabla.calendar.acum', string='Calendario',
+    acum_calendar_id = fields.Many2one('hr.calendar.acum', string='Calendario',
                                        help='Calendario para acumulados en nomina')
 
 
-class TablaSubsidioEmpleo(models.Model):
-    _name = "hr.tabla.sube"
-    _description = 'Tabla Subsidio Empleo'
+class HrSubsidy(models.Model):
+    _name = "hr.employment.sube"
+    _description = 'Employment Subsidy Table'
 
     name = fields.Char('Nombre', required=True, default=datetime.now().year)
     tabla_line = fields.One2many(
-        'hr.tabla.sube.line', 'tabla_id', string='Lineas')
+        'hr.employment.sube.line', 'tabla_id', string='Lineas')
 
-    @api.model
-    def get_valor(self, ingreso, tabla_id):
-        """
-        Busca el subisido para el ingreso dado
-        :param ingreso: Ingreso
-        :return: subsidio
-        """
-        if not tabla_id:
-            raise ValidationError(
-                'No se ha establecido las tablas para Subsidio en los ajustes de nómina')
-        sube = 0
-        # Busca el valor igual o inmediato superior al limite inferior y el año
-        tabla_sube = self.env['hr.tabla.sube.line'].search([
-            ('tabla_id', '=', tabla_id),
-            ('limite_inferior', '<=', ingreso),
-            ('limite_superior', '>=', ingreso),
-        ], limit=1)
-        if tabla_sube:
-            sube = tabla_sube.subsidio
+    # @api.model
+    # def get_valor(self, ingreso, tabla_id):
+    #     """
+    #     Busca el subisido para el ingreso dado
+    #     :param ingreso: Ingreso
+    #     :return: subsidio
+    #     """
+    #     if not tabla_id:
+    #         raise ValidationError(
+    #             'No se ha establecido las tablas para Subsidio en los ajustes de nómina')
+    #     sube = 0
+    #     # Busca el valor igual o inmediato superior al limite inferior y el año
+    #     tabla_sube = self.env['hr.employment.sube.line'].search([
+    #         ('tabla_id', '=', tabla_id),
+    #         ('limite_inferior', '<=', ingreso),
+    #         ('limite_superior', '>=', ingreso),
+    #     ], limit=1)
+    #     if tabla_sube:
+    #         sube = tabla_sube.subsidio
 
-        return sube
+    #     return sube
 
 
-class TablaSubsidioEmpleoLine(models.Model):
-    _name = "hr.tabla.sube.line"
+class HrSubsidyLine(models.Model):
+    _name = "hr.employment.sube.line"
     _order = "limite_inferior"
-    _description = 'Tabla Subsidio Empleo Line'
+    _description = 'Table Subsidy Employment Line'
 
-    tabla_id = fields.Many2one('hr.tabla.sube')
+    tabla_id = fields.Many2one('hr.employment.sube')
     limite_inferior = fields.Float("Limite inferior")
     limite_superior = fields.Float("Limite superior")
     subsidio = fields.Float("Subsidio")
 
-    @api.model
-    def default_get(self, default_fields):
-        res = super(TablaSubsidioEmpleoLine, self).default_get(default_fields)
-        if self._context.get('tabla_line'):
-            lines = self.env['hr.tabla.sube'].new(
-                {'tabla_line': self._context['tabla_line']})
-        print('lines', lines)
-        if lines and lines[-1] and 'limite_inferior' not in res:
-            limsup2 = lines[-1]
-            res['limite_inferior'] = limsup2 + 0.01
-            res['limite_superior'] = limsup2 + 1
-        return res
+    # @api.model
+    # def default_get(self, default_fields):
+    #     res = super(HrSubsidyLine, self).default_get(default_fields)
+    #     if self._context.get('tabla_line'):
+    #         lines = self.env['hr.employment.sube'].new(
+    #             {'tabla_line': self._context['tabla_line']})
+    #     print('lines', lines)
+    #     if lines and lines[-1] and 'limite_inferior' not in res:
+    #         limsup2 = lines[-1]
+    #         res['limite_inferior'] = limsup2 + 0.01
+    #         res['limite_superior'] = limsup2 + 1
+    #     return res
 
 
     # @api.model
     # def default_get(self, fields):
-    #     res = super(TablaSubsidioEmpleoLine, self).default_get(fields)
-    # lines = self.env['hr.tabla.sube'].new(
+    #     res = super(HrSubsidyLine, self).default_get(fields)
+    # lines = self.env['hr.employment.sube'].new(
     #     'tabla_line', self._context.get('tabla_line'), ['limite_superior'])
     # print('self._context.gettabla_line', self._context.get('tabla_line'))
     # print(self._context.get('tabla_line'), ['limite_inferior'])
-    # lines = self.env['hr.tabla.sube'].new(
+    # lines = self.env['hr.employment.sube'].new(
     #     {'tabla_line', self._context.get('tabla_line'), ['limite_inferior']})
     # if lines and lines[-1] and 'limite_inferior' not in res:
     #     limsup2 = lines[-1].get('limite_superior')
@@ -415,13 +419,13 @@ class TablaSubsidioEmpleoLine(models.Model):
     # return res
 
 
-class TablaISPT(models.Model):
-    _name = "hr.tabla.ispt"
+class HrIspt(models.Model):
+    _name = "hr.ispt"
     _description = 'Tabla ISPT'
 
     name = fields.Char('Nombre', required=True, default=datetime.now().year)
     tabla_line = fields.One2many(
-        'hr.tabla.ispt.line', 'tabla_id', string='Lineas')
+        'hr.ispt.line', 'tabla_id', string='Lineas')
 
     @api.model
     def get_valor(self, ingreso, tabla_id):
@@ -436,7 +440,7 @@ class TablaISPT(models.Model):
 
         ispt = 0
         # Busca el valor igual o inmediato superior al limite inferior y el año
-        tabla_ispt = self.env['hr.tabla.ispt.line'].search([
+        tabla_ispt = self.env['hr.ispt.line'].search([
             ('tabla_id', '=', tabla_id),
             ('limite_inferior', '<=', ingreso),
             ('limite_superior', '>=', ingreso), ], limit=1)
@@ -448,11 +452,12 @@ class TablaISPT(models.Model):
         return ispt
 
 
-class TablaISPTLine(models.Model):
-    _name = "hr.tabla.ispt.line"
+class HrIsptLine(models.Model):
+    _name = "hr.ispt.line"
     _order = "limite_inferior"
     _description = 'Tabla ISPT Line'
-    tabla_id = fields.Many2one('hr.tabla.ispt')
+
+    tabla_id = fields.Many2one('hr.ispt')
     limite_inferior = fields.Float("Limite inferior")
     limite_superior = fields.Float("Limite superior")
     cuota_fija = fields.Float("Cuota fija")
@@ -460,8 +465,8 @@ class TablaISPTLine(models.Model):
 
     # @api.model
     # def default_get(self, fields):
-    #     res = super(TablaISPTLine, self).default_get(fields)
-    #     lines = self.env['hr.tabla.ispt'].new(
+    #     res = super(HrIsptLine, self).default_get(fields)
+    #     lines = self.env['hr.ispt'].new(
     #         'tabla_line', self._context.get('tabla_line'), ['limite_superior'])
 
     #     if lines and lines[-1] and 'limite_inferior' not in res:

@@ -17,7 +17,7 @@ def migrate(cr, version):
 
     ICPSudo = env['ir.config_parameter'].sudo()
     tabla_sube_id = literal_eval(ICPSudo.get_param('cfdi_nomina.NominaSUBEID') or None)
-    tabla_sube = env['hr.tabla.sube']
+    tabla_sube = env['hr.employment.sube']
     acumulado_obj = env['hr.payslip.acumulado']
     payslip_obj = env['hr.payslip']
     fper = 365.0 / 12.0 / 15.0

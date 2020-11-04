@@ -20,13 +20,13 @@ class NominasReport(models.AbstractModel):
     total_gravable = fields.Float(string="Total gravable")
     lines_p = fields.Char(string="lines p")
     lines_d = fields.Char(string="lines d")
-    lines_o = fields.Char(string="lines o")
+    lines_o = fields.Char(string="Otros")
     otras_p = fields.Char(string="Otras P")
     otras_d = fields.Char(string="Otras D")
     total_subsidio_empleo = fields.Float(string="Total subsidio empleo")
     dias_trabajados = fields.Float(string="Dias Trabajados")
     horas_trabajados = fields.Float(string="Horas Trabajados")
-    salarioXhora = fields.Float(string="SalarioXhora")
+    salarioXhora = fields.Float(string="Salario por hora")
     total_sueldo = fields.Float(string="Total Sueldo")
     total_d = fields.Float(string="Total D")
     total_o = fields.Float(string="Total O")
@@ -40,7 +40,7 @@ class NominasReport(models.AbstractModel):
     total_lines_p = fields.Char(string="Total lines P")
     total_lines_o = fields.Char(string="Total Lines o")
     total_lines_d = fields.Char(string="Total lines d")
-    totales = fields.Char(string="Totales")
+    totales = fields.Float(string="Total FDP")
 
     def calc_reglas_lines(self, o):
         p_id = self.env.ref("cfdi_nomina.catalogo_tipo_percepcion").id

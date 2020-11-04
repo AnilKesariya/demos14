@@ -737,7 +737,7 @@ class HrPayslip(models.Model):
             'serie': self.journal_id.serie or '',
             'currency': company.currency_id.name,
             'rate': round(rate, 4) if rate != 1.0 else "1",
-            'emitter_zip': self.journal_id.lugar or "",
+            'emitter_zip': self.journal_id.place or "",
             'date_invoice_tz': fecha_local.strftime('%Y-%m-%dT%H:%M:%S'),
             'number': self._get_folio(),
             'document_type': 'N',

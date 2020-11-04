@@ -175,9 +175,9 @@ class Employee(models.Model):
     zona_salario = fields.Many2one(
         'hr.ext.mx.zonasalario', string="Zona salario")
     sueldo_diario = fields.Float('Sueldo diario', track_visibility='onchange')
-    tabla_sdi_id = fields.Many2one('hr.tabla.fi', 'Tabla SDI',)
+    tabla_sdi_id = fields.Many2one('hr.factor', 'Tabla SDI',)
     tabla_vacaciones_id = fields.Many2one(
-        'hr.tabla.vacaciones', 'Tabla Vacaciones',)
+        'hr.vacation', 'Tabla Vacaciones',)
     sueldo_imss = fields.Float(
         string='Sueldo integrado al IMSS', track_visibility='onchange')
     historico_sueldo_imss = fields.One2many(
@@ -285,7 +285,7 @@ class Employee(models.Model):
         return super().write(vals)
 
 
-class HistoricoSueldoIMSS(models.Model):
+class HistoricalSalaryIMSS(models.Model):
     _name = "hr.employee.historico.imss"
     _order = "name DESC"
 

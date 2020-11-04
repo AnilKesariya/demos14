@@ -30,9 +30,11 @@ class Contract(models.Model):
     _inherit = 'hr.contract'
     _description = 'Contract'
 
-    type_id = fields.Many2one(
-        'hr.contract.type', string='Contract Type',required=True,
-        default=lambda self: self.env['hr.contract.type'].search([], limit=1))
+    type_id = fields.Many2one('hr.contract.type',string='Contract type')
+
+    # type_id = fields.Many2one(
+        # 'hr.contract.type', string='Contract Type',required=True,
+        # default=lambda self: self.env['hr.contract.type'].search([], limit=1))
 
 
         

@@ -23,9 +23,9 @@ class PaySlipReport(models.AbstractModel):
     comprobante = fields.Char(string="coprobante")
     timbre = fields.Char(string="Timbre")
     total_especie = fields.Float(string="Total Especie")
-    total_p = fields.Float(string="Total P")
-    total_d = fields.Float(string="Total D")
-    total_o = fields.Float(string="Total O")
+    total_p = fields.Float(string="Total Percepciones")
+    total_d = fields.Float(string="Total Deducciones")
+    total_o = fields.Float(string="Total Otros pagos")
     lines_d = fields.Char(string="lines d")
     lines_o = fields.Char(string="lines o")
 

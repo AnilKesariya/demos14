@@ -4,7 +4,7 @@
         <field name="name">batch.cfdi.view.form</field>
         <field name="model">cfdi_nomina.batch.cfdi</field>
         <field name="arch" type="xml">
-            <form string="Generar XMLs">
+            <form string="Generate XMLs">
                 <group>
                     <field name="fecha_pago"/>
                     <field name="concepto"/>

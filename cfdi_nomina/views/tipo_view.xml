@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="hr_tipo_view_tree" model="ir.ui.view">
+    <record id="hr_type_view_tree" model="ir.ui.view">
         <field name="name">tipo.reglas.tree</field>
         <field name="model">cfdi_nomina.codigo.agrupador</field>
         <field name="arch" type="xml">
@@ -13,14 +13,14 @@
         </field>
     </record>
 
-    <record id="act_open_hr_tipo" model="ir.actions.act_window">
+    <record id="act_open_hr_type" model="ir.actions.act_window">
         <field name="name">Catálogo SAT tipo reglas</field>
         <field name="res_model">cfdi_nomina.codigo.agrupador</field>
         <field name="view_mode">tree</field>
         <field name="type">ir.actions.act_window</field>    
     </record>
 
-    <menuitem action="act_open_hr_tipo" id="menu_open_hr_tipo" groups="hr.group_hr_manager"
+    <menuitem action="act_open_hr_type" id="menu_open_hr_tipo" groups="hr.group_hr_manager"
         parent="hr_work_entry_contract.menu_hr_payroll_configuration"/>
 
 </odoo>

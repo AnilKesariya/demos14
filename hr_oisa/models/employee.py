@@ -28,9 +28,9 @@ seleccion3 = [('CH', 'CH Chica'), ('M', 'M Mediana'),
               ('G', 'G Grande'), ('EG', 'EG Extra grande')]
 
 
-class Hijos(models.Model):
+class Children(models.Model):
     _name = "hr.employee.hijos"
-    _description = 'hr employee hijos'
+    _description = 'hr employee children'
 
     nombre = fields.Char(required=True)
     edad = fields.Integer(required=True)
@@ -38,9 +38,9 @@ class Hijos(models.Model):
     employee_id = fields.Many2one("hr.employee", string="Empleado")
 
 
-class FamiliarLabora(models.Model):
+class EmployeeFamily(models.Model):
     _name = "hr.employee.familiar"
-    _description = 'hr employee familiar'
+    _description = 'hr employee family'
 
     name = fields.Char("Nombre(s)", required=True)
     appat = fields.Char("Apellido paterno", required=True)
@@ -48,7 +48,7 @@ class FamiliarLabora(models.Model):
     employee_id = fields.Many2one("hr.employee", string="Empleado")
 
 
-class PensionAlimenticia(models.Model):
+class EmployeePension(models.Model):
     _name = "hr.employee.pension"
     _description = 'hr employee pension'
 
@@ -60,9 +60,9 @@ class PensionAlimenticia(models.Model):
     amount = fields.Char(required=True)
 
 
-class Credito(models.Model):
+class EmployeeCredit(models.Model):
     _name = "hr.employee.credito"
-    _description = 'hr employee credito'
+    _description = 'hr employee credit'
 
     name = fields.Char(required=True)
     employee_id = fields.Many2one("hr.employee", string="Empleado")
@@ -81,9 +81,9 @@ class ActaAdministrativa(models.Model):
         "hr.employee", string="Empleados", required=True)
 
 
-class BeneficiarioSeguroVida(models.Model):
+class InsuranceBeneficiaries(models.Model):
     _name = "hr.employee.beneficiario_seguro"
-    _description = 'hr employee beneficiarios seguro'
+    _description = 'hr employee insurance beneficiaries'
 
     name = fields.Char()
     parentesco = fields.Selection([

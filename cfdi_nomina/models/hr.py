@@ -162,7 +162,7 @@ class HRSalaryRule(models.Model):
 
     destajo = fields.Boolean('A Destajo', default=False)
     en_especie = fields.Boolean('Pago en Especie', default=False)
-    acum_calendar_id = fields.Many2one('hr.tabla.calendar.acum', string='Calendario', required=False,
+    acum_calendar_id = fields.Many2one('hr.calendar.acum', string='Calendario', required=False,
                                        help='Calendario para acumulados en nomina')
     input_ids = fields.One2many(
         'hr.rule.input', 'input_id', string='Inputs', copy=True)
@@ -330,9 +330,9 @@ class HRSalaryRule(models.Model):
                 'cfdi_nomina.NominaIPSTMensualID') or 'None')
 
             if payslip.tipo_calculo == 'anual':
-                localdict['ISPT'] = self.env['hr.tabla.ispt'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
+                localdict['ISPT'] = self.env['hr.ispt'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
                                                                         tabla_isr_id)
-                localdict['SUBE'] = self.env['hr.tabla.sube'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
+                localdict['SUBE'] = self.env['hr.employment.sube'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
                                                                         tabla_sube_id)
                 # Registrar valores del Subsidio y Subsidio acumulado
                 payslip.save_subsidio(localdict)
@@ -341,9 +341,9 @@ class HRSalaryRule(models.Model):
                 self.calculo_anual(localdict, payslip)
 
             else:
-                localdict['ISPT'] = self.env['hr.tabla.ispt'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
+                localdict['ISPT'] = self.env['hr.ispt'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
                                                                         tabla_isr_id)
-                localdict['SUBE'] = self.env['hr.tabla.sube'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
+                localdict['SUBE'] = self.env['hr.employment.sube'].get_valor(localdict['TOTAL_GRV_ISR_MENSUAL'],
                                                                         tabla_sube_id)
 
                 # Registrar valores del Subsidio y Subsidio acumulado
@@ -372,7 +372,7 @@ class HRSalaryRule(models.Model):
 
         gravable_anual = factor_anual * total_gravado_anual
 
-        ispt_tabla = self.env['hr.tabla.ispt'].get_valor(
+        ispt_tabla = self.env['hr.ispt'].get_valor(
             gravable_anual, tabla_isr_id)
 
         impuesto_del_gravable_acumulado = factor_anual and ispt_tabla / factor_anual or 0.0
@@ -384,7 +384,7 @@ class HRSalaryRule(models.Model):
         ispt = impuesto_corresp_anual - isr_acumulado
 
         localdict['ISPT_ANUAL'] = ispt
-        # localdict['SUBE'] = self.env['hr.tabla.sube'].get_valor(total_gravado_anual, tabla_sube_id)
+        # localdict['SUBE'] = self.env['hr.employment.sube'].get_valor(total_gravado_anual, tabla_sube_id)
 
         # _logger.info("SUBE: {}, ISPT: {},  ISPT_ANUAL: {}, D100_AC: {}, FPER: {}".format(
         #     localdict['SUBE'],
@@ -794,7 +794,7 @@ class HrJob(models.Model):
     xs_tipo_grupo_poliza = fields.Selection(selection=[
             ('administracion', 'Administracion'),
             ('ventas', 'Ventas'),
-        ], string='Policy Group Type',store=True ,default="administracion")
+        ], string='Tipo de Puesto',store=True ,default="administracion")
 
 
 def to_tz(datetime, tz_name):

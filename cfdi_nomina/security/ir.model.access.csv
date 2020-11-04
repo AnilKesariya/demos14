@@ -12,10 +12,14 @@
 "access_hr_mov_nomina_l","access_hr_mov_nomina_l","cfdi_nomina.model_hr_mov_nomina_line","hr.group_hr_manager",1,1,1,1
 "access_user_hr_mov_nomina","access_user_hr_mov_nomina","cfdi_nomina.model_hr_mov_nomina",,1,0,0,0
 "access_user_hr_mov_nomina_l","access_user_hr_mov_nomina_l","cfdi_nomina.model_hr_mov_nomina_line",,1,0,0,0
-"access_user_hr_factor_integracion","access_hr_tabla_fi user","cfdi_nomina.model_hr_tabla_fi",,1,0,0,0
-"access_hr_factor_integracion","access_hr_tabla_fi admin","cfdi_nomina.model_hr_tabla_fi","hr.group_hr_manager",1,1,1,1
-"access_user_hr_factor_integracion_l","access_hr_tabla_fi_line user","cfdi_nomina.model_hr_tabla_fi_line",,1,0,0,0
-"access_hr_factor_integracion_l","access_hr_tabla_fi_line admin","cfdi_nomina.model_hr_tabla_fi_line","hr.group_hr_manager",1,1,1,1
+"access_user_hr_factor_integracion","access_hr_factor user","cfdi_nomina.model_hr_factor",,1,0,0,0
+
+"access_hr_factor_integracion","access_hr_factor admin","cfdi_nomina.model_hr_factor","hr.group_hr_manager",1,1,1,1
+
+"access_user_hr_factor_integracion_l","access_hr_factor_line user","cfdi_nomina.model_hr_factor_line",,1,0,0,0
+
+"access_hr_factor_integracion_l","access_hr_factor_line admin","cfdi_nomina.model_hr_factor_line","hr.group_hr_manager",1,1,1,1
+
 "access_user_employee_historico_imss","access_hr_employee_historico_imss","cfdi_nomina.model_hr_employee_historico_imss",,1,1,1,1
 "access_admin_employee_historico_imss","access_hr_employee_historico_imss admin","cfdi_nomina.model_hr_employee_historico_imss","hr.group_hr_manager",1,1,1,1
 "access_user_employee_transfer","access_hr_employee_transfer","cfdi_nomina.model_hr_employee_transfer",,1,0,0,0
@@ -26,18 +30,24 @@ access_hr_payslip_info,access_hr_payslip_info,model_hr_payslip_info,base.group_u
 access_hr_payslip_acumulado,access_hr_payslip_acumulado,model_hr_payslip_acumulado,base.group_user,1,1,1,1
 access_hr_rule_input,access_hr_rule_input,model_hr_rule_input,base.group_user,1,1,1,1
 access_hr_contract_type,access_hr_contract_type,model_hr_contract_type,base.group_user,1,1,1,1                                        
-access_hr_tabla_sube_line,access_hr_tabla_sube_line,model_hr_tabla_sube_line,base.group_user,1,1,1,1
-access_hr_tabla_ispt,access_hr_tabla_ispt,model_hr_tabla_ispt,base.group_user,1,1,1,1
-access_hr_tabla_ispt_line,access_hr_tabla_ispt_line,model_hr_tabla_ispt_line,base.group_user,1,1,1,1
+access_hr_employment_sube_line,access_hr_employment_sube_line,model_hr_employment_sube_line,base.group_user,1,1,1,1
+
+access_hr_ispt,access_hr_ispt,model_hr_ispt,base.group_user,1,1,1,1
+access_hr_ispt_line,access_hr_ispt_line,model_hr_ispt_line,base.group_user,1,1,1,1
+
 access_cfdi_nomina_periodicidad_pago,access_cfdi_nomina_periodicidad_pago,model_cfdi_nomina_periodicidad_pago,base.group_user,1,1,1,1
 access_cfdi_nomina_origen_recurso,access_cfdi_nomina_origen_recurso,model_cfdi_nomina_origen_recurso,base.group_user,1,1,1,1
-access_hr_tabla_vacaciones,access_hr_tabla_vacaciones,model_hr_tabla_vacaciones,base.group_user,1,1,1,1
-access_hr_tabla_vacaciones_line,access_hr_tabla_vacaciones_line,model_hr_tabla_vacaciones_line,base.group_user,1,1,1,1
-access_hr_tabla_calendar_acum,access_hr_tabla_calendar_acum,model_hr_tabla_calendar_acum,base.group_user,1,1,1,1
-access_hr_tabla_calendar_acum_line,access_hr_tabla_calendar_acum_line,model_hr_tabla_calendar_acum_line,base.group_user,1,1,1,1
-access_hr_tabla_basegravable_acum,access_hr_tabla_basegravable_acum,model_hr_tabla_basegravable_acum,base.group_user,1,1,1,1                     
-access_hr_tabla_basegravable_acum,access_hr_tabla_basegravable_acum,model_hr_tabla_basegravable_acum,base.group_user,1,1,1,1
-access_hr_tabla_sube,access_hr_tabla_sube,model_hr_tabla_sube,base.group_user,1,1,1,1
+
+access_hr_vacation,access_hr_vacation,model_hr_vacation,base.group_user,1,1,1,1
+access_hr_vacation_line,access_hr_vacation_line,model_hr_vacation_line,base.group_user,1,1,1,1
+
+access_hr_calendar_acum,access_hr_calendar_acum,model_hr_calendar_acum,base.group_user,1,1,1,1
+access_hr_calendar_acum_line,access_hr_calendar_acum_line,model_hr_calendar_acum_line,base.group_user,1,1,1,1
+
+access_hr_basegravable_acum,access_hr_basegravable_acum,model_hr_basegravable_acum,base.group_user,1,1,1,1  
+access_hr_basegravable_acum,access_hr_basegravable_acum,model_hr_basegravable_acum,base.group_user,1,1,1,1
+
+access_hr_employment_sube,access_hr_employment_sube,model_hr_employment_sube,base.group_user,1,1,1,1
 access_cfdi_nomina_tipo_horas,access_cfdi_nomina_tipo_horas,model_cfdi_nomina_tipo_horas,base.group_user,1,1,1,1
 access_cfdi_nomina_tipo_incapacidad,access_cfdi_nomina_tipo_incapacidad,model_cfdi_nomina_tipo_incapacidad,base.group_user,1,1,1,1
 access_cfdi_nomina_tipo_deduccion,access_cfdi_nomina_tipo_deduccion,model_cfdi_nomina_tipo_deduccion,base.group_user,1,1,1,1

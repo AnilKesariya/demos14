@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class HrRepLiqIMSSWiz(models.TransientModel):
     _name = 'hr.reporte.liqimss.wiz'
-    _description = 'Wizard para Generar reporte de Liquidaion IMSS'
+    _description = 'Wizard to Generate IMSS Liquidation Report'
 
     company_ids = fields.Many2many('res.company', string='Compañías')
     department_ids = fields.Many2many('hr.department', string='Departamentos')

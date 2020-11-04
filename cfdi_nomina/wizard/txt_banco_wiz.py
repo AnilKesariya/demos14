@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class TxtBancoWiz(models.TransientModel):
     _name = 'txt.banco.wiz'
-    _description = 'Wizard para Generar texto de dispersion de banco'
+    _description = 'Wizard for Generating Bank Dispersion Text'
 
     company_ids = fields.Many2many('res.company', string='Compañías')
 

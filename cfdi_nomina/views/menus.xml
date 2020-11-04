@@ -6,8 +6,7 @@
     <record id="act_open_zonasalario" model="ir.actions.act_window">
         <field name="name">Zona Salario</field>
         <field name="res_model">hr.ext.mx.zonasalario</field>
-<!--         <field name="view_type">form</field>
- -->        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem action="act_open_zonasalario" id="menu_open_zonasalario"
