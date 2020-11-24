@@ -165,4 +165,14 @@
             </xpath>
         </field>
     </record>
+
+    <record id="act_reason_low" model="ir.actions.act_window">
+        <field name="name">Reason for withdrawal</field>
+        <field name="res_model">reason.low</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem action="act_reason_low" id="menu_reason_low"
+        parent="hr.menu_human_resources_configuration" sequence="0" groups="hr.group_hr_manager"/>
+
 </odoo>

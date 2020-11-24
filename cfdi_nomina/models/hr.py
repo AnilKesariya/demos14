@@ -128,9 +128,9 @@ class HRSalaryRule(models.Model):
         ('variable', 'Variable')])
 
     tipo_horas = fields.Many2one(
-        "cfdi_nomina.tipo_horas", string="Tipo horas extras")
+        "cfdi_nomina.tipo_horas", string="Type of overtime")
     codigo_agrupador = fields.Many2one(
-        "cfdi_nomina.codigo.agrupador", string=u"Código SAT")
+        "cfdi_nomina.codigo.agrupador", string=u"SAT Code")
     agrupacion = fields.Many2one("hr.salary.rule.group")
     gravado_o_exento = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True, default='gravado',
                                         help='Gravado para ISR. Genera variables  <code>_GRV_ISR y TOTAL_GRV_ISR')
@@ -785,6 +785,17 @@ class HrContract(models.Model):
     periodicidad_pago = fields.Many2one("cfdi_nomina.periodicidad_pago")
     monthly_wage = fields.Monetary(
         'Sueldo Mensual', digits=(16, 2), help='Para contrato impreso')
+    planned_payment = fields.Selection([
+        ('monthly','Mensual'),
+        ('quarterly','Trimestral'),
+        ('semiannually','Semestralmente'),
+        ('annually','Anualmente'),
+        ('weekly','Semanalmente'),
+        ('biweekly','Bisemanal'),
+        ('bimonthly','Bimensual'),
+        ],default="monthly",string="Pago planificado")
+    salary_journal = fields.Many2one(
+        'account.journal', 'Diario de salario', required=True)
 
 
 class HrJob(models.Model):

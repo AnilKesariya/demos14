@@ -6,12 +6,13 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <field name="parent_id" position="before">
-                <group>
-                    <field name="employee" attrs="{'invisible': [ ('is_company','=',True)]}"/>
-                    <!-- <field name="employee" attrs="{'invisible': ['|', ('is_company','=',True), '|', ('customer','=',True), ('supplier','=',True)]}"/> -->
-                </group>
-            </field>
+            <xpath expr="//form//sheet//group//group[1]//field[@name='type']" position="before">
+                <field name="employee" attrs="{'invisible': [ ('is_company','=',True)]}"/>
+                <!-- <field name="employee" attrs="{'invisible': ['|', ('is_company','=',True), '|', ('customer','=',True), ('supplier','=',True)]}"/> -->
+            </xpath>
+            <xpath expr="//form//sheet//group//group[1]//field[@name='type']" position="after">
+                <field name="rfc"/>
+            </xpath>
         </field>
     </record>
 

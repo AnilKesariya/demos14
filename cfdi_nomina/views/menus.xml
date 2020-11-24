@@ -9,6 +9,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+
     <menuitem action="act_open_zonasalario" id="menu_open_zonasalario"
         parent="hr.menu_human_resources_configuration" sequence="20" groups="hr.group_hr_manager"/>
 

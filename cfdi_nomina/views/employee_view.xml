@@ -127,7 +127,7 @@
                                 <field name="cod_emp"/>
                                 <field name="registro_patronal"/>
                                 <field name="tipo_jornada"/>
-                                <field name="sindicalizado"/>
+                                <field name="sindicalizado" invisible="1"/>
                             </group>
                             <group>
                                 <field name="curp"/>
@@ -150,7 +150,7 @@
                             <group>
                                 <field name="sueldo_diario"/>
                                 <field name="sueldo_imss" />
-                                <field name="sueldo_imss_bimestre_actual" />
+                                <field name="sueldo_imss_bimestre_actual" invisible="1"/>
                                 <field name="sueldo_info"/>
                                 <field name="retiro_parcialidad"/>
                             </group>

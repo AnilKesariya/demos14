@@ -8,3 +8,5 @@ access_hr_employee_historico_sueldo,access_hr_employee_historico_sueldo,model_hr
 access_hr_employee_historico_otros,access_hr_employee_historico_otros,model_hr_employee_historico_otros,,1,1,1,1
 access_hr_employee_credito,access_hr_employee_credito,model_hr_employee_credito,,1,1,1,1
 access_hr_employee_beneficiario_cuenta,access_hr_employee_beneficiario_cuenta,model_hr_employee_beneficiario_cuenta,,1,1,1,1
+
+"access_reason_low","access_reason_low","hr_oisa.model_reason_low","hr.group_hr_manager",1,1,1,1

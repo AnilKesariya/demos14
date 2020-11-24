@@ -223,6 +223,11 @@
                     <span>/ mes</span>
                 </div>
             </xpath>
+            <xpath expr="//form//sheet//group//group[@name=
+                'duration_group']//field['hr_responsible_id']" position="after">
+                <field name="planned_payment"/>
+                <field name="salary_journal"/>
+            </xpath>
             <xpath expr="//field[@name='type_id']" position="attributes">
                 <attribute name="options">{'no_create_edit': True, 'no_create':True}</attribute>
             </xpath>

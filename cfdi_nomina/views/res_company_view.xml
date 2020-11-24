@@ -8,6 +8,7 @@
             <notebook position="inside">
                 <page string="Human Resources">
                     <group>
+                        <field name="warehouse"/>
                         <field name="xs_id_region"/>
                         <field name="registro_patronal"/>
                         <field name="riesgo_puesto"/>

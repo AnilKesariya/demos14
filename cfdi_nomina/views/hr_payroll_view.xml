@@ -31,17 +31,21 @@
             <field name="credit_note" position="after">
                 <field name="total" readonly="1"/>
             </field>
-            <field name="credit_note" position="before">
+            <!-- <field name="credit_note" position="before">
                 <field name="tipo_calculo"/>
-            </field>
+            </field> -->
             <xpath expr="//field[@name='credit_note']" position="before">
                 <label for="date_from" string="Faltas"/>
                  <div>
                        <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
                  </div>
             </xpath>
-            <xpath expr="//field[@name='credit_note']" position="before">
+            <xpath expr="//form//sheet//group//group[1]" position="inside">
                 <field name="fecha_pago"/>
+                <field name="tipo_calculo"/>
+            </xpath>
+            <xpath expr="//field[@name='credit_note']" position="before">
+                <!-- <field name="fecha_pago"/> -->
                 <field name="struct_id"/>
             </xpath>
             <xpath expr="//sheet" position="after">
@@ -50,6 +54,27 @@
                     <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
+            </xpath>
+            <xpath expr="//form//sheet" position="inside">
+                <notebook>
+                    <page string="Payslips" name="payslip">
+                        <field name="slip_ids">
+                            <tree>
+                                <field name="number"/>
+                                <field name="employee_id"/>
+                                <field name="name"/>
+                                <field name="struct_id"/>
+                                <field name="tipo_calculo"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="total"/>
+                                <field name="state"/>
+                                <field name="timbrada"/>
+                                <field name="company_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
             </xpath>
         </data></field>
     </record>

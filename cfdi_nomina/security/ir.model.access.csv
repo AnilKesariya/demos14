@@ -64,3 +64,5 @@ access_txt_banco_wiz,access_txt_banco_wiz,model_txt_banco_wiz,base.group_user,1,
 access_hr_reporte_nominas_wiz,access_hr_reporte_nominas_wiz,model_hr_reporte_nominas_wiz,base.group_user,1,1,1,1
 access_hr_reporte_liqimss_wiz,access_hr_reporte_liqimss_wiz,model_hr_reporte_liqimss_wiz,base.group_user,1,1,1,1
 access_hr_employee_transfer_wiz,access_hr_employee_transfer_wiz,model_hr_employee_transfer_wiz,base.group_user,1,1,1,1
+
+

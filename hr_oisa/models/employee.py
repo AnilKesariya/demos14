@@ -106,7 +106,7 @@ class Employee(models.Model):
     talla_playera = fields.Selection(seleccion3, string=u"Playera")
     talla_faja = fields.Selection(seleccion3, string=u"Faja")
     documento_baja = fields.Binary()
-    motivo_baja = fields.Text()
+    motivo_baja = fields.Many2one('reason.low',string="Motivo Baja")
     offspring = fields.One2many(
         "hr.employee.hijos", "employee_id", string="Hijos")
     marital = fields.Selection([
@@ -155,3 +155,9 @@ class ResPartnerBank(models.Model):
 
     beneficiarios = fields.One2many(
         "hr.employee.beneficiario_cuenta", "partner_bank_id")
+
+
+class ReasonLow(models.Model):
+    _name = 'reason.low'
+
+    name = fields.Char(string="Name")

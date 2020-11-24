@@ -13,9 +13,15 @@ class ResCompany(models.Model):
     registro_patronal = fields.Many2one('hr.ext.mx.regpat')
     cfd_mx_test_nomina = fields.Boolean('Timbrar en modo de prueba (nómina)')
     xs_id_region = fields.Selection(selection=[
-            ('demo', 'Demo'),
-            ('demo2', 'Demo2'),
-        ], string='region',store=True ,default="demo")
+            ('shallows', 'Bajío'),
+            ('center 1', 'Centro 1'),
+            ('center 2', 'Centro 2'),
+            ('gulf', 'Golfo'),
+            ('northeast', 'Noreste'),
+            ('south','Sur'),
+            ('southeast','Sureste'),
+        ], string='Region',store=True ,default="shallows")
+    warehouse = fields.Text(string="ID Warehouse")
 
     @api.model
     def _load_xsd_attachments(self):
