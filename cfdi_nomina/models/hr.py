@@ -128,9 +128,9 @@ class HRSalaryRule(models.Model):
         ('variable', 'Variable')])
 
     tipo_horas = fields.Many2one(
-        "cfdi_nomina.tipo_horas", string="Type of overtime")
+        "cfdi_nomina.tipo_horas", string="Tipo horas extras")
     codigo_agrupador = fields.Many2one(
-        "cfdi_nomina.codigo.agrupador", string=u"SAT Code")
+        "cfdi_nomina.codigo.agrupador", string=u"Código SAT")
     agrupacion = fields.Many2one("hr.salary.rule.group")
     gravado_o_exento = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True, default='gravado',
                                         help='Gravado para ISR. Genera variables  <code>_GRV_ISR y TOTAL_GRV_ISR')

@@ -130,30 +130,30 @@ class Employee(models.Model):
         return res
 
     sindicalizado = fields.Boolean(
-        help='Check this box if the employee is unionized, otherwise leave off')
+        help='Marque esta casilla si el empleado es sindicalizado, si no, deje desactivado')
     tipo_jornada = fields.Many2one(
-        "hr.ext.mx.tipojornada", string="Type of day")
+        "hr.ext.mx.tipojornada", string="Tipo de jornada")
     escolaridad = fields.Selection([
         ('primaria', 'Primaria'),
         ('secundaria', 'Secundaria'),
         ('prepa', 'Preparatoria'),
-        ('licenciatura', 'Licenciatura')], string="Schooling")
+        ('licenciatura', 'Licenciatura')], string="Escolaridad")
     nombre_completo = fields.Char(compute=_nombre_completo, store=True)
-    appat = fields.Char("Father's surname", size=64, required=True)
-    apmat = fields.Char("Mother's surname", size=64, required=True)
-    cod_emp = fields.Char(related="barcode", string="Employee Code", readonly=True,
-                          help="Data taken from employee ID card")
+    appat = fields.Char('Apellido paterno', size=64, required=True)
+    apmat = fields.Char('Apellido materno', size=64, required=True)
+    cod_emp = fields.Char(related="barcode", string="Código de empleado", readonly=True,
+                          help="Dato tomado del ID de credencial de empleado")
     curp = fields.Char('CURP', size=18)
     imss = fields.Char('No. IMSS', size=64)
     registro_patronal = fields.Many2one(
-        'hr.ext.mx.regpat', string='Employer Registration')
-    fecha_alta = fields.Date('High date', required=True,
+        'hr.ext.mx.regpat', string='Registro patronal')
+    fecha_alta = fields.Date('Fecha alta', required=True,
                              track_visibility='onchange')
     status_imss = fields.Selection([
         ('alta', 'Alta'),
         ('reingreso', 'Reingreso'),
         ('baja', 'Baja')], string="Estatus IMSS", default='alta', required=True)
-    fecha_baja = fields.Date('Low date', track_visibility='onchange')
+    fecha_baja = fields.Date('Fecha baja', track_visibility='onchange')
     causa_baja = fields.Selection([
         ('1', '1) Término contrato'),
         ('2', '2) Sep. Voluntaria'),
@@ -165,7 +165,7 @@ class Employee(models.Model):
         ('8', '8) Rescisión de Contrato'),
         ('9', '9) Jubilación'),
         ('A', 'A) Pensión')
-    ], string="Low Cause")
+    ], string="Causa Baja")
     rfc = fields.Char('RFC', size=13)
     infonavit = fields.Char('Infonavit', size=64)
     sar = fields.Char('SAR', size=64)
@@ -173,41 +173,41 @@ class Employee(models.Model):
         ('fijo', 'Fija'), ('variable', 'Variable'), ('mixto', 'Mixta')],
         u"Base cotización")
     zona_salario = fields.Many2one(
-        'hr.ext.mx.zonasalario', string="Salary zone")
-    sueldo_diario = fields.Float('Daily salary', track_visibility='onchange')
+        'hr.ext.mx.zonasalario', string="Zona salario")
+    sueldo_diario = fields.Float('Sueldo diario', track_visibility='onchange')
     tabla_sdi_id = fields.Many2one('hr.factor', 'Tabla SDI',)
     tabla_vacaciones_id = fields.Many2one(
         'hr.vacation', 'Tabla Vacaciones',)
     sueldo_imss = fields.Float(
-        string='IMSS integrated salary', track_visibility='onchange')
+        string='Sueldo integrado al IMSS', track_visibility='onchange')
     historico_sueldo_imss = fields.One2many(
         "hr.employee.historico.imss", "employee_id")
-    sueldo_info = fields.Float('Infonavit integrated salary')
+    sueldo_info = fields.Float('Sueldo integrado al Infonavit')
     sueldo_imss_bimestre_actual = fields.Float(
-        'IMSS integrated salary (current bim)', track_visibility='onchange')
+        'Sueldo integrado al IMSS (bim actual)', track_visibility='onchange')
     retiro_parcialidad = fields.Float(
-        'Retiro', help="Daily amount received by the worker for retirement, pension or retirement when the payment is partial")
+        'Retiro', help="Monto diario percibido por el trabajador por jubilación, pensión o retiro cuando el pago es en parcialidades")
     anos_servicio = fields.Integer(
-        compute=_get_anos_servicio, string=u"Number of years of service")
-    tarjeta_nomina = fields.Many2one(related="bank_account_id",string='Payroll card number', size=64)
+        compute=_get_anos_servicio, string=u"Número años de servicio")
+    tarjeta_nomina = fields.Many2one(related="bank_account_id",string='Numero de tarjeta de nomina', size=64)
     # tarjeta_nomina = fields.Char(string='Numero de tarjeta de nomina', size=64)
-    ife_anverso = fields.Binary('Front', filters='*.png,*.jpg,*.jpeg')
-    ife_reverso = fields.Binary('Back', filters='*.png,*.jpg,*.jpeg')
-    ife_numero = fields.Char("Voter's key", size=64)
-    licencia_anverso = fields.Binary('Front', filters='*.png,*.jpg,*.jpeg')
-    licencia_reverso = fields.Binary('Back', filters='*.png,*.jpg,*.jpeg')
-    licencia_numero = fields.Char('Number', size=64)
-    licencia_vigencia = fields.Date('Validity')
-    med_actividad = fields.Text("Activity within the company")
-    med_antecedentes_1 = fields.Text("Family history")
-    med_antecedentes_2 = fields.Text("Non-pathological personal history")
-    med_antecedentes_3 = fields.Text("Personal Pathological History")
-    med_padecimiento = fields.Text("Current condition")
-    med_exploracion = fields.Text("Physical exploration")
+    ife_anverso = fields.Binary('Anverso', filters='*.png,*.jpg,*.jpeg')
+    ife_reverso = fields.Binary('Reverso', filters='*.png,*.jpg,*.jpeg')
+    ife_numero = fields.Char('Clave de elector', size=64)
+    licencia_anverso = fields.Binary('Anverso', filters='*.png,*.jpg,*.jpeg')
+    licencia_reverso = fields.Binary('Reverso', filters='*.png,*.jpg,*.jpeg')
+    licencia_numero = fields.Char('Numero', size=64)
+    licencia_vigencia = fields.Date('Vigencia')
+    med_actividad = fields.Text("Actividad dentro de la empresa")
+    med_antecedentes_1 = fields.Text("Antecedentes heredo familiares")
+    med_antecedentes_2 = fields.Text("Antecedentes personales no patologicos")
+    med_antecedentes_3 = fields.Text("Antecedentes personales patologicos")
+    med_padecimiento = fields.Text("Padecimento actual")
+    med_exploracion = fields.Text("Exploracion fisica")
     vehicle_distance = fields.Integer(
         string='Home-Work Dist.', help="In kilometers", groups="hr.group_hr_user")
-    med_diagnostico = fields.Text("Diagnosis")
-    med_apto = fields.Boolean("Suitable for the position")
+    med_diagnostico = fields.Text("Diagnostico")
+    med_apto = fields.Boolean("Apto para el puesto")
     tipo_cuenta = fields.Selection([
         ('01', '01 Efectivo'),
         ('02', '02 Cheque nominativo'),
@@ -215,17 +215,11 @@ class Employee(models.Model):
     ], 'Forma de pago', default='02')
     no_fonacot = fields.Char('No. FONACOT', size=15)
     dias_descanso_ids = fields.Many2many(
-        'hr.weekday', string='Days of rest')
-    nombre_compelto = fields.Char(string="Full Name")
+        'hr.weekday', string='Días de descanso')
+    nombre_compelto = fields.Char(string="Nombre Compelto")
 
     transfers_count = fields.Integer(
-        compute='_compute_transfers_count', string='Transfers')
-
-
-    @api.constrains('rfc')
-    def check_rfc(self):
-        if self.rfc != self.address_id.rfc:
-            raise UserError(_("The RFC does not match the partner's RFC"))
+        compute='_compute_transfers_count', string='Transferencias')
 
     def _compute_transfers_count(self):
         # read_group as sudo, since contract count is displayed on form view
@@ -300,13 +294,13 @@ class HistoricalSalaryIMSS(models.Model):
         user_id = self.env.context.get('default_user_id', self.env.uid)
         return user_id
 
-    name = fields.Date("Date", required=True,
+    name = fields.Date("Fecha", required=True,
                        default=fields.Date.context_today)
-    sueldo_old = fields.Float("Previous salary")
-    sueldo_new = fields.Float("New salary")
-    employee_id = fields.Many2one("hr.employee", string="Employee")
+    sueldo_old = fields.Float("Sueldo anterior")
+    sueldo_new = fields.Float("Sueldo nuevo")
+    employee_id = fields.Many2one("hr.employee", string="Empleado")
     user_id = fields.Many2one(
-        "res.users", string="Modified by", default=_default_user_id, readonly=True)
+        "res.users", string="Modificado por", default=_default_user_id, readonly=True)
 
 
 class HrApplicant(models.Model):

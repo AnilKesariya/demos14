@@ -129,9 +129,9 @@ class HrIDSECWiz(models.TransientModel):
 
             line = "{rpatronal:>11.11}{nss:>11.11}" \
                    "{appat:<27.27}{apmat:<27.27}{nombres:<27.27}{sdi:06.2f}{sdinf:06.2f}" \
-                   "{tipo_trab:1.1}{tipo_salario:1.1}{jornada:1.1}{fecha:8.8}{umf:>3.3}" \
-                   "{space:2.1}{tipo_mov:02.1}{guia:>5.5}{clave_trab:>10.10}" \
-                   "{space:1.1}{curp:>18.18}{idf:1.1}{folio_incapacidad:>8.8}{ndias:2.1}{sucursal:03.1}" \
+                   "{tipo_trab:1}{tipo_salario:1}{jornada:1}{fecha:8.8}{umf:>3.3}" \
+                   "{space:2}{tipo_mov:02}{guia:>5.5}{clave_trab:>10.10}" \
+                   "{space:1}{curp:>18.18}{idf:1}{folio_incapacidad:>8.8}{ndias:2}{sucursal:03}" \
                    "\r\n".format(
                 rpatronal=e.registro_patronal and e.registro_patronal.name or ' ',
                 nss=e.imss or '',
@@ -144,7 +144,7 @@ class HrIDSECWiz(models.TransientModel):
                 tipo_trab=tipo_trab,
                 tipo_salario=tipo_salario,
                 jornada=jornada,
-                fecha=datetime.datetime.strptime(str(e.fecha_alta), '%Y-%m-%d').strftime("%d%m%Y"),
+                fecha=datetime.datetime.strptime(e.fecha_alta, '%Y-%m-%d').strftime("%d%m%Y"),
                 umf=self.umf,
                 tipo_mov=tipo_mov,
                 guia=self.guia,
@@ -210,7 +210,7 @@ class HrIDSECWiz(models.TransientModel):
                 apmat=apmat,
                 nombres=nombres,
                 space=' ',
-                fecha=datetime.datetime.strptime(str(e.fecha_baja), '%Y-%m-%d').strftime("%d%m%Y"),
+                fecha=datetime.datetime.strptime(e.fecha_baja, '%Y-%m-%d').strftime("%d%m%Y"),
                 generico=0,
                 umf=self.umf,
                 tipo_mov=tipo_mov,
@@ -249,7 +249,7 @@ class HrIDSECWiz(models.TransientModel):
         for mov in mov_sdi:
 
             e = mov.employee_id
-            contrato = contract_obj.search([('employee_id', '=', e.id), ('state', '=', 'draft')], limit=1)
+            contrato = contract_obj.search([('employee_id', '=', e.id), ('state', '=', 'open')], limit=1)
             if not contrato:
                 mensaje += 'NO se localizó contrato para empleado {}\n'.format(e.cod_emp)
                 continue
@@ -285,39 +285,11 @@ class HrIDSECWiz(models.TransientModel):
             apmat = (e.apmat or '').replace('.', '  ')
             nombres = (e.name or '').replace('.', '  ')
 
-            # line = "{rpatronal:>11.11}{nss:>11.11}" \
-            #        "{appat:<27.27}{apmat:<27.27}{nombres:<27.27}{sdi:>6}{sdinf:>6}" \
-            #        "{tipo_trab:1}{tipo_salario:1}{jornada:1}{fecha:8.8}" \
-            #        "{space:5}{tipo_mov:02}{guia:>5.5}{clave_trab:>10.10}" \
-            #        "{space:1}{curp:>18.18}{idf:1}{folio_incapacidad:>8.8}{ndias:2}{sucursal:03}" \
-            #        "\r\n".format(
-            #     rpatronal=e.registro_patronal and e.registro_patronal.name or ' ',
-            #     nss=e.imss or '',
-            #     appat=appat,
-            #     apmat=apmat,
-            #     nombres=nombres,
-            #     sdi=sdi,
-            #     sdinf=sdinf,
-            #     space=' ',
-            #     tipo_trab=tipo_trab,
-            #     tipo_salario=tipo_salario,
-            #     jornada=0,
-            #     fecha=datetime.datetime.strptime(str(mov.name), '%Y-%m-%d').strftime("%d%m%Y"),
-            #     tipo_mov=tipo_mov,
-            #     guia=self.guia,
-            #     clave_trab=e.cod_emp,
-            #     curp=e.curp,
-            #     idf=9,
-            #     folio_incapacidad='',
-            #     ndias=' ',
-            #     sucursal=0
-            # )
-
-            line = "{rpatronal:>11}{nss:>11}" \
-                   "{appat:<27}{apmat:<27}{nombres:<27}{sdi:>6}{sdinf:>6}" \
-                   "{tipo_trab:1}{tipo_salario:1}{jornada:1}{fecha:8}" \
-                   "{space:5}{tipo_mov:02}{guia:>5.5}{clave_trab:>10}" \
-                   "{space:1}{curp:>18}{idf:1}{folio_incapacidad:>8}{ndias:2}{sucursal:03}" \
+            line = "{rpatronal:>11.11}{nss:>11.11}" \
+                   "{appat:<27.27}{apmat:<27.27}{nombres:<27.27}{sdi:>6}{sdinf:>6}" \
+                   "{tipo_trab:1}{tipo_salario:1}{jornada:1}{fecha:8.8}" \
+                   "{space:5}{tipo_mov:02}{guia:>5.5}{clave_trab:>10.10}" \
+                   "{space:1}{curp:>18.18}{idf:1}{folio_incapacidad:>8.8}{ndias:2}{sucursal:03}" \
                    "\r\n".format(
                 rpatronal=e.registro_patronal and e.registro_patronal.name or ' ',
                 nss=e.imss or '',
@@ -330,7 +302,7 @@ class HrIDSECWiz(models.TransientModel):
                 tipo_trab=tipo_trab,
                 tipo_salario=tipo_salario,
                 jornada=0,
-                fecha=datetime.datetime.strptime(str(mov.name), '%Y-%m-%d').strftime("%d%m%Y"),
+                fecha=datetime.datetime.strptime(mov.name, '%Y-%m-%d').strftime("%d%m%Y"),
                 tipo_mov=tipo_mov,
                 guia=self.guia,
                 clave_trab=e.cod_emp,
@@ -418,7 +390,7 @@ class HrIDSECWiz(models.TransientModel):
                 tipo_trab=tipo_trab,
                 tipo_salario=tipo_salario,
                 jornada=0,
-                fecha=datetime.datetime.strptime(str(self.date_from), '%Y-%m-%d').strftime("%d%m%Y"),
+                fecha=datetime.datetime.strptime(self.date_from, '%Y-%m-%d').strftime("%d%m%Y"),
                 tipo_mov=tipo_mov,
                 guia=self.guia,
                 clave_trab=e.cod_emp,
