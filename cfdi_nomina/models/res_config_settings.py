@@ -9,20 +9,20 @@ class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
     _description = 'Res Config Settings'
 
-    nomina_year_days = fields.Float('Días por año', default=365)
-    nomina_sf = fields.Float('Salario mínimo DF')
-    nomina_uma = fields.Float('UMA', help='Unidad  de Medida y Actualización')
+    nomina_year_days = fields.Float('Days per year', default=365)
+    nomina_sf = fields.Float('Minimum wage DF')
+    nomina_uma = fields.Float('UMA', help='Unit of Measurement and Update')
 
-    attendance_range = fields.Float('Rango checar asistencia',
-                                    help='Minutos para buscar checadas de asistencia en torno al horario')
-    attendance_nretardos = fields.Integer('Numero de retarods',
-                                          help='Numero de retardos para ser configurados como falta')
+    attendance_range = fields.Float('Attendance Check Range',
+                                    help='Minutes to look for attendance checks around the schedule')
+    attendance_nretardos = fields.Integer('Number of retarods',
+                                          help='Number of delays to be set as a fault')
     nomina_journal = fields.Many2one(
-        'account.journal', 'Diario de Nóminas', required=True)
+        'account.journal', 'Payroll Journal', required=True)
 
-    ispt_mensual_id = fields.Many2one('hr.ispt', 'Tabla ISPT mensual')
-    ispt_anual_id = fields.Many2one('hr.ispt', 'Tabla ISPT anual')
-    sube_id = fields.Many2one('hr.employment.sube', 'Tabla subsidio para el empleo')
+    ispt_mensual_id = fields.Many2one('hr.ispt', 'Monthly ISPT table')
+    ispt_anual_id = fields.Many2one('hr.ispt', 'Annual ISPT table')
+    sube_id = fields.Many2one('hr.employment.sube', 'Table of employment subsidies')
 
     @api.model
     def get_values(self):

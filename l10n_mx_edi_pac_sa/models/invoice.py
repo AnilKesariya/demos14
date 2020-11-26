@@ -45,7 +45,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.move'
 
     id_cancel_request = fields.Char(
-        'Id de Solicitud de Cancelación', readonly=True, copy=False)
+        'Cancellation Request ID', readonly=True, copy=False)
 
     @api.model
     def _l10n_mx_edi_advans_info(self, company_id, service_type):

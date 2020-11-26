@@ -29,8 +29,8 @@ class TxtBancoWiz(models.TransientModel):
     opt_tipo_pago = fields.Selection([('todos', 'Todos'), ('transfer', 'Transferencias')], 'Tipo de pago',
                                      default='todos')
 
-    data_file = fields.Binary('Archivo generado', filters='*.csv,*.txt', readonly=True)
-    data_fname = fields.Char('Nombre Archivo')
+    data_file = fields.Binary('File generated', filters='*.csv,*.txt', readonly=True)
+    data_fname = fields.Char('File Name')
 
     uma = fields.Float('UMA')
 

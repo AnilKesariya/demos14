@@ -21,12 +21,12 @@
         <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
         <field name="arch" type="xml">
             <data><button name="action_open_payslips" position="after">
-                <button string="Importar Faltas" name="importar_faltas" type="object" states="draft"/>
+                <button string="Importing Faults" name="importar_faltas" type="object" states="draft"/>
                 <button string="Compute Amount Total" name="compute_sheet_run" type="object" states="draft" class="oe_highlight"/>
                 <button string="Confirm Payslips" name="confirm_sheet_run" type="object" states="draft" class="oe_highlight"/>
-                <button string="Timbrar nóminas" name="%(action_batch_cfdi)d" states="draft" type="action"/>
-                <button string="Enviar Correo" name="send_mail" type="object" class="oe_highlight"/>
-                <button string="Calcular SDI Bimestre Actual" name="action_calculate_sdi_last" attrs="{'invisible':[('tipo_calculo','not in',['ajustado', 'anual'])]}" type="object"/>
+                <button string="Stamping payrolls" name="%(action_batch_cfdi)d" states="draft" type="action"/>
+                <button string="Send Mail" name="send_mail" type="object" class="oe_highlight"/>
+                <button string="Calculate Current Bimonthly SDI" name="action_calculate_sdi_last" attrs="{'invisible':[('tipo_calculo','not in',['ajustado', 'anual'])]}" type="object"/>
             </button>
             <field name="credit_note" position="after">
                 <field name="total" readonly="1"/>
@@ -43,6 +43,7 @@
             <xpath expr="//form//sheet//group//group[1]" position="inside">
                 <field name="fecha_pago"/>
                 <field name="tipo_calculo"/>
+                <field name="journal_id"/>
             </xpath>
             <xpath expr="//field[@name='credit_note']" position="before">
                 <!-- <field name="fecha_pago"/> -->
@@ -54,6 +55,30 @@
                     <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
+            </xpath>
+            <xpath expr="//form//sheet" position="inside">
+                <notebook>
+                    <page string="Payslips" name="payslip">
+                        <field name="slip_ids">
+                            <tree>
+                                <field name="number"/>
+                                <field name="employee_id"/>
+                                <field name="name"/>
+                                <field name="struct_id"/>
+                                <field name="tipo_calculo"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="total"/>
+                                <field name="state"/>
+                                <field name="timbrada"/>
+                                <field name="company_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+            <xpath expr="//form//sheet//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
         </data></field>
     </record>

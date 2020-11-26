@@ -20,14 +20,14 @@ class PaySlipReport(models.AbstractModel):
     _name = 'report.cfdi_nomina.nomina_report'
 
 
-    comprobante = fields.Char(string="coprobante")
-    timbre = fields.Char(string="Timbre")
-    total_especie = fields.Float(string="Total Especie")
-    total_p = fields.Float(string="Total Percepciones")
-    total_d = fields.Float(string="Total Deducciones")
-    total_o = fields.Float(string="Total Otros pagos")
-    lines_d = fields.Char(string="lines d")
-    lines_o = fields.Char(string="lines o")
+    comprobante = fields.Char(string="co-proving")
+    timbre = fields.Char(string="Buzzer")
+    total_especie = fields.Float(string="Total Species")
+    total_p = fields.Float(string="Total Perceptions")
+    total_d = fields.Float(string="Total Deductions")
+    total_o = fields.Float(string="Total Other payments")
+    lines_d = fields.Char(string="lines D")
+    lines_o = fields.Char(string="lines O")
 
 
     def get_nomina_data(self, o, dato, default=''):

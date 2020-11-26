@@ -11,44 +11,44 @@ class HrEmployeeTransferWiz(models.TransientModel):
     _rec_name = 'date'
     _description = 'Wizard para transferir company del empleado'
 
-    date = fields.Date('Fecha', required=True, default=datetime.datetime.now())
+    date = fields.Date('Date', required=True, default=datetime.datetime.now())
     employee_id = fields.Many2one(
-        'hr.employee', string='Empleado', required=True)
+        'hr.employee', string='Employee', required=True)
     sueldo_diario = fields.Float(
-        "Sueldo diario", related="employee_id.sueldo_diario", readonly=True)
+        "Daily salary", related="employee_id.sueldo_diario", readonly=True)
     company_id = fields.Many2one(relation='res.company', related='employee_id.company_id',
-                                 string='Almacén', readonly=True)
+                                 string='Warehouse', readonly=True)
     registro_patronal_id = fields.Many2one(relation='hr.ext.mx.regpat',
                                            related='company_id.registro_patronal',
-                                           string='Registro patronal', readonly=True)
+                                           string='Employer Registration', readonly=True)
     company_dest_id = fields.Many2one(
-        'res.company', string='Almacén Destino', required=True)
+        'res.company', string='Destination Warehouse', required=True)
     registro_patronal_dest_id = fields.Many2one(relation='hr.ext.mx.regpat',
                                                 related='company_dest_id.registro_patronal',
-                                                string='Registro patronal', readonly=True)
+                                                string='Employer Registration', readonly=True)
 
-    department_id = fields.Many2one('hr.department', 'Departamento')
-    job_id = fields.Many2one('hr.job', 'Puesto de Empleo')
-    contract_id = fields.Many2one('hr.contract', 'Contrato', readonly=True)
+    department_id = fields.Many2one('hr.department', 'Department')
+    job_id = fields.Many2one('hr.job', 'Job Title')
+    contract_id = fields.Many2one('hr.contract', 'Contract', readonly=True)
     type_id = fields.Many2one(relation='hr.contract.type', related='contract_id.type_id',
-                              string='Tipo de Contrato', readonly=True)
+                              string='Contract Type', readonly=True)
     date_start = fields.Date(
-        'Fecha de inicio', related='contract_id.date_start', readonly=True)
-    wage = fields.Float('Salario diario contrato')
+        'Start date', related='contract_id.date_start', readonly=True)
+    wage = fields.Float('Daily salary contract')
 
     nomina_bim_anterior_ids = fields.Many2many(comodel_name="hr.payslip",
                                                relation="hr_employeetransferwiz_payslip_ant_rel",
                                                column1="hr_change_wiz_id",
                                                column2="payslip_id",
-                                               string="Bimestre Anterior", readonly=True)
+                                               string="Previous Bimester", readonly=True)
     nomina_bim_actual_ids = fields.Many2many(comodel_name="hr.payslip",
                                              relation="hr_employeetransferwiz_payslip_act_rel",
                                              column1="hr_change_wiz_id",
                                              column2="payslip_id",
-                                             string="Bimestre Actual", readonly=True)
+                                             string="Current Quarter", readonly=True)
 
-    bim_actual = fields.Char("Bimestre Actual", readonly=True)
-    bim_anterior = fields.Char("Bimestre Anterior", readonly=True)
+    bim_actual = fields.Char("Current Quarter", readonly=True)
+    bim_anterior = fields.Char("Previous Bimester", readonly=True)
 
     state = fields.Selection([
         ('step1', 'Paso 1'),

@@ -29,13 +29,13 @@
                     </group>
                 </group>
                 <footer>
-                    <button name="action_update" string="Actualiza" type="object" class="oe_highlight"
+                    <button name="action_update" string="Update" type="object" class="oe_highlight"
                             attrs="{'invisible':[('data_fname','!=','X')]}"/>
-                    <button name="gen_txt" string="Generar TXT de Dispersión" type="object" class="oe_highlight"
+                    <button name="gen_txt" string="Generate Dispersion TXT" type="object" class="oe_highlight"
                             attrs="{'invisible':[('data_fname','!=',False)]}"/>
 
                     o
-                    <button string="Descartar"  special="cancel" />
+                    <button string="Discard"  special="cancel" />
                 </footer>
             </form>
         </field>

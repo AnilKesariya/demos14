@@ -6,19 +6,23 @@
         <field name="model">hr.salary.rule</field>
         <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//form//sheet//group//field[@name='active']" position="after">
+                <field name="company_id"/>
+            </xpath>
             <xpath expr="//page/group" position="before">
                 <group colspan="4">
-                    <group string="Complemento Nómina SAT">
+                    <group string="SAT Payroll Complement">
                         <field name="tipo_id"/>
                         <field name="tipo_de_percepcion"/>
                         <field name="codigo_agrupador" domain="[('tipo_id', '=', tipo_id)]"/>
                         <field name="tipo_horas"/>
                         <field name="agrupacion"/>
                     </group>
-                    <group string="Opciones">
+                    <group string="Options">
                         <field name="en_especie"/>
                         <field name="destajo"/>
                         <field name="acum_calendar_id" options="{'no_create_edit': True, 'no_create':True}"/>
+                        <field name="policy_level"/>
                     </group>
                 </group>
             </xpath>
@@ -27,13 +31,14 @@
                <field name="input_ids" mode="tree">
                     <tree string="Input Data" editable="bottom">
                         <field name="name"/>
+                        <field name="amount_python_compute"/>
                         <field name="code"/>
                     </tree>
                 </field>
             </page>
             </xpath>
             <xpath expr="//notebook[last()]" position="inside">
-                <page name="bases_gravables" string="Bases Gravables">
+                <page name="bases_gravables" string="Taxable Bases">
                     <group>
                         <group string="ISR">
                             <field name="gravado_o_exento"/>
@@ -281,6 +286,7 @@
              <xpath expr="//field[@name='worked_days_line_ids']/form//field[@name='contract_id']" position="attributes">
                 <attribute name="domain">[('employee_id', '?=', context.get('employee_id'))]</attribute>
             </xpath>
+        
             <!--holidays_ids cambia con onchange, y si no lo considero en la vista, se pierden los cambios  JGO-->
             <xpath expr="//field[@name='worked_days_line_ids']/tree//field[@name='is_paid']" position="after">
                 <field name="holiday_ids" widget="many2many_tags" invisible="0"/>
@@ -297,13 +303,13 @@
                 <field name="tipo_nomina" attrs="{'readonly':[('state','=','done')]}"/>
                 <field name="finiquito" attrs="{'readonly':[('state','=','done')]}"/>
             </field>
-            <!-- <xpath expr="//field[@name='contract_id']" position="after">
-                <label for="day_contract_from" string="Faltas"/>
+            <xpath expr="//field[@name='contract_id']" position="after">
+                <label for="day_leave_from" string="Faltas"/>
                 <div>
-                    <field name="day_contract_from" class="oe_inline"/> - <field name="day_contract_to" class="oe_inline"/>
+                    <field name="day_leave_from" class="oe_inline"/> - <field name="day_leave_to" class="oe_inline"/>
                 </div>
                 <field name="fecha_pago"/>
-            </xpath> -->
+            </xpath>
             <xpath expr="//field[@name='input_line_ids']/tree//field[@name='amount']" position="after">
                 <field name="quantity"/>
                 <field name="amount_python_compute"/>
@@ -313,10 +319,29 @@
             </field>
              <field name="credit_note" position="after" >
                 <field name="tipo_calculo" />
+                <field name="payment_date"/>
             </field>
             <notebook position="inside">
-                <page string="Timbrado">
-                    <group string="Estatus de timbrado">
+                <page string="Detail By Salary Category">
+                    <field name="rule_line_ids">
+                        <tree editable="bottom">
+                            <field name="category_id"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="total"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name"/>
+                                <field name="category_id"/>
+                                <field name="code"/>
+                                <field name="total"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page string="Stamped">
+                    <group string="Stamping status">
                         <field name="timbrada" readonly="1" invisible="1"/>
                         <field name="estado_timbrado" widget="statusbar"/>
                         <field name="error_timbrado" attrs="{'invisible':[('error_timbrado','=',False)]}" reaodnly="1"/>
@@ -329,17 +354,17 @@
                         <field name="fecha_sat" readonly="1"/>
                         <field name="cadena_sat" readonly="1"/>
                     </group>
-                    <group string="Origen Recurso">
+                    <group string="Resource Origin">
                         <field name="origen_recurso"/>
                         <field name="monto_recurso"/>
                     </group>
-                    <group string="Cancelación" attrs="{'invisible': [('mandada_cancelar','=',False)]}">
+                    <group string="Cancellation" attrs="{'invisible': [('mandada_cancelar','=',False)]}">
                         <field name="mandada_cancelar" invisible="1"/>
                         <field name="id_cancel_request"/>
                         <field name="mensaje_pac" readonly="1"/>
                     </group>
                 </page>
-                 <page id="info" string="Otra Info">
+                 <page id="info" string="Other Info">
                     <group>
                         <group>
                             <field name="sdi"/>
@@ -373,7 +398,7 @@
                         </group>
                     </group>
                 </page>
-                <page id="info" string="Info Bimestre Actual" attrs="{'invisible':[('tipo_calculo','not in',('ajustado','anual'))]}">
+                <page id="info" string="Current Bimonthly Info" attrs="{'invisible':[('tipo_calculo','not in',('ajustado','anual'))]}">
                     <group>
                         <group>
                             <field name="sdi_last"/>
@@ -407,7 +432,7 @@
                         </group>
                     </group>
                 </page>
-                <page id="acumulados" string="Acumulados">
+                <page id="acumulados" string="Accumulated">
                     <group>
                         <label for="acumulado_ids" colspan="4"/>
                         <field name="acumulado_ids" nolabel="1" colspan="4">
@@ -421,76 +446,108 @@
                         </field>
                     </group>
                 </page>
-                <page id="page_anual" string="ISR Anual" attrs="{'invisible':[('tipo_calculo','!=','anual')]}">
+                <page id="page_anual" string="ISR Annual" attrs="{'invisible':[('tipo_calculo','!=','anual')]}">
                     <group>
                        <field name="calculo_anual" nolabel="1"/>
                     </group>
                 </page>
-               <page id="obrero_patron" string="Cuotas Obrero-Patrón">
+               <page id="obrero_patron" string="employer's fees">
+                <group>
                     <group>
-                        <label for="dpnom" string="Dias periodo de nomina"/>
+                        <label for="dpnom" string="Days payroll period"/>
                         <field name="dpnom" nolabel="1"/>
-                    </group>
-                    <group>
-                        <label for="dtnom" string="Dias trabajados"/>
+                        <label for="dtnom" string="Days worked"/>
                         <field name="dtnom" nolabel="1"/>
-                    
-                      <separator colspan="4" string="Enfermedad y maternidad"/>
+                    </group>
+                </group>
+                <group>
+                      <separator colspan="3" string="Sickness and Maternity"/>
 
-                        <label for="pe_patron" string="Especie Cuota Fija"/>
-                        <field name="pe_patron" nolabel="1"/>
-                        <br/>
+                        <label for="pe_patron" string="Fixed Quota Species"/>
+                       
+                        <div>
+                        <field name="pe_patron" nolabel="1" class="oe_inline"/>
+                         &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
+                        <span class="oe_inline"> - </span>
+                        </div>
 
-                        <label for="ae3_patron" string="Especie mayor 3 UMA"/>
-                        <field name="ae3_patron" nolabel="1"/>
-                        <field name="ae3_trab" nolabel="1"/>
-                        <br/>
+                        <label for="ae3_patron" string="Major species 3 UMA"/>
+                        <div>
+                        <field name="ae3_patron" nolabel="1" class="oe_inline"/>
+                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
+                        <field name="ae3_trab" nolabel="1" class="oe_inline"/>
+                        </div>
+                        
 
-                        <label for="ed_patron" string="Prestaciones en Dinero"/>
-                        <field name="ed_patron" nolabel="1"/>
-                        <field name="ed_trab" nolabel="1"/>
-                        <br/>
+                        <label for="ed_patron" string="Cash Benefits"/>
+                        <div>
+                        <field name="ed_patron" nolabel="1" class="oe_inline"/>&#x2063;
+                        &#x2063;&#x2063;&#x2063;&#x2063;
+                        <field name="ed_trab" nolabel="1" class="oe_inline"/>
+                        </div>
+                        
 
-                        <label for="gmp_patron" string="Pensionados y beneficiarios"/>
-                        <field name="gmp_patron" nolabel="1"/>
-                        <field name="gmp_trab" nolabel="1"/>
-                        <br/>
+                        <label for="gmp_patron" string="Pensioners and beneficiaries"/>
+                        <div>
+                        <field name="gmp_patron" nolabel="1" class="oe_inline"/>
+                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
+                        <field name="gmp_trab" nolabel="1" class="oe_inline"/>
+                        </div>
+                        
+                        <hr class="btn-primary" colspan="3"/>
 
-                        <hr class="btn-primary" colspan="4" />
+                        <label for="iv_patron" string="Disability and life"/>
+                        <div>
+                        <field name="iv_patron" nolabel="1" class="oe_inline"/>
+                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
+                        <field name="iv_trab" nolabel="1" class="oe_inline"/>
+                        </div>
+                        
+                        <label for="rt_patron" string="Occupational Risk"/>
+                        <div>
+                        <field name="rt_patron" nolabel="1" class="oe_inline"/>
+                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
+                        <span class="oe_inline"> - </span>
+                        </div>
 
-                        <label for="iv_patron" string="Invalidez y vida"/>
-                        <field name="iv_patron" nolabel="1"/>
-                        <field name="iv_trab" nolabel="1"/>
-                        <br/>
-
-                        <label for="rt_patron" string="Riesgo de Trabajo"/>
-                        <field name="rt_patron" nolabel="1"/>    
-                        <br/>
-
-                        <label for="gua_patron" string="Guarderias y Prestaciones Sociales"/>
-                        <field name="gua_patron" nolabel="1"/>   
-                        <br/>
-
-                        <label for="ret_patron" string="Seguro retiro"/>
-                        <field name="ret_patron" nolabel="1"/>   
-                        <br/>
-
-                        <label for="ceav_patron" string="Cesantia y vejez"/>
-                        <field name="ceav_patron" nolabel="1"/>  
-                        <br/>
+                        <label for="gua_patron" string="Nursery Schools and Social Services"/>
+                        <div>
+                            <field name="gua_patron" nolabel="1" class="oe_inline"/>
+                            &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
+                            <span class="oe_inline"> - </span>   
+                        </div>
+                      
+                        <label for="ret_patron" string="Retirement Insurance"/>
+                        <div>
+                            <field name="ret_patron" nolabel="1" class="oe_inline"/>
+                            &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
+                            <span class="oe_inline"> - </span>    
+                        </div>
+                
+                        <label for="ceav_patron" string="Cesantia and old age"/>
+                        <div>
+                        <field name="ceav_patron" nolabel="1" class="oe_inline"/>
+                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
+                        <span class="oe_inline"> - </span> 
+                        </div>
 
                         <label for="infonavit_patron" string="INFONAVIT"/>
-                        <field name="infonavit_patron" nolabel="1"/> 
-                        <br/>
+                        <div>
+                            <field name="infonavit_patron" nolabel="1" class="oe_inline"/>
+                            &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
+                            <span class="oe_inline"> - </span> 
+                        </div>
+                 
                     </group> 
                 </page>
             </notebook>
             <field name="line_ids" position="replace">
                 <field name="line_ids" colspan="4" nolabel="1">
-                    <tree string="Salary Structure" editable="bottom" colors="blue:total == 0">
-                        <field name="name"/>
+                    <tree string="Salary Structure"  colors="blue:total == 0">
+                        <field name="salary_rule_id"/>
                         <field name="code"/>
                         <field name="category_id"/>
+                        <field name="name"/>
                         <field name="sequence" invisible="1"/>
                         <field name="quantity"/>
                         <field name="rate"/>
@@ -499,17 +556,18 @@
                         <field name="gravado_imss"/>
                         <field name="exento_imss"/>
                         <field name="gravado_infonavit"/>
-                        <field name="exento_infonavit"/>
-                        <field name="gravado_ptu"/>
-                        <field name="exento_ptu"/>
-                        <field name="amount"/>
-                        <field name="total"/>
+                        <!-- <field name="exento_infonavit"/> -->
+                       <!--  <field name="gravado_ptu"/>
+                        <field name="exento_ptu"/> -->
+                        <!-- <field name="amount"/>
+                        <field name="total"/> -->
                     </tree>
                     <form string="Payslip Line">
                         <group col="4">
-                            <field name="name"/>
+                            <field name="salary_rule_id"/>
                             <field name="code"/>
                             <field name="category_id"/>
+                            <field name="name"/>
                             <field name="sequence"/>
                             <field name="quantity"/>
                             <field name="rate"/>
@@ -523,7 +581,6 @@
                             <field name="exento_ptu"/>
                             <field name="amount"/>
                             <field name="total"/>
-                            <field name="salary_rule_id"/>
                         </group>
                     </form>
                 </field>
@@ -703,5 +760,15 @@
         </field>
     </record>
 
+    <record id="hr_salary_rule_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.salary.rule.view.inherit</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='accounting']//field[@name='not_computed_in_net']" position="after">
+                <field name="tax_id" widget='many2many_tags'/>
+            </xpath>
+        </field> 
+    </record>
 </odoo>
 

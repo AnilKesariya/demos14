@@ -5,7 +5,7 @@
         <field name="name">view.hr.mov.nomina</field>
         <field name="model">hr.mov.nomina</field>
         <field name="arch" type="xml">
-            <tree string="Movimientos Nómina">
+            <tree string="Payroll movements">
                 <field name="name"/>
                 <field name="rule_id"/>
                 <field name="rule_code"/>
@@ -18,7 +18,7 @@
         <field name="name">view.hr.mov.nomina.form</field>
         <field name="model">hr.mov.nomina</field>
         <field name="arch" type="xml">
-            <form string="Movimientos Nómina" version="7.0">
+            <form string="Payroll movements" version="7.0">
                 <header>
                     <field name="state" widget="statusbar" clickable="True"/>
                 </header>

@@ -18,7 +18,7 @@
         </record>
 
         <record id="action_batch_mail" model="ir.actions.act_window">
-            <field name="name">Enviar nóminas por correo</field>
+            <field name="name">Send payroll by mail</field>
             <field name="res_model">cfdi_nomina.batch.mail</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>

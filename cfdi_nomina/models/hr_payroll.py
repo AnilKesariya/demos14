@@ -87,20 +87,22 @@ class HrPayslipRun(models.Model):
     date_from = fields.Date(help='Used to get the lack to the employees',required=True)
     date_to = fields.Date(help='Used to get the lack to the employees',required=True)
     total = fields.Float('Total Amount', digits='Payroll', default=0.00)
-    fecha_pago = fields.Date('Fecha de pago',required=True)
+    fecha_pago = fields.Date('Payment date',required=True)
     tipo_calculo = fields.Selection([
         ('anual', 'Anual'),
         ('ajustado', 'Ajustado'),
         ('mensual', 'Mensual'),
-    ], 'Tipo cálculo', default='mensual')
+    ], 'Calculation type', default='mensual')
     # period_id = fields.Many2one(
     #    "account.period", string='Periodo', required=True)
-    struct_id = fields.Many2one('hr.payroll.structure', string='Estructura',required=True, 
+    struct_id = fields.Many2one('hr.payroll.structure', string='Structure',required=True, 
                                 readonly=True, states={'draft': [('readonly', False)]},
                                 help='Defines the rules that have to be applied to this payslip, accordingly '
                                      'to the contract chosen. If you let empty the field contract, this field isn\'t '
                                      'mandatory anymore and thus the rules applied will be all the rules set on the '
                                      'structure of all contracts of the employee valid for the chosen period')
+    journal_id = fields.Many2one('account.journal',string="Salary journal")
+    
 
     @api.model
     def default_get(self, fields):
@@ -118,7 +120,7 @@ class HrPayslipRun(models.Model):
         for pr in self:
             if pr.slip_ids and len(pr.slip_ids):
                 raise UserError(
-                    _('No se puede borrar mientras tenga nominas incluidas!'))
+                    _('Cannot be deleted as long as it has payroll included!'))
         return super(HrPayslipRun, self).unlink()
 
     def importar_faltas(self):

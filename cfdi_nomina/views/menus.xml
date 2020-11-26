@@ -4,7 +4,7 @@
 
     <!-- Acciones y menus -->
     <record id="act_open_zonasalario" model="ir.actions.act_window">
-        <field name="name">Zona Salario</field>
+        <field name="name">Salary Zone</field>
         <field name="res_model">hr.ext.mx.zonasalario</field>
         <field name="view_mode">tree,form</field>
     </record>

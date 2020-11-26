@@ -27,22 +27,22 @@ from datetime import date
 class historico_sueldo(models.Model):
     _name = "hr.employee.historico.sueldo"
 
-    name = fields.Date("Fecha")
-    sueldo_old = fields.Float("Sueldo anterior")
-    sueldo_new = fields.Float("Sueldo nuevo")
-    employee_id = fields.Many2one("hr.employee", string="Empleado")
-    user_id = fields.Many2one("res.users", string="Modificado por")
+    name = fields.Date("Date")
+    sueldo_old = fields.Float("Previous salary")
+    sueldo_new = fields.Float("New salary")
+    employee_id = fields.Many2one("hr.employee", string="Employee")
+    user_id = fields.Many2one("res.users", string="Modified by")
 
 
 class historico_otros(models.Model):
     _name = "hr.employee.historico.otros"
 
-    name = fields.Date("Fecha")
-    tipo = fields.Char("Tipo")
-    valor_old = fields.Char("Valor anterior")
-    valor_new = fields.Char("Valor nuevo")
-    employee_id = fields.Many2one("hr.employee", string="Empleado")
-    user_id = fields.Many2one("res.users", string="Modificado por")
+    name = fields.Date("Date")
+    tipo = fields.Char("Type")
+    valor_old = fields.Char("Previous Value")
+    valor_new = fields.Char("New value")
+    employee_id = fields.Many2one("hr.employee", string="Employee")
+    user_id = fields.Many2one("res.users", string="Modified By")
 
 
 class HrEmployee(models.Model):

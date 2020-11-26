@@ -29,8 +29,8 @@
                 </group>
                 <field name="mensaje" states="done"/>
                 <footer>
-                    <button string="Descartar"  special="cancel" />
-                    <button name="gen_idse" string="Generar" type="object" class="oe_highlight" states="draft" />
+                    <button string="Discard"  special="cancel" />
+                    <button name="gen_idse" string="Generate" type="object" class="oe_highlight" states="draft" />
                 </footer>
             </form>
         </field>

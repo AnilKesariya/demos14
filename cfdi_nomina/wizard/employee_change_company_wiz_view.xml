@@ -49,7 +49,7 @@
                     </group>
                 </group>
                 <div states="step2">
-                    <separator string="Bimestre Anterior"/>
+                    <separator string="Previous Bimester"/>
                     <field name="bim_anterior"/>
                     <field name="nomina_bim_anterior_ids">
                         <tree>
@@ -65,7 +65,7 @@
                             <field name="company_id"/>
                         </tree>
                     </field>
-                    <separator string="Bimestre Actual"/>
+                    <separator string="Current Quarter"/>
                     <field name="bim_actual"/>
                     <field name="nomina_bim_actual_ids">
                         <tree>

@@ -8,10 +8,10 @@ _logger = logging.getLogger(__name__)
 
 class HrRepNominasWiz(models.TransientModel):
     _name = 'hr.reporte.nominas.wiz'
-    _description = 'Wizard para Generar reporte de Nominas'
+    _description = 'Wizard for Generating Payroll Reports'
 
-    company_ids = fields.Many2many('res.company', string='Compañías')
-    department_ids = fields.Many2many('hr.department', string='Departamentos')
+    company_ids = fields.Many2many('res.company', string='Companies')
+    department_ids = fields.Many2many('hr.department', string='Departments')
 
     
     def print_reporte(self):

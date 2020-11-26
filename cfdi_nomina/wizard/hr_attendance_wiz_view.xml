@@ -26,7 +26,7 @@
     </record>
 
     <record id="act_attendance_search" model="ir.actions.act_window">
-        <field name="name">Faltas desde Checador</field>
+        <field name="name">Faults from Checador</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.attendance.gen.wiz</field>
         <field name="view_mode">form</field>
@@ -34,7 +34,7 @@
     </record>
 
     <menuitem
-        name="Faltas desde Checador"
+        name="Faults from Checador"
         parent="hr_attendance.menu_hr_attendance_root"
         action="act_attendance_search"
         sequence="250"

@@ -9,12 +9,12 @@ class HrMovNomina(models.Model):
     _description = 'Payroll movements pre-configured'
     _rec_name = 'name'
 
-    name = fields.Char('Nombre', required=True)
-    rule_id = fields.Many2one('hr.salary.rule', 'Regla Salarial', required=True)
-    rule_code = fields.Char(related='rule_id.code', type="char", string="Código", readonly=True)
-    amount_python_compute = fields.Text('Fórmula')
-    state = fields.Selection([('alta', 'Alta'), ('baja', 'Baja')], string='Estado', default='baja')
-    mov_nomina_lines = fields.One2many('hr.mov.nomina.line', 'mov_nomina_id', string='Empleados', required=True)
+    name = fields.Char('Name', required=True)
+    rule_id = fields.Many2one('hr.salary.rule', 'Salary Rule', required=True)
+    rule_code = fields.Char(related='rule_id.code', type="char", string="Code", readonly=True)
+    amount_python_compute = fields.Text('Formula')
+    state = fields.Selection([('alta', 'Alta'), ('baja', 'Baja')], string='Status', default='baja')
+    mov_nomina_lines = fields.One2many('hr.mov.nomina.line', 'mov_nomina_id', string='Employees', required=True)
 
     
     def action_baja(self):
@@ -38,6 +38,6 @@ class HrMovNominaLinea(models.Model):
     _description = 'Payroll Movement Lines pre-configured'
 
     mov_nomina_id = fields.Many2one('hr.mov.nomina')
-    employee_id = fields.Many2one('hr.employee', 'Empleado', required=True)
-    amount_python_compute = fields.Text('Fórmula')
-    date_deadline = fields.Date('Fecha Límite')
+    employee_id = fields.Many2one('hr.employee', 'Employee', required=True)
+    amount_python_compute = fields.Text('Formula')
+    date_deadline = fields.Date('Deadline')

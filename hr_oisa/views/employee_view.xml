@@ -7,9 +7,9 @@
         <field name="inherit_id" ref="base.view_partner_bank_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
-                <group string="Beneficiarios">
+                <group string="Beneficiaries">
                     <field name="beneficiarios" nolabel="1">
-                        <tree string="Beneficiarios" editable="bottom">
+                        <tree string="Beneficiaries" editable="bottom">
                             <field name="name"/>
                             <field name="porcentaje"/>
                             <field name="direccion"/>
@@ -27,7 +27,7 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page string="Tallas">
+                <page string="Sizes">
                     <group style="width:40%%">
                         <field name="talla_pantalon"/>
                         <field name="talla_bata"/>
@@ -36,16 +36,16 @@
                         <field name="talla_faja"/>
                     </group>
                 </page>
-                <page string="Baja">
+                <page string="Download">
                     <group>
                         <field name="documento_baja"/>
                         <field name="motivo_baja"/>
                     </group>
                 </page>
-                <page string="Pensiones alimenticias">
+                <page string="Alimony">
                     <group>
                         <field name="pensiones" nolabel="1">
-                            <tree string="Pensiones" editable="bottom">
+                            <tree string="Pensions" editable="bottom">
                                 <field name="name"/>
                                 <field name="porcentaje"/>
                                 <field name="no_card"/>
@@ -55,13 +55,13 @@
                         </field>
                     </group>
                 </page>
-                <page string="Seguro de vida">
+                <page string="Life Insurance">
                     <group>
                         <field name="poliza_seguro"/>
                     </group>
-                    <separator string="Beneficiarios"/>
+                    <separator string="Beneficiaries"/>
                     <field name="beneficiarios_seguro">
-                        <tree string="Beneficiarios" editable="bottom">
+                        <tree string="Beneficiaries" editable="bottom">
                             <field name="name"/>
                             <field name="parentesco"/>
                             <field name="porcentaje"/>
@@ -69,21 +69,21 @@
                         </tree>
                     </field>
                 </page>
-                <page string="Familiares">
-                    <h2>Familiares que laboran o laboraron en la empresa</h2>
+                <page string="Family members">
+                    <h2>Family members who work or worked in the company</h2>
                     <newline/>
                     <field name="familiares">
-                        <tree string="Familiares" editable="bottom">
+                        <tree string="Family Members" editable="bottom">
                             <field name="name"/>
                             <field name="appat"/>
                             <field name="apmat"/>
                         </tree>
                     </field>
                 </page>
-                <page string="Histórico sueldos">
+                <page string="Historical salaries">
                     <group>
                         <field name="historico_sueldo">
-                            <tree string="Histórico sueldo">
+                            <tree string="Historical salary">
                                 <field name="name"/>
                                 <field name="sueldo_old"/>
                                 <field name="sueldo_new"/>
@@ -92,10 +92,10 @@
                         </field>
                     </group>
                 </page>
-                <page string="Histórico otros">
+                <page string="Historical others">
                     <group>
                         <field name="historico_otros">
-                            <tree string="Histórico otros">
+                            <tree string="Historical Others">
                                 <field name="name"/>
                                 <field name="tipo"/>
                                 <field name="valor_old"/>
@@ -105,10 +105,10 @@
                         </field>
                     </group>
                 </page>
-                <page string="Actas adiminstrativas">
+                <page string="Administrative Records">
                     <group>
                         <field name="actas_adm" readonly="1">
-                            <tree string="Actas">
+                            <tree string="Minutes">
                                 <field name="fecha"/>
                                 <field name="motivo"/>
                                 <field name="repercusion"/>
@@ -119,27 +119,27 @@
                 </page>
             </notebook>
             <field name="work_phone" position="attributes">
-                <attribute name="string">Teléfono de casa</attribute>
+                <attribute name="string">Home Phone</attribute>
             </field>
             <field name="mobile_phone" position="attributes">
-                <attribute name="string">Móvil personal</attribute>
+                <attribute name="string">Personal mobile</attribute>
             </field>
             <field name="work_location" position="replace"/>
             <xpath expr="//page[@name='personal_information']" position="inside">
-                <group string="Hijos">
+                <group string="Children">
                     <field name="offspring" nolabel="1">
-                        <tree string="Hijos" editable="bottom">
+                        <tree string="Children" editable="bottom">
                             <field name="nombre"/>
                             <field name="edad"/>
                             <field name="nombre_padre"/>
                         </tree>
                     </field>
                 </group>
-                <group string="Otra información">
+                <group string="Other information">
                     <field name="tipo_sangre"/>
                     <field name="antecedentes_penales"/>
                     <field name="creditos">
-                        <tree string="Creditos" editable="bottom">
+                        <tree string="Credits" editable="bottom">
                             <field name="name"/>
                         </tree>
                     </field>
@@ -158,7 +158,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='hr_settings']" position="inside">
                 <group string="Current Contract" cols="2">
-                    <field name="vehicle" string="Vehículo propio"/>
+                    <field name="vehicle" string="Own vehicle"/>
                 </group>
             </xpath>
             <xpath expr="//page[@name='personal_information']/group/group[4]" position="replace">

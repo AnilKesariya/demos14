@@ -52,63 +52,63 @@ class HrPayslip(models.Model):
     _inherit = ['hr.payslip', 'mail.thread']
 
     # CDFI
-    tipo_nomina = fields.Selection(CATALOGO_TIPONOMINA, string=u"Tipo nómina")
+    tipo_nomina = fields.Selection(CATALOGO_TIPONOMINA, string=u"Payroll type")
     registro_patronal_codigo = fields.Char(
-        string='Registro patronal',
+        string='Employer Registration',
         related='company_id.registro_patronal.name',
         store=True, readonly=True)
-    timbrada = fields.Boolean("Timbrada", default=False, copy=False)
-    fecha_local = fields.Datetime("Fecha y hora local")
+    timbrada = fields.Boolean("Stamped", default=False, copy=False)
+    fecha_local = fields.Datetime("Date and local time")
     uuid = fields.Char("UUID", size=36, copy=False)
     qrcode = fields.Binary("QR code", copy=False)
     monto_cfdi = fields.Float("Monto CFDI", copy=False)
-    fecha_sat = fields.Char("Fecha de timbrado", copy=False)
-    cadena_sat = fields.Text("Cadena original timbre", copy=False)
-    certificado_sat = fields.Char("No. certificado SAT", copy=False)
-    sello_sat = fields.Text("Sello digital SAT", copy=False)
+    fecha_sat = fields.Char("Stamping date", copy=False)
+    cadena_sat = fields.Text("Original bell chain", copy=False)
+    certificado_sat = fields.Char("SAT Certificate No.", copy=False)
+    sello_sat = fields.Text("SAT Digital Seal", copy=False)
     certificado = fields.Char("No. certificado", copy=False)
-    sello = fields.Text("Sello digital", copy=False)
-    cant_letra = fields.Char("Cantidad con letra", copy=False)
-    retenido = fields.Float("ISR Retenido", copy=False)
+    sello = fields.Text("Digital Seal", copy=False)
+    cant_letra = fields.Char("Quantity with letter", copy=False)
+    retenido = fields.Float("Retained SRI", copy=False)
     descuento = fields.Float(
-        "Total deducciones sin ISR (descuento)", copy=False)
-    subtotal = fields.Float("Total percepciones (subtotal)", copy=False)
-    concepto = fields.Char("Concepto", copy=False)
-    mandada_cancelar = fields.Boolean('Mandada cancelar', copy=False)
+        "Total deductions without ISR (discount)", copy=False)
+    subtotal = fields.Float("Total perceptions (subtotal)", copy=False)
+    concepto = fields.Char("Concept", copy=False)
+    mandada_cancelar = fields.Boolean('Sent to cancel', copy=False)
     id_cancel_request = fields.Char(
-        'Id de Solicitud de Cancelación', readonly=True, copy=False)
-    mensaje_pac = fields.Text('Ultimo mensaje del PAC', copy=False)
-    test = fields.Boolean("Timbrado en modo de prueba", copy=False)
+        'Cancellation Request ID', readonly=True, copy=False)
+    mensaje_pac = fields.Text('Last message from PAC', copy=False)
+    test = fields.Boolean("Stamping in test mode", copy=False)
     noCertificado = fields.Char(
-        relation="certificado", string="No. certificado", copy=False)
-    l10n_mx_edi_cfdi_name = fields.Char("Nombre CFDI XML", copy=False)
-    fecha_pago = fields.Date("Fecha pago", copy=False)
-    error_timbrado = fields.Text("Errores del proceso", copy=False)
+        relation="certificado", string="Certificate No.", copy=False)
+    l10n_mx_edi_cfdi_name = fields.Char("CFDI XML Name", copy=False)
+    fecha_pago = fields.Date("Payment date", copy=False)
+    error_timbrado = fields.Text("Process errors", copy=False)
     estado_timbrado = fields.Selection([
         ('sin_timbrar', 'Sin timbrar'),
         ('en_proceso', 'En proceso'),
         ('a_cancelar', 'A Cancelar'),
         ('cancelada', 'Cancelado'),
         ('timbrada', 'Timbrada'),
-        ('error', 'Error')], string="Estado del timbrado",
+        ('error', 'Error')], string="Stamping status",
         default='sin_timbrar', copy=False)
-    fecha_ultimo_estatus = fields.Datetime(u"Fecha último estatus", copy=False)
-    finiquito = fields.Boolean("Finiquito", copy=False)
+    fecha_ultimo_estatus = fields.Datetime(u"Date of last status", copy=False)
+    finiquito = fields.Boolean("Settlement", copy=False)
     origen_recurso = fields.Selection([
         ('IP', 'Ingresos propios'),
         ('IF', 'Ingreso federales'),
         ('IM', 'Ingresos mixtos'),
-    ], 'Origen del recurso')
-    monto_recurso = fields.Float('Monto Recurso Propio')
+    ], 'Origin of the resource')
+    monto_recurso = fields.Float('Amount of Own Resource')
     total = fields.Float('Total Amount', digits='Payroll', copy=False,
-                         help='Total Ingresos +  Otros Pagos - Deducciones', default=0.00)
+                         help='Total Income + Other Payments - Deductions', default=0.00)
     l10n_mx_edi_cfdi = fields.Binary('CFDI content', copy=False, readonly=True,
                                      help='The cfdi xml content encoded in base64.')
 
     # Regitro Patronal Nuevo, para usarse como retroactivo en cambios de
     # sucursal de empleados
     registro_patronal_codigo_new = fields.Char(
-        'Nuevo registro patronal', copy=False, readonly=True)
+        'New employer registration', copy=False, readonly=True)
 
     # compute='_compute_cfdi_values')
 

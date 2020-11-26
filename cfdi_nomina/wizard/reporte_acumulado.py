@@ -8,14 +8,14 @@ class reporte_acumulado(osv.TransientModel):
     _description = 'aggregate report'
 
     _columns = {
-        'fecha_inicio': fields.date("Fecha inicio"),
-        'fecha_fin': fields.date("Fecha fin"),
+        'fecha_inicio': fields.date("Start date"),
+        'fecha_fin': fields.date("End date"),
         # 'period_id': fields.many2one("account.period", "Periodo", required=True), #reemplaza a fecha inicio y fecha fin
-        'nominas': fields.many2many("hr.payslip.run", string=u"Nóminas", required=True),
+        'nominas': fields.many2many("hr.payslip.run", string=u"Payslip", required=True),
         # ya no se usará, ahora es por agrupación
-        'rule_ids': fields.many2many("hr.salary.rule", string="Reglas"),
-        'rule_group_ids': fields.many2many("hr.salary.rule.group", string="Agrupaciones"),
-        'employee_ids': fields.many2many("hr.employee", string="Empleados"),
+        'rule_ids': fields.many2many("hr.salary.rule", string="Rules"),
+        'rule_group_ids': fields.many2many("hr.salary.rule.group", string="Groupings"),
+        'employee_ids': fields.many2many("hr.employee", string="Employees"),
         'datas': fields.binary("Reporte CSV"),
         'fname': fields.char("Fname")
     }
@@ -176,15 +176,15 @@ class reporte_acumulado_line(osv.TransientModel):
     _name = "cfdi_nomina.reporte.acumulado.line"
 
     _columns = {
-        'employee_id': fields.many2one("hr.employee", string="Empleado"),
+        'employee_id': fields.many2one("hr.employee", string="Employee"),
         'codemp': fields.integer("Cod. Emp."),
         'rfc': fields.char("RFC"),
         'imss': fields.char("IMSS"),
-        'p_otras': fields.float("Otras percepiones"),
-        'd_otras': fields.float("Otras deducciones"),
-        'gravado': fields.float("Total gravado"),
-        'exento': fields.float("Total exento"),
-        'neto': fields.float("Neto")
+        'p_otras': fields.float("Other barnacles"),
+        'd_otras': fields.float("Other Deductions"),
+        'gravado': fields.float("Total taxed"),
+        'exento': fields.float("Total exempt"),
+        'neto': fields.float("Net")
     }
 
     def __init__(self, pool, cr):

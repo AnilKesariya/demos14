@@ -18,7 +18,7 @@ class HrPayslipWorkedDays(models.Model):
     _inherit = "hr.payslip.worked_days"
     _description = 'hr payslip worked days'
 
-    holiday_ids = fields.Many2many('hr.leave', string='Ausencias consideradas')
+    holiday_ids = fields.Many2many('hr.leave', string='Absences considered')
     dias_imss_ausencia = fields.Float()
     dias_imss_incapacidad = fields.Float()
 
@@ -49,19 +49,19 @@ class HrPayslipInput(models.Model):
     _inherit = "hr.payslip.input"
     _description = 'hr payslip input'
 
-    quantity = fields.Float('Cantidad', default=1.0)
-    amount_python_compute = fields.Text(string='Código Python',
-                                        help='Si existe código, se ejecuta y el resultado (result) '
-                                             'se registra en el importe (amount)')
+    quantity = fields.Float('Quantity', default=1.0)
+    amount_python_compute = fields.Text(string='Python code',
+                                        help='If there is code, it is executed and the result '
+                                             'is recorded in the (amount)')
 
 
 class HrPaySlipInfo(models.Model):
     _name = 'hr.payslip.info'
     _description = 'hr payslip info'
 
-    name = fields.Char("Nombre")
-    code = fields.Char("Clave")
-    value = fields.Float("Valor", digits=(16, 5))
+    name = fields.Char("Name")
+    code = fields.Char("Key")
+    value = fields.Float("Value", digits=(16, 5))
 
 
 class HrPaySlipAcumulado(models.Model):
@@ -69,30 +69,30 @@ class HrPaySlipAcumulado(models.Model):
     _description = 'hr payslip accumulated'
 
     slip_id = fields.Many2one('hr.payslip')
-    name = fields.Char("Nombre")
-    code = fields.Char("Clave")
-    base_grv_id = fields.Integer('ID Base Gravable')
+    name = fields.Char("Name")
+    code = fields.Char("Key")
+    base_grv_id = fields.Integer('Taxable Base ID')
     actual_ac = fields.Float(
-        "Actual AC", help="Actual AC, No incluye nomina actual", )
+        "Current AC", help="Current AC, Does not include current payroll", )
     actual_nc = fields.Float(
-        "Actual NC", help="Actual NC, Incluye nomina actual")
-    anterior = fields.Float("Anterior")
-    anual = fields.Float("Anual")
+        "Current NC", help="Current NC, includes current payroll")
+    anterior = fields.Float("Previous")
+    anual = fields.Float("Annual")
 
 
 class HrPayslipLine(models.Model):
     _inherit = "hr.payslip.line"
     _description = 'hr payslip line'
 
-    date_from = fields.Date(related="slip_id.date_from", string="De")
-    date_to = fields.Date(related="slip_id.date_to", string="A")
+    date_from = fields.Date(related="slip_id.date_from", string="From")
+    date_to = fields.Date(related="slip_id.date_to", string="Date To")
     codigo_agrupador = fields.Char(
         related="salary_rule_id.codigo_agrupador.name")
     tipo_de_percepcion = fields.Selection(
         [('fijo', 'Fijo'), ('variable', 'Variable')],
         related="salary_rule_id.tipo_de_percepcion")
-    gravado = fields.Float("Gravado ISR")
-    exento = fields.Float("Exento ISR")
+    gravado = fields.Float("Taxed ISR")
+    exento = fields.Float("Exempt ISR")
     gravado_imss = fields.Float()
     exento_imss = fields.Float()
     gravado_infonavit = fields.Float()
@@ -101,93 +101,100 @@ class HrPayslipLine(models.Model):
     exento_ptu = fields.Float()
     gravado_local = fields.Float()
     exento_local = fields.Float()
+    code = fields.Char(related="salary_rule_id.code",required=True,
+                       help="The code of salary rules can be used as reference in computation of other rules. "
+                       "In that case, it is case sensitive.")
 
 
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
     _description = 'hr payslip'
 
+    payment_date = fields.Date(string="Payment Date")
+
     cod_emp = fields.Char(related="employee_id.barcode",
-                          string="Código empleado", store=True)
+                          string="Code used", store=True)
     day_leave_from = fields.Date(help='Used to get the lack to the employees')
     day_leave_to = fields.Date(help='Used to get the lack to the employees')
     tipo_calculo = fields.Selection([
         ('anual', 'Anual'),
         ('ajustado', 'Ajustado'),
         ('mensual', 'Mensual'),
-    ], 'Tipo cálculo', default='mensual', readonly=True, states={'draft': [('readonly', False)]})
+    ], 'Calculation type', default='mensual', readonly=True, states={'draft': [('readonly', False)]})
 
-    sdo = fields.Float("Salario diario", copy=False)
-    sdi = fields.Float("Salario diario integrado",
-                       help="SDI fijo + SDI variable", readonly=True, copy=False)
+    sdo = fields.Float("Daily Salary", copy=False)
+    sdi = fields.Float("Integrated daily wage",
+                       help="Fixed SDI + variable SDI", readonly=True, copy=False)
     sdi_var = fields.Float(
-        "SDI variable", help="Salario diario variable", readonly=True, copy=False)
+        "Variable SDI", help="Variable daily wage", readonly=True, copy=False)
     sdi_fijo = fields.Float(
-        "SDI fijo", help="Salario diario fijo", readonly=True, copy=False)
+        "Fixed SDI", help="Fixed daily salary", readonly=True, copy=False)
     sdi_info_calc_ids = fields.Many2many('hr.payslip.info', relation="hr_payslip_hr_payslip_info_rel",
-                                         string='Detalle SDI Fijo', readonly=True, copy=False)
+                                         string='Detail SDI Fixed', readonly=True, copy=False)
     sdip_info_calc_ids = fields.Many2many('hr.payslip.info', relation="hr_payslip_hr_payslip_infop_rel",
-                                          string='Detalle SDI Fijo percepcioens', readonly=True, copy=False)
+                                          string='Detail SDI Fixed perceptions', readonly=True, copy=False)
     sdiv_info_calc_ids = fields.Many2many('hr.payslip.info', relation="hr_payslip_hr_payslip_infov_rel",
-                                          string='Detalle SDI Variable', readonly=True, copy=False)
+                                          string='Detail SDI Variable', readonly=True, copy=False)
 
     acumulado_ids = fields.One2many(
-        'hr.payslip.acumulado', 'slip_id', string='Acumulados', readonly=True, copy=False)
+        'hr.payslip.acumulado', 'slip_id', string='Accumulated', readonly=True, copy=False)
 
     # variables de subsidio para calculos prosteriores
-    subsidio_causado = fields.Float("Subsidio Causado", copy=False)
-    sube = fields.Float("SUBE", copy=False)
-    sube_calc = fields.Float("SUBE calc", copy=False)
+    subsidio_causado = fields.Float("Subsidy Due", copy=False)
+    sube = fields.Float("GO UP", copy=False)
+    sube_calc = fields.Float("RISE calc", copy=False)
     ispt = fields.Float("ISPT", copy=False)
     ispt_calc = fields.Float("ISPT calc", copy=False)
 
     # Registro de historicos Obrero-Patronal IMSS por nomina
     # No. dias trabajados JRV 20190514
-    dtnom = fields.Integer("Dias trabajados", readonly=True)
+    dtnom = fields.Integer("Days worked", readonly=True)
     # No. dias del periodo nomina JRV 20190514
-    dpnom = fields.Integer("Dias de periodo nomina", readonly=True)
-    pe_patron = fields.Float("Especie Cuota Fija",
+    dpnom = fields.Integer("Payroll period days", readonly=True)
+    pe_patron = fields.Float("Fixed Quota Species",
                              digits=(8, 4), readonly=True)
-    ae3_patron = fields.Float("Especie mayor 3 UMA",
+    ae3_patron = fields.Float("Major species 3 UMA",
                               digits=(8, 4), readonly=True)
-    ae3_trab = fields.Float("Especie mayor 3 UMA",
+    ae3_trab = fields.Float("Major species 3 UMA",
                             digits=(8, 4), readonly=True)
-    ed_patron = fields.Float("Prestaciones en Dinero",
+    ed_patron = fields.Float("Cash Benefits",
                              digits=(8, 4), readonly=True)
-    ed_trab = fields.Float("Prestaciones en Dinero",
+    ed_trab = fields.Float("Cash Benefits",
                            digits=(8, 4), readonly=True)
     gmp_patron = fields.Float(
-        "Pensionados y beneficiarios", digits=(8, 4), readonly=True)
-    gmp_trab = fields.Float("Pensionados y beneficiarios",
+        "Pensioners and beneficiaries", digits=(8, 4), readonly=True)
+    gmp_trab = fields.Float("Pensioners and beneficiaries",
                             digits=(8, 4), readonly=True)
-    iv_patron = fields.Float("Invalidez y vida", digits=(8, 4), readonly=True)
-    iv_trab = fields.Float("Invalidez y vida", digits=(8, 4), readonly=True)
-    rt_patron = fields.Float("Riesgo de Trabajo", digits=(8, 4), readonly=True)
+    iv_patron = fields.Float("Disability and life", digits=(8, 4), readonly=True)
+    iv_trab = fields.Float("Disability and life", digits=(8, 4), readonly=True)
+    rt_patron = fields.Float("Occupational Risk", digits=(8, 4), readonly=True)
     gua_patron = fields.Float(
-        "Guarderias y Prestaciones Sociales", digits=(8, 4), readonly=True)
-    ret_patron = fields.Float("Seguro retiro", digits=(8, 4), readonly=True)
+        "Nursery Schools and Social Services", digits=(8, 4), readonly=True)
+    ret_patron = fields.Float("Retirement Insurance", digits=(8, 4), readonly=True)
     ceav_patron = fields.Float(
-        "Cesantia y vejez", digits=(8, 4), readonly=True)
-    ceav_trab = fields.Float("Cesantia y vejez", digits=(8, 4), readonly=True)
+        "Cesantia and old age", digits=(8, 4), readonly=True)
+    ceav_trab = fields.Float("Cesantia and old age", digits=(8, 4), readonly=True)
     infonavit_patron = fields.Float("Infonavit", digits=(8, 4), readonly=True)
 
     # Segunda pestaña de datos SDI
-    sdi_last = fields.Float("Salario diario integrado",
-                            help="SDI fijo + SDI variable", readonly=True, copy=False)
+    sdi_last = fields.Float("Integrated daily wage",
+                            help="Fixed SDI + variable SDI", readonly=True, copy=False)
     sdi_var_last = fields.Float(
-        "SDI variable", help="Salario diario variable", readonly=True, copy=False)
+        "Variable SDI", help="Variable daily wage", readonly=True, copy=False)
     sdi_fijo_last = fields.Float(
-        "SDI fijo", help="Salario diario fijo", readonly=True, copy=False)
+        "Fixed SDI", help="Fixed daily salary", readonly=True, copy=False)
     sdi_info_calc_last_ids = fields.Many2many('hr.payslip.info', relation="hr_payslip_hr_payslip_info_last_rel",
-                                              string='Detalle SDI Fijo', readonly=True, copy=False)
+                                              string='Detail SDI Fixed', readonly=True, copy=False)
     sdip_info_calc_last_ids = fields.Many2many('hr.payslip.info', relation="hr_payslip_hr_payslip_infop_last_rel",
-                                               string='Detalle SDI Fijo percepciones', readonly=True, copy=False)
+                                               string='Detail SDI Fixed Perceptions', readonly=True, copy=False)
     sdiv_info_calc_last_ids = fields.Many2many('hr.payslip.info', relation="hr_payslip_hr_payslip_infov_last_rel",
-                                               string='Detalle SDI Variable', readonly=True, copy=False)
+                                               string='Detail SDI Variable', readonly=True, copy=False)
 
     calculo_anual = fields.Html(
-        "Calculo Anual", readonly=True, help="Datos anuales")
+        "Annual Calculation", readonly=True, help="Annual data")
     # localdict = fields.Text("Variables durante el calculo", readonly=True)
+
+    rule_line_ids =fields.One2many('hr.salary.rule','payslip_id',string="detail by salary category",copy=False)
 
     @api.constrains('date_from', 'date_to', 'state', 'employee_id', 'tipo_nomina')
     def _check_date(self):

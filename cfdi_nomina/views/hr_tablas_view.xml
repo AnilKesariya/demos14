@@ -103,7 +103,7 @@
     </record>
 
     <record id="act_open_regpat" model="ir.actions.act_window">
-        <field name="name">Registro patronal</field>
+        <field name="name">Employer Registration</field>
         <field name="res_model">hr.ext.mx.regpat</field>
         <field name="type">ir.actions.act_window</field>
         <field name="type">ir.actions.act_window</field>       
@@ -164,7 +164,7 @@
     </record>
 
     <record id="act_open_tabla_factor_integ" model="ir.actions.act_window">
-        <field name="name">Tabla factor de integración</field>
+        <field name="name">Integration factor table</field>
         <field name="res_model">hr.factor</field>
         <field name="type">ir.actions.act_window</field>
        <field name="view_mode">tree,form</field>
@@ -286,7 +286,7 @@
     </record>
 
     <record id="hr_calendar_acum_action" model="ir.actions.act_window">
-        <field name="name">Tabla Calendario</field>
+        <field name="name">Calendar Table</field>
         <field name="res_model">hr.calendar.acum</field>
         <field name="type">ir.actions.act_window</field>     
         <field name="view_mode">tree,form</field>
@@ -310,7 +310,7 @@
     </record>
 
     <record id="act_open_tabla_basegravable" model="ir.actions.act_window">
-        <field name="name">Tabla Base Gravable</field>
+        <field name="name">Taxable Base Table</field>
         <field name="res_model">hr.basegravable.acum</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -360,7 +360,7 @@
     </record>
 
     <record id="hr_employment_sube_action" model="ir.actions.act_window">
-        <field name="name">Tabla Subsidio</field>
+        <field name="name">Subsidy Table</field>
         <field name="res_model">hr.employment.sube</field>
         <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
@@ -413,7 +413,7 @@
     </record>
 
     <record id="act_open_tabla_ispt" model="ir.actions.act_window">
-        <field name="name">Tabla ISR</field>
+        <field name="name">Table ISR</field>
         <field name="res_model">hr.ispt</field>
         <field name="type">ir.actions.act_window</field>       
         <field name="view_mode">tree,form</field>

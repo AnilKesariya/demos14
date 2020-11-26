@@ -14,7 +14,7 @@
     </record>
 
     <record id="act_open_hr_type" model="ir.actions.act_window">
-        <field name="name">Catálogo SAT tipo reglas</field>
+        <field name="name">Catalog SAT type rules</field>
         <field name="res_model">cfdi_nomina.codigo.agrupador</field>
         <field name="view_mode">tree</field>
         <field name="type">ir.actions.act_window</field>    

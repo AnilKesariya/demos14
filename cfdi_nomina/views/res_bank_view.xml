@@ -19,7 +19,7 @@
         <!--Menu para cuentas bancarias-->
 
         <record id="action_nomina_res_partner_bank" model="ir.actions.act_window">
-            <field name="name">Cuentas Bancarias</field>
+            <field name="name">Bank Accounts</field>
             <field name="res_model">res.partner.bank</field>
             <field name="type">ir.actions.act_window</field>            
             <field name="view_mode">tree,form</field>

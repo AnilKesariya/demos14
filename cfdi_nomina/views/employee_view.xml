@@ -117,7 +117,7 @@
                     <field name="dias_descanso_ids" widget="many2many_tags" options="{'no_create_edit': True, 'no_create':True}"/>
                 </field>
                 <notebook position="inside">
-                    <page string="Campos adicionales MX">
+                    <page string="Additional MX fields">
                         <group>
                             <group>
                                 <field name="status_imss"/>
@@ -156,7 +156,7 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Histórico IMSS" name="historico_imss">
+                    <page string="IMSS History" name="historico_imss">
                         <group string="SDI">
                             <field name="historico_sueldo_imss" nolabel="1" >
                                 <tree string="Histórico sueldo" editable="bottom" delete="0">
@@ -176,7 +176,7 @@
                             <field name="ife_reverso" widget="image"/>
                         </group>
                     </page>
-                    <page string="Licencia de conducir">
+                    <page string="Driver's license">
                         <group>
                             <field name="licencia_numero"/>
                             <field name="licencia_vigencia"/>
@@ -184,7 +184,7 @@
                             <field name="licencia_reverso" widget="image"/>
                         </group>
                     </page>
-                    <page string="Servicio médico">
+                    <page string="Medical Service">
                         <group>
                             <field name="med_actividad"/>
                             <field name="med_antecedentes_1"/>

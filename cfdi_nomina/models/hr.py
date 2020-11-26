@@ -128,44 +128,54 @@ class HRSalaryRule(models.Model):
         ('variable', 'Variable')])
 
     tipo_horas = fields.Many2one(
-        "cfdi_nomina.tipo_horas", string="Tipo horas extras")
+        "cfdi_nomina.tipo_horas", string="Type of overtime")
     codigo_agrupador = fields.Many2one(
-        "cfdi_nomina.codigo.agrupador", string=u"Código SAT")
+        "cfdi_nomina.codigo.agrupador", string=u"SAT Code")
     agrupacion = fields.Many2one("hr.salary.rule.group")
-    gravado_o_exento = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True, default='gravado',
-                                        help='Gravado para ISR. Genera variables  <code>_GRV_ISR y TOTAL_GRV_ISR')
-    amount_python_compute2 = fields.Text(string='Python Code Parcial',
-                                         help="Codigo de calculo previo, para del monto gravado o exento.")
-    gravado_o_exento_imss = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True,
+    gravado_o_exento = fields.Selection(GRAVADO_EXENTO_SEL, string="Taxed or Exempt", required=True, default='gravado',
+                                        help='Taxed for ISR. Generates <code>_GRV_ISR and TOTAL_GRV_ISR variables')
+    amount_python_compute2 = fields.Text(string='Partial Python Code',
+                                         help="Previous calculation code, for the taxed or exempt amount.")
+    gravado_o_exento_imss = fields.Selection(GRAVADO_EXENTO_SEL, string="Taxed or Exempt", required=True,
                                              default='ninguno',
-                                             help='Gravado para IMSS Genera variables  <code>_GRV_IMSS y TOTAL_GRV_IMSS')
-    amount_python_compute2_imss = fields.Text(string='Python Code Parcial',
-                                              help="Codigo de calculo previo, para del monto gravado o exento.")
-    gravado_o_exento_infonavit = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True,
+                                             help='Recorded for IMSS Generates <code>_GRV_IMSS and TOTAL_GRV_IMSS variables')
+    amount_python_compute2_imss = fields.Text(string='Partial Python Code',
+                                              help="Previous calculation code, for the taxed or exempt amount.")
+    gravado_o_exento_infonavit = fields.Selection(GRAVADO_EXENTO_SEL, string="Taxed or Exempt", required=True,
                                                   default='ninguno',
-                                                  help='Gravado para INFONAVIT. '
-                                                       'Genera variables  <code>_GRV_INFONAVIT y TOTAL_GRV_INFONAVIT')
-    amount_python_compute2_infonavit = fields.Text(string='Python Code Parcial',
-                                                   help="Codigo de calculo previo, para del monto gravado o exento.")
-    gravado_o_exento_ptu = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True,
+                                                  help='Charged for INFONAVIT. '
+                                                       'Generates <code>_GRV_INFONAVIT and TOTAL_GRV_INFONAVIT variables')
+    amount_python_compute2_infonavit = fields.Text(string='Partial Python Code',
+                                                   help="Previous calculation code, for the taxed or exempt amount.")
+    gravado_o_exento_ptu = fields.Selection(GRAVADO_EXENTO_SEL, string="Taxed or Exempt", required=True,
                                             default='ninguno',
                                             help='Gravado para PTU. '
-                                            'Genera variables  <code>_GRV_LOCAL y TOTAL_GRV_LOCAL')
-    amount_python_compute2_ptu = fields.Text(string='Python Code Parcial',
-                                             help="Codigo de calculo previo, para del monto gravado o exento.")
-    gravado_o_exento_local = fields.Selection(GRAVADO_EXENTO_SEL, string="Gravado o Exento", required=True,
+                                            'Generates <code>_GRV_LOCAL and TOTAL_GRV_LOCAL variables')
+    amount_python_compute2_ptu = fields.Text(string='Partial Python Code',
+                                             help="Previous calculation code, for the taxed or exempt amount.")
+    gravado_o_exento_local = fields.Selection(GRAVADO_EXENTO_SEL, string="Taxed or Exempt", required=True,
                                               default='ninguno',
-                                              help='Gravado para Local. '
-                                              'Genera variables  <code>_GRV_LOCAL y TOTAL_GRV_LOCAL')
-    amount_python_compute2_local = fields.Text(string='Python Code Parcial',
-                                               help="Codigo de calculo previo, para del monto gravado o exento.")
+                                              help='Local Taxation. '
+                                              'Generates <code>_GRV_LOCAL and TOTAL_GRV_LOCAL variables')
+    amount_python_compute2_local = fields.Text(string='Partial Python Code',
+                                               help="Previous calculation code, for the taxed or exempt amount.")
 
-    destajo = fields.Boolean('A Destajo', default=False)
-    en_especie = fields.Boolean('Pago en Especie', default=False)
-    acum_calendar_id = fields.Many2one('hr.calendar.acum', string='Calendario', required=False,
-                                       help='Calendario para acumulados en nomina')
+    destajo = fields.Boolean('In the Spotlight', default=False)
+    en_especie = fields.Boolean('Payment in Kind', default=False)
+    acum_calendar_id = fields.Many2one('hr.calendar.acum', string='Calendar', required=False,
+                                       help='Calendar for accumulated in payroll.')
     input_ids = fields.One2many(
         'hr.rule.input', 'input_id', string='Inputs', copy=True)
+
+    company_id = fields.Many2one('res.company',string="Company")
+    policy_level = fields.Selection([
+        ('summary','Summary'),
+        ('detail','Detail'),
+        ],default="summary",string="Policy level of detail")
+
+    tax_id = fields.Many2many('account.tax',string="Tax")
+    payslip_id = fields.Many2one('hr.payslip',string="Payslip")
+    total = fields.Float(string="Total")
 
     @api.model
     def _set_global_values(self, localdict):
@@ -784,7 +794,7 @@ class HrContract(models.Model):
         "cfdi_nomina.regimen.contratacion", required=True)
     periodicidad_pago = fields.Many2one("cfdi_nomina.periodicidad_pago")
     monthly_wage = fields.Monetary(
-        'Sueldo Mensual', digits=(16, 2), help='Para contrato impreso')
+        'Sueldo Mensual', digits=(16, 2), help='For printed contract')
     planned_payment = fields.Selection([
         ('monthly','Mensual'),
         ('quarterly','Trimestral'),
@@ -793,9 +803,9 @@ class HrContract(models.Model):
         ('weekly','Semanalmente'),
         ('biweekly','Bisemanal'),
         ('bimonthly','Bimensual'),
-        ],default="monthly",string="Pago planificado")
+        ],default="monthly",string="Planned payment")
     salary_journal = fields.Many2one(
-        'account.journal', 'Diario de salario', required=True)
+        'account.journal', 'Salary diary', required=True)
 
 
 class HrJob(models.Model):
@@ -805,7 +815,7 @@ class HrJob(models.Model):
     xs_tipo_grupo_poliza = fields.Selection(selection=[
             ('administracion', 'Administracion'),
             ('ventas', 'Ventas'),
-        ], string='Tipo de Puesto',store=True ,default="administracion")
+        ], string='Job Type',store=True ,default="administracion")
 
 
 def to_tz(datetime, tz_name):

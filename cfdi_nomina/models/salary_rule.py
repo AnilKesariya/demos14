@@ -10,7 +10,7 @@ class HrRuleInput(models.Model):
         required=True, help="The code that can be used in the salary rules")
     input_id = fields.Many2one(
         'hr.salary.rule', string='Salary Rule Input', required=True)
-    amount_python_compute = fields.Text('Fórmula')
+    amount_python_compute = fields.Text('Formula')
 
 
 class ContractType(models.Model):
@@ -22,7 +22,7 @@ class ContractType(models.Model):
     name = fields.Char(string='Contract Type', required=True)
     sequence = fields.Integer(
         help="Gives the sequence when displaying a list of Contract.", default=10)
-    code = fields.Char(u"Código catálogo SAT", required=True)
+    code = fields.Char(u"Catalog code SAT", required=True)
 
 
 class Contract(models.Model):

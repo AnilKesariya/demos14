@@ -8,11 +8,11 @@ class reporte_acumulado_2(models.TransientModel):
     _name = "cfdi_nomina.reporte.acumulado2"
 
     # period_id = fields.Many2one("account.period", string="Periodo")
-    datas = fields.Binary("Reporte Excel")
+    datas = fields.Binary("Excel Report")
     fname = fields.Char("Fname")
-    slip_ids = fields.Many2many("hr.payslip", string=u"Nóminas")
-    employee_ids = fields.Many2many("hr.employee", string="Empleados")
-    rule_group_ids = fields.Many2many("hr.salary.rule.group", string="Grupos de reglas")
+    slip_ids = fields.Many2many("hr.payslip", string=u"Payslip")
+    employee_ids = fields.Many2many("hr.employee", string="Employees")
+    rule_group_ids = fields.Many2many("hr.salary.rule.group", string="Groups of rules")
 
     def action_reporte(self, context=None):
         self._create_report()

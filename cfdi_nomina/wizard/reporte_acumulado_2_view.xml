@@ -26,15 +26,15 @@
                     <!-- <button type="special" special="cancel" string="Cerrar" icon="gtk-cancel"/>
                     <button type="object" string="Generar reporte" name="action_reporte" icon="gtk-execute"/> -->
 
-                    <button type="special" special="cancel" string="Cerrar" icon="fa-times"/>
-                    <button type="object" string="Generar reporte" name="action_reporte" icon="fa-check-square"/>
+                    <button type="special" special="cancel" string="Close" icon="fa-times"/>
+                    <button type="object" string="Generate report" name="action_reporte" icon="fa-check-square"/>
                 </footer>
             </form>
         </field>
     </record>
 
     <record id="action_reporte_acumulado2" model="ir.actions.act_window">
-        <field name="name">Reporte Acu. por Estructura</field>
+        <field name="name">Report by Structure</field>
         <field name="res_model">cfdi_nomina.reporte.acumulado2</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">form</field>

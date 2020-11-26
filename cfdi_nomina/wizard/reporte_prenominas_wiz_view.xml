@@ -11,16 +11,16 @@
                    <field name="department_ids" widget="many2many_tags" options="{'no_create': True}"/>
                 </group>
                 <footer>
-                    <button name="print_reporte" string="Imprimir" type="object" class="oe_highlight"/>
+                    <button name="print_reporte" string="Print" type="object" class="oe_highlight"/>
                     o
-                    <button string="Descartar"  special="cancel" />
+                    <button string="Discard"  special="cancel" />
                 </footer>
             </form>
         </field>
     </record>
 
     <record id="action_hr_rpt_nominas" model="ir.actions.act_window">
-        <field name="name">Pre Nóminas</field>
+        <field name="name">Pre Payroll</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.reporte.nominas.wiz</field>
         <field name="view_mode">form</field>

@@ -12,12 +12,12 @@ _logger = logging.getLogger(__name__)
 
 class HrGenLayPolizaWiz(models.TransientModel):
     _name = 'hr.genera.laypoliza.wiz'
-    _description = 'Wizard para Generar Layout Polizas Nomina'
+    _description = 'Wizard for Generating Payroll Policies'
 
-    company_ids = fields.Many2many('res.company', string='Compañías')
-    data_file = fields.Binary('Archivo generado', filters='*.csv,*.txt', readonly=True)
-    data_fname = fields.Char('Nombre Archivo')
-    avisos = fields.Text('Avisos', readonly=1, default='')
+    company_ids = fields.Many2many('res.company', string='Companies')
+    data_file = fields.Binary('File generated', filters='*.csv,*.txt', readonly=True)
+    data_fname = fields.Char('File Name')
+    avisos = fields.Text('Notices', readonly=1, default='')
 
     
     def gen_laypoliza(self):

@@ -7,11 +7,11 @@ class ResCompany(models.Model):
     _description = 'Company'
 
     curp = fields.Char(
-        help="Llenar en caso de que el empleador sea una persona física")
+        help="Fill out in case the employer is a natural person")
     riesgo_puesto = fields.Many2one(
-        "cfdi_nomina.riesgo.puesto", string="Clase riesgo")
+        "cfdi_nomina.riesgo.puesto", string="Risk class")
     registro_patronal = fields.Many2one('hr.ext.mx.regpat')
-    cfd_mx_test_nomina = fields.Boolean('Timbrar en modo de prueba (nómina)')
+    cfd_mx_test_nomina = fields.Boolean('Ring in test mode (payroll)')
     xs_id_region = fields.Selection(selection=[
             ('shallows', 'Bajío'),
             ('center 1', 'Centro 1'),

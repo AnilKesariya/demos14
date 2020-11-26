@@ -5,7 +5,7 @@
         <field name="name">hr.salary.rule.group.view.tree</field>
         <field name="model">hr.salary.rule.group</field>
         <field name="arch" type="xml">
-            <tree string="Agrupación reglas" editable="bottom">
+            <tree string="Grouping rules" editable="bottom">
                 <field name="name"/>
             </tree>
         </field>

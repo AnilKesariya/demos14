@@ -23,16 +23,16 @@
                         </group>
                     </div>
                     <footer>
-                        <button type="special" special="cancel" string="Cerrar" icon="gtk-cancel"/>
+                        <button type="special" special="cancel" string="Close" icon="gtk-cancel"/>
                         <button type="object" string="CSV" name="action_reporte_excel" icon="gtk-execute"/>
-                        <button type="object" string="Vista lista" name="action_reporte_acumulado" icon="gtk-execute"/>
+                        <button type="object" string="List view" name="action_reporte_acumulado" icon="gtk-execute"/>
                     </footer>
                 </form>
             </field>
         </record>
     
         <record id="action_reporte_acumulado" model="ir.actions.act_window">
-            <field name="name">Reporte acumulados</field>
+            <field name="name">Accumulated reports</field>
             <field name="res_model">cfdi_nomina.reporte.acumulado</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">form</field>

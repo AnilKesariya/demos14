@@ -19,7 +19,7 @@ class Holidays(models.Model):
     afecta_imss = fields.Selection([
         ('incapacidad', 'Incapacidad'),
         ('ausentismo', 'Ausentismo'),
-    ], related="holiday_status_id.afecta_imss", string="Afectacion IMSS", readonly=True,
+    ], related="holiday_status_id.afecta_imss", string="IMSS Affection", readonly=True,
         states={'draft': [('readonly', False)], 'confirm': [('readonly', False)]})
     cert_incapacidad_imss = fields.Char('Certificado IMSS', readonly=True,
                                         states={'draft': [('readonly', False)], 'confirm': [('readonly', False)]})
@@ -31,7 +31,7 @@ class Holidays(models.Model):
 
     retardo_parent_id = fields.Many2one('hr.leave', ondelete="set null")
     retardos_acum_list = fields.One2many(
-        'hr.leave', 'retardo_parent_id', string='Retardos acumulados', readonly=True)
+        'hr.leave', 'retardo_parent_id', string='Accumulated delays', readonly=True)
 
     @api.model
     def create(self, vals):
@@ -66,13 +66,13 @@ class Holidays(models.Model):
 class HrHolidaysStatus(models.Model):
     _inherit = "hr.leave.type"
 
-    fdia_7 = fields.Boolean("Séptimo día", default=False,
-                            help='Marcar si tiene afectación')
+    fdia_7 = fields.Boolean("Seventh day", default=False,
+                            help='Check if affected')
     fdias_ptu = fields.Boolean(
-        "Días trabajados para PTU", default=False, help='Marcar si tiene afectación')
+        "Days worked for PTU", default=False, help='Check if affected')
     fdias_infonavit = fields.Boolean(
-        "Días trabajados para INFONAVIT", default=False, help='Marcar si tiene afectación')
+        "Days worked for INFONAVIT", default=False, help='Check if affected')
     afecta_imss = fields.Selection([
         ('incapacidad', 'Incapacidad'),
         ('ausentismo', 'Ausentismo'),
-    ], string="IMSS", help='Seleccionar el tipo afectación. Dejar en blanco si no aplica')
+    ], string="IMSS", help='Select the type of affectation. Leave blank if not applicable')

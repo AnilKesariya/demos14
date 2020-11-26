@@ -10,8 +10,8 @@ class HrRepLiqIMSSWiz(models.TransientModel):
     _name = 'hr.reporte.liqimss.wiz'
     _description = 'Wizard to Generate IMSS Liquidation Report'
 
-    company_ids = fields.Many2many('res.company', string='Compañías')
-    department_ids = fields.Many2many('hr.department', string='Departamentos')
+    company_ids = fields.Many2many('res.company', string='Companies')
+    department_ids = fields.Many2many('hr.department', string='Departments')
 
     
     def print_reporte(self):

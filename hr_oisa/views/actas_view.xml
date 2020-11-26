@@ -5,7 +5,7 @@
         <field name="name">actas tree</field>
         <field name="model">hr.employee.actas</field>
         <field name="arch" type="xml">
-            <tree string="Actas administrativas">
+            <tree string="Administrative records">
                 <field name="fecha"/>
                 <field name="motivo"/>
                 <field name="repercusion"/>
@@ -19,7 +19,7 @@
         <field name="name">actas form</field>
         <field name="model">hr.employee.actas</field>
         <field name="arch" type="xml">
-            <form string="Actas administrativas" version="7.0">
+            <form string="Administrative records" version="7.0">
                 <sheet>
                     <group>
                         <field name="fecha"/>
@@ -27,7 +27,7 @@
                         <field name="repercusion"/>
                         <field name="accion"/>
                     </group>
-                    <separator string="Empleados"/>
+                    <separator string="Employees"/>
                     <field name="employee_ids" nolabel="1"/>
                 </sheet>
             </form>
@@ -35,7 +35,7 @@
     </record>
 
     <record id="action_actas" model="ir.actions.act_window">
-        <field name="name">Actas administrativas</field>
+        <field name="name">Administrative records</field>
         <field name="res_model">hr.employee.actas</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>

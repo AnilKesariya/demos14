@@ -15,13 +15,13 @@ def float_to_time(float_hour):
 
 class HrMovNomina(models.TransientModel):
     _name = 'hr.attendance.gen.wiz'
-    _description = 'Wizard para Buscar Inasistencias'
+    _description = 'Wizard to search for absences'
 
-    date_from = fields.Date('Fecha Inicial', required=True,
+    date_from = fields.Date('Initial Date', required=True,
                             default=(datetime.datetime.now() + relativedelta.relativedelta(days=-15)))
-    date_to = fields.Date('Fecha Final', required=True,
+    date_to = fields.Date('Ending Date', required=True,
                           default=datetime.datetime.now())
-    resultado_txt = fields.Text('Resultado', readonly=True)
+    resultado_txt = fields.Text('Result', readonly=True)
    
 
     def get_timedelta_tz(self, day=None, user=None):

@@ -10,8 +10,8 @@ class HrEmployeeTransfer(models.Model):
     _rec_name = 'date'
     _description = 'Employee transfers'
 
-    date = fields.Date('Fecha', required=True, default=datetime.datetime.now())
-    employee_id = fields.Many2one('hr.employee', string='Empleado', required=True)
-    company_id = fields.Many2one('res.company', string='Almacén Origen', readonly=True)
-    company_dest_id = fields.Many2one('res.company', string='Almacén Destino', readonly=True)
-    wage = fields.Float('Salario diario')
+    date = fields.Date('Date', required=True, default=datetime.datetime.now())
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
+    company_id = fields.Many2one('res.company', string='Origin Warehouse', readonly=True)
+    company_dest_id = fields.Many2one('res.company', string='Destination Warehouse', readonly=True)
+    wage = fields.Float('Daily Salary')

@@ -19,7 +19,7 @@
         <field name="name">hr.transfer.select</field>
         <field name="model">hr.employee.transfer</field>
         <field name="arch" type="xml">
-            <search string="Transferencias">
+            <search string="Transfers">
                 <field name="date" string="Fecha" filter_domain="[('date','=',date]"/>
                 <field name="employee_id"/>
                 <group expand="0" string="Agrupar Por">

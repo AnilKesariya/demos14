@@ -5,5 +5,5 @@ class AccountJournal(models.Model):
     _inherit = 'account.journal'
     _description = 'Account Journal'
 
-    place = fields.Char('Lugar de expedición', size=128)
+    place = fields.Char('Expedition place', size=128)
     serie = fields.Char(size=32)
