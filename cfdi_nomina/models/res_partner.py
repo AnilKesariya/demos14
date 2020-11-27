@@ -6,4 +6,4 @@ class partner(models.Model):
     _description = 'Partner'
 
     is_employee = fields.Boolean('IS Employee')
-    rfc = fields.Char(string="RFC")
+    # rfc = fields.Char(string="RFC")

@@ -10,9 +10,9 @@
                 <field name="employee" attrs="{'invisible': [ ('is_company','=',True)]}"/>
                 <!-- <field name="employee" attrs="{'invisible': ['|', ('is_company','=',True), '|', ('customer','=',True), ('supplier','=',True)]}"/> -->
             </xpath>
-            <xpath expr="//form//sheet//group//group[1]//field[@name='type']" position="after">
-                <field name="rfc"/>
-            </xpath>
+<!--            <xpath expr="//form//sheet//group//group[1]//field[@name='type']" position="after">-->
+<!--                <field name="rfc"/>-->
+<!--            </xpath>-->
         </field>
     </record>
 

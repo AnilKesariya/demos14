@@ -44,14 +44,15 @@
                             <label for="PRT_SF" string="Riesgos del Trabajo"/>
                             <field name="PRT_SF" nolabel="1"/>
                             <field name="PRT" nolabel="1"/>
-<!--                             <label string="-"/>
- -->
+                            <label string="-" for="PRT"/>
+
                             <hr  class="btn-primary" colspan="4" />
                             <separator colspan="4" string="Enfermedad y maternidad"/>
 
                             <label for="PE_SF" string="Prestaciones en especie"/>
                             <field name="PE_SF" nolabel="1"/>
                             <field name="PE_PATRON" nolabel="1"/>
+                            <label string="-" for="PE_PATRON"/>
 <!--                             <label string="-"/>
  -->
                             <label for="AE3_SF" string="Prest.esp.(mayor 3UMA)"/>
@@ -74,8 +75,8 @@
                             <label for="RET_SF" string="Retiro"/>
                             <field name="RET_SF" nolabel="1"/>
                             <field name="RET_PATRON" nolabel="1"/>
-<!--                             <label string="-"/>
- -->
+                            <label string="-" for="RET_PATRON"/>
+
                             <label for="CEAV_SF" string="Cesantía Edad y Vejéz"/>
                             <field name="CEAV_SF" nolabel="1"/>
                             <field name="CEAV_PATRON" nolabel="1"/>
@@ -84,7 +85,7 @@
                             <label for="GUA_SF" string="Guarderías"/>
                             <field name="GUA_SF" nolabel="1"/>
                             <field name="GUA_PATRON" nolabel="1"/>
-                            <!-- <label string="-"/> -->
+                             <label string="-" for="GUA_PATRON"/>
 
                             <label for="GMP_SF" string="Gastos Médicos para Pens."/>
                             <field name="GMP_SF" nolabel="1"/>
@@ -94,7 +95,7 @@
                             <label for="INFONAVIT_SF" string="INFONAVIT"/>
                             <field name="INFONAVIT_SF" nolabel="1"/>
                             <field name="INFONAVIT_PATRON" nolabel="1"/>
-                            <!-- <label string="-"/> -->
+                             <label string="-" for="INFONAVIT_PATRON"/>
                         </group>
                     </page>
                 </notebook>

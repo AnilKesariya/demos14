@@ -221,11 +221,13 @@ class Employee(models.Model):
     transfers_count = fields.Integer(
         compute='_compute_transfers_count', string='Transfers')
 
-
-    @api.constrains('rfc')
-    def check_rfc(self):
-        if self.rfc != self.address_id.rfc:
-            raise UserError(_("The RFC does not match the partner's RFC"))
+    @api.model
+    def create(self, vals):
+        res = super(Employee, self).create(vals)
+        if res and res.rfc and res.address_home_id and res.address_home_id.vat and \
+                res.address_home_id.vat != res.rfc:
+            raise UserError(_("The RFC does not match the Partner's RFC!"))
+        return res
 
     def _compute_transfers_count(self):
         # read_group as sudo, since contract count is displayed on form view
@@ -236,19 +238,10 @@ class Employee(models.Model):
         for employee in self:
             employee.transfers_count = result.get(employee.id, 0)
 
-    def _check_rfc(self):
-        for rec in self:
-            if rec.address_home_id and rec.address_home_id.vat != rec.rfc:
-                return False
-        return True
-
     # Se retira constraint ya que ahora cod_emp esta relacionado con el campo barcode
     # _sql_constraints = [
     #     ('cod_emp_uniq', 'unique (cod_emp)', 'Error! Ya hay un empleado con ese codigo.')
     # ]
-
-    _constraints = [
-        (_check_rfc, "The RFC does not match the partner's", ['rfc'])]
 
     @api.onchange('fecha_baja')
     def onchange_fecha_baja(self):
@@ -258,9 +251,9 @@ class Employee(models.Model):
             self.status_imss = 'alta'
 
     def write(self, vals):
+        res = super(Employee, self).write(vals)
         for employee in self:
             if 'fecha_alta' in vals:
-                
                     if employee.fecha_alta != vals['fecha_alta']:
                         employee.message_post(body=_(
                             'Se actualizo la fecha de alta de %s a %s') % (
@@ -274,9 +267,9 @@ class Employee(models.Model):
                                 'fecha_baja']
                         ))
 
-            if 'rfc' in vals and employee.address_id:
-                if vals.get('rfc') != employee.address_id.rfc:
-                    raise UserError(_("The RFC does not match the partner's"))
+            if employee.rfc and employee.address_home_id and employee.address_home_id.vat and \
+                    employee.address_home_id.vat != employee.rfc:
+                    raise UserError(_("The RFC does not match the Partner's RFC!"))
 
             # if vals.get('fecha_baja'):
             #     vals.update(status_imss='baja')
@@ -293,7 +286,7 @@ class Employee(models.Model):
                         'user_id': self.env.uid
                     })])
 
-        return super().write(vals)
+        return res
 
 
 class HistoricalSalaryIMSS(models.Model):
@@ -327,12 +320,13 @@ class HrApplicant(models.Model):
 
     @api.model
     def create(self, vals):
+        res = super().create(vals)
         first_name = vals.get("partner_first_name", "")
         appat = vals.get("appat", "")
         apmat = vals.get("apmat", "")
         if first_name and appat and apmat:
             vals["partner_name"] = first_name + " " + appat + " " + apmat
-        return super().create(vals)
+        return res
 
     @api.onchange('partner_first_name', 'appat', 'apmat')
     def onchange_name(self):

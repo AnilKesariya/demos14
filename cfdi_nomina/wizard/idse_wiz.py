@@ -99,7 +99,6 @@ class HrIDSECWiz(models.TransientModel):
         if self.company_ids:
             domain.append(('company_id', 'in', self.company_ids.ids))
         mov_altas = self.env['hr.employee'].search(domain)
-
         if not mov_altas:
             raise ValidationError('No hay datos entre las fechas dadas')
 
@@ -141,19 +140,19 @@ class HrIDSECWiz(models.TransientModel):
                 sdi=e.sueldo_imss,
                 sdinf=e.sueldo_imss,   # e.sueldo_info,
                 space=' ',
-                tipo_trab=tipo_trab,
-                tipo_salario=tipo_salario,
-                jornada=jornada,
+                tipo_trab=float(tipo_trab),
+                tipo_salario=float(tipo_salario),
+                jornada=float(jornada),
                 fecha=datetime.datetime.strptime(str(e.fecha_alta), '%Y-%m-%d').strftime("%d%m%Y"),
                 umf=self.umf,
-                tipo_mov=tipo_mov,
+                tipo_mov=float(tipo_mov),
                 guia=self.guia,
-                clave_trab=e.cod_emp,
-                curp=e.curp,
-                idf=9,
+                clave_trab=float(e.cod_emp),
+                curp=float(e.curp),
+                idf=float(9),
                 folio_incapacidad='',
-                ndias=' ',
-                sucursal=0
+                ndias = ' ',
+                sucursal = float(0)
             )
 
             idse_txt += remove_accents(line.replace(u'ñ', '#').replace(u'Ñ', '#'))
@@ -172,6 +171,7 @@ class HrIDSECWiz(models.TransientModel):
         if self.company_ids:
             domain.append(('company_id', 'in', self.company_ids.ids))
         mov_bajas = self.env['hr.employee'].search(domain)
+
 
         if not mov_bajas:
             raise ValidationError('No hay datos entre las fechas dadas')
@@ -211,20 +211,19 @@ class HrIDSECWiz(models.TransientModel):
                 nombres=nombres,
                 space=' ',
                 fecha=datetime.datetime.strptime(str(e.fecha_baja), '%Y-%m-%d').strftime("%d%m%Y"),
-                generico=0,
+                generico=float(0),
                 umf=self.umf,
-                tipo_mov=tipo_mov,
-                clave_trab=e.cod_emp,
+                tipo_mov=float(tipo_mov),
+                clave_trab=str(e.cod_emp),
                 causa_baja=causa_baja,
-                curp=e.curp,
-                idf=9,
+                curp=str(e.curp),
+                idf=float(9),
                 folio_incapacidad='',
                 ndias=' ',
-                sucursal=0
+                sucursal=float(0)
             )
 
             idse_txt += remove_accents(line.replace(u'ñ', '#').replace(u'Ñ', '#'))
-
         self.mensaje = mensaje
 
         return idse_txt
@@ -421,12 +420,12 @@ class HrIDSECWiz(models.TransientModel):
                 fecha=datetime.datetime.strptime(str(self.date_from), '%Y-%m-%d').strftime("%d%m%Y"),
                 tipo_mov=tipo_mov,
                 guia=self.guia,
-                clave_trab=e.cod_emp,
-                curp=e.curp,
-                idf=9,
+                clave_trab=str(e.cod_emp),
+                curp=str(e.curp),
+                idf=float(9),
                 folio_incapacidad='',
                 ndias=' ',
-                sucursal=0
+                sucursal=float(0)
             )
 
             #  las Ñ las ponga como carácter #

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
+
     <record model="ir.ui.view" id="hr_salary_rule_form_inherit">
         <field name="name">hr.salary.rule.form.inherit</field>
         <field name="model">hr.salary.rule</field>
@@ -26,16 +26,16 @@
                     </group>
                 </group>
             </xpath>
-           <xpath expr="//notebook/page[@name='description']" position="after">
-            <page string="Inputs">
-               <field name="input_ids" mode="tree">
-                    <tree string="Input Data" editable="bottom">
-                        <field name="name"/>
-                        <field name="amount_python_compute"/>
-                        <field name="code"/>
-                    </tree>
-                </field>
-            </page>
+            <xpath expr="//notebook/page[@name='description']" position="after">
+                <page string="Inputs">
+                    <field name="input_ids" mode="tree">
+                        <tree string="Input Data" editable="bottom">
+                            <field name="name"/>
+                            <field name="amount_python_compute"/>
+                            <field name="code"/>
+                        </tree>
+                    </field>
+                </page>
             </xpath>
             <xpath expr="//notebook[last()]" position="inside">
                 <page name="bases_gravables" string="Taxable Bases">
@@ -54,84 +54,135 @@
                         </group>
                     </group>
                     <group>
-                    <group string="IMSS">
-                        <field name="gravado_o_exento_imss"/>
-                        <field name="amount_python_compute2_imss"
-                               placeholder="Ejemplo: result = inputs.P002.amount / 2"
-                               attrs="{'invisible':[('gravado_o_exento_imss', 'not in', ('p_gravado', 'p_exento'))]}"/>
+                        <group string="IMSS">
+                            <field name="gravado_o_exento_imss"/>
+                            <field name="amount_python_compute2_imss"
+                                   placeholder="Ejemplo: result = inputs.P002.amount / 2"
+                                   attrs="{'invisible':[('gravado_o_exento_imss', 'not in', ('p_gravado', 'p_exento'))]}"/>
+                        </group>
+                        <group string="PTU">
+                            <field name="gravado_o_exento_ptu"/>
+                            <field name="amount_python_compute2_ptu"
+                                   placeholder="Ejemplo: result = inputs.P002.amount / 2"
+                                   attrs="{'invisible':[('gravado_o_exento_ptu', 'not in', ('p_gravado', 'p_exento'))]}"/>
+                        </group>
+                        <group string="Local">
+                            <field name="gravado_o_exento_local"/>
+                            <field name="amount_python_compute2_local"
+                                   placeholder="Ejemplo: result = inputs.P002.amount / 2"
+                                   attrs="{'invisible':[('gravado_o_exento_ptu', 'not in', ('p_gravado', 'p_exento'))]}"/>
+                        </group>
                     </group>
-                   <group string="PTU">
-                        <field name="gravado_o_exento_ptu"/>
-                        <field name="amount_python_compute2_ptu"
-                               placeholder="Ejemplo: result = inputs.P002.amount / 2"
-                               attrs="{'invisible':[('gravado_o_exento_ptu', 'not in', ('p_gravado', 'p_exento'))]}"/>
-                    </group>
-                    <group string="Local">
-                        <field name="gravado_o_exento_local"/>
-                        <field name="amount_python_compute2_local"
-                               placeholder="Ejemplo: result = inputs.P002.amount / 2"
-                               attrs="{'invisible':[('gravado_o_exento_ptu', 'not in', ('p_gravado', 'p_exento'))]}"/>
-                    </group>
-                </group>
                 </page>
                 <page name="formula_values" string="Info Valores">
-                        <h2>Disponibles en fórmulas</h2>
-                        <div name="variables">
-                            <h3>Variables</h3>
-                            <ul>
-                                <li><strong>categories</strong>: treea de Categorías de reglas salariales</li>
-                                <li><strong>rules</strong>: treea de todas las reglas salariales disponibles, en base al codigo</li>
-                                <li><strong>payslip</strong>: La misma nomina</li>
-                                <li><strong>worked_days</strong>: treea de los elementos de Dias Trabajados</li>
-                                <li><strong>inputs</strong>: treea de los elementos de Otras Entradas</li>
-                                <li><strong>employee</strong>: Empleado al que se aplica la nomina</li>
-                                <li><strong>contract</strong>: Contrato usado en la nomina</li>
-                            </ul>
-                        </div>
-                        <div name="valores">
-                            <h3>Valores</h3>
-                            <ul>
-                                <li><strong>TIPOCALCULO</strong>: Tipo del calculo (mensual, ajustado o anual)</li>
-                                <li><strong>FINIQUITO</strong>: Booleano, si es finiquito</li>
-                                <li><strong>DA</strong>: Días por año, parámetro de ajustes</li>
-                                <li><strong>DP</strong>: Días del Periodo, del periodo de la nómina</li>
-                                <li><strong>DAG</strong>: Días Aguinaldo, en base a la tabla SDI del empleado</li>
-                                <li><strong>DTA</strong>: Días Trabajados, en base a la tabla SDI del empleado</li>
-                                <li><strong>DPV</strong>: Días Prima Vacacional, en base a la tabla de vacaciones del empleado</li>
-                                <li><strong>DV</strong>: Días de Vacaciones, en base a la tabla de vacaciones del empleado</li>
-                                <li><strong>ANTIGUEDAD</strong>: Antigüedad del empleado en años</li>
-                                <li><strong>SDI</strong>: Salario diario integrado</li>
-                                <li><strong>SM</strong>: Salario mínimo de la zona, en base a la zona salario del empleado</li>
-                                <li><strong>SF</strong>: Salario mímimo DF, parámetro de ajustes</li>
-                                <li><strong>UMA</strong>: Unidad  de Medida y Actualización, parámetro de ajustes</li>
-                                <li><strong>FA</strong>: Faltas por ausentismo, tomado de las faltas, tipo de ausencia y afectacion IMSS</li>
-                                <li><strong>FI</strong>: Faltas por incapacidad, tomado de las faltas, tipo de ausencia y afectacion IMSS</li>
-                                <li><strong>FPER</strong>: Factor Periodo</li>
-                                <li><strong>SUBE</strong>: Subsidio para el empleo</li>
-                                <li><strong>ISPT</strong>: ISPT</li>
-                                <li><strong>ISPT_ANUAL</strong>: ISPT del calculo anual</li>
-                                <li><strong>TOTAL_GRV_PTU</strong>: Total gravado PTU</li>
-                                <li><strong>TOTAL_EXT_PTU</strong>: Total exento PTU</li>
-                                <li><strong>TOTAL_GRV_</strong>: Total gravado INFONAVIT</li>
-                                <li><strong>TOTAL_EXT_INFONAVIT</strong>: Total exento INFONAVIT</li>
-                                <li><strong>TOTAL_GRV_IMSS</strong>: Total gravado IMSS</li>
-                                <li><strong>TOTAL_EXT_IMSS</strong>: Total exento IMSS</li>
-                                <li><strong>TOTAL_GRV_ISR</strong>: Total gravado ISR</li>
-                                <li><strong>TOTAL_GRV_ISR_MENSUAL</strong>: TOTAL_GRV_ISR por FPER, si el tipo calculo es Mensual, Si es 'Ajustado' sera su valor sera TOTAL_GRV_ISR_NC </li>
-                                <li><strong>TOTAL_GRV_ISR_AC</strong>: Acumulado Actual, No incluye nomina actual</li>
-                                <li><strong>TOTAL_GRV_ISR_NC</strong>: Acumulado Actual, Incluye nomina actual</li>
-                                <li><strong>TOTAL_GRV_ISR_AN</strong>: Acumulado Anual, No incluye nomina actual</li>
-                                <li><strong>codigo_NC</strong>: Variable acumulada del periodo. Incluye nómina actual (ojo, considerar la secuencia)</li>
-                                <li><strong>codigo_AC</strong>: Variable acumulada del periodo. No incluye nómina actual</li>
-                                <li><strong>codigo_ANT</strong>: Variable acumulada del periodo anterior</li>
-                                <li><strong>codigo_AN</strong>: Variable acumulada anual. No incluye nómina actual</li>
-                                <li><strong>TOTAL_EXT_ISR</strong>: Total exento ISR</li>
-                                <li><strong>TOTAL_PERCEPCIONES</strong>: Total de percepciones</li>
-                                <li><strong>TOTAL_DEDUCCIONES</strong>: Total de deducciones</li>
-                                <li><strong>TOTAL_OTROS_PAGOS</strong>: Total de otros pagos</li>
-                            </ul>
-                        </div>
-                    </page>
+                    <h2>Disponibles en fórmulas</h2>
+                    <div name="variables">
+                        <h3>Variables</h3>
+                        <ul>
+                            <li><strong>categories</strong>: treea de Categorías de reglas salariales
+                            </li>
+                            <li><strong>rules</strong>: treea de todas las reglas salariales disponibles, en base al
+                                codigo
+                            </li>
+                            <li><strong>payslip</strong>: La misma nomina
+                            </li>
+                            <li><strong>worked_days</strong>: treea de los elementos de Dias Trabajados
+                            </li>
+                            <li><strong>inputs</strong>: treea de los elementos de Otras Entradas
+                            </li>
+                            <li><strong>employee</strong>: Empleado al que se aplica la nomina
+                            </li>
+                            <li><strong>contract</strong>: Contrato usado en la nomina
+                            </li>
+                        </ul>
+                    </div>
+                    <div name="valores">
+                        <h3>Valores</h3>
+                        <ul>
+                            <li><strong>TIPOCALCULO</strong>: Tipo del calculo (mensual, ajustado o anual)
+                            </li>
+                            <li><strong>FINIQUITO</strong>: Booleano, si es finiquito
+                            </li>
+                            <li><strong>DA</strong>: Días por año, parámetro de ajustes
+                            </li>
+                            <li><strong>DP</strong>: Días del Periodo, del periodo de la nómina
+                            </li>
+                            <li><strong>DAG</strong>: Días Aguinaldo, en base a la tabla SDI del empleado
+                            </li>
+                            <li><strong>DTA</strong>: Días Trabajados, en base a la tabla SDI del empleado
+                            </li>
+                            <li><strong>DPV</strong>: Días Prima Vacacional, en base a la tabla de vacaciones del
+                                empleado
+                            </li>
+                            <li><strong>DV</strong>: Días de Vacaciones, en base a la tabla de vacaciones del empleado
+                            </li>
+                            <li><strong>ANTIGUEDAD</strong>: Antigüedad del empleado en años
+                            </li>
+                            <li><strong>SDI</strong>: Salario diario integrado
+                            </li>
+                            <li><strong>SM</strong>: Salario mínimo de la zona, en base a la zona salario del empleado
+                            </li>
+                            <li><strong>SF</strong>: Salario mímimo DF, parámetro de ajustes
+                            </li>
+                            <li><strong>UMA</strong>: Unidad de Medida y Actualización, parámetro de ajustes
+                            </li>
+                            <li><strong>FA</strong>: Faltas por ausentismo, tomado de las faltas, tipo de ausencia y
+                                afectacion IMSS
+                            </li>
+                            <li><strong>FI</strong>: Faltas por incapacidad, tomado de las faltas, tipo de ausencia y
+                                afectacion IMSS
+                            </li>
+                            <li><strong>FPER</strong>: Factor Periodo
+                            </li>
+                            <li><strong>SUBE</strong>: Subsidio para el empleo
+                            </li>
+                            <li><strong>ISPT</strong>: ISPT
+                            </li>
+                            <li><strong>ISPT_ANUAL</strong>: ISPT del calculo anual
+                            </li>
+                            <li><strong>TOTAL_GRV_PTU</strong>: Total gravado PTU
+                            </li>
+                            <li><strong>TOTAL_EXT_PTU</strong>: Total exento PTU
+                            </li>
+                            <li><strong>TOTAL_GRV_</strong>: Total gravado INFONAVIT
+                            </li>
+                            <li><strong>TOTAL_EXT_INFONAVIT</strong>: Total exento INFONAVIT
+                            </li>
+                            <li><strong>TOTAL_GRV_IMSS</strong>: Total gravado IMSS
+                            </li>
+                            <li><strong>TOTAL_EXT_IMSS</strong>: Total exento IMSS
+                            </li>
+                            <li><strong>TOTAL_GRV_ISR</strong>: Total gravado ISR
+                            </li>
+                            <li><strong>TOTAL_GRV_ISR_MENSUAL</strong>: TOTAL_GRV_ISR por FPER, si el tipo calculo es
+                                Mensual, Si es 'Ajustado' sera su valor sera TOTAL_GRV_ISR_NC
+                            </li>
+                            <li><strong>TOTAL_GRV_ISR_AC</strong>: Acumulado Actual, No incluye nomina actual
+                            </li>
+                            <li><strong>TOTAL_GRV_ISR_NC</strong>: Acumulado Actual, Incluye nomina actual
+                            </li>
+                            <li><strong>TOTAL_GRV_ISR_AN</strong>: Acumulado Anual, No incluye nomina actual
+                            </li>
+                            <li><strong>codigo_NC</strong>: Variable acumulada del periodo. Incluye nómina actual (ojo,
+                                considerar la secuencia)
+                            </li>
+                            <li><strong>codigo_AC</strong>: Variable acumulada del periodo. No incluye nómina actual
+                            </li>
+                            <li><strong>codigo_ANT</strong>: Variable acumulada del periodo anterior
+                            </li>
+                            <li><strong>codigo_AN</strong>: Variable acumulada anual. No incluye nómina actual
+                            </li>
+                            <li><strong>TOTAL_EXT_ISR</strong>: Total exento ISR
+                            </li>
+                            <li><strong>TOTAL_PERCEPCIONES</strong>: Total de percepciones
+                            </li>
+                            <li><strong>TOTAL_DEDUCCIONES</strong>: Total de deducciones
+                            </li>
+                            <li><strong>TOTAL_OTROS_PAGOS</strong>: Total de otros pagos
+                            </li>
+                        </ul>
+                    </div>
+                </page>
             </xpath>
         </field>
     </record>
@@ -150,31 +201,31 @@
         </field>
     </record>
 
-   <!-- Inherit Form View Tipo Contrato -->
+    <!-- Inherit Form View Tipo Contrato -->
 
     <record id="hr_contract_type_view_form" model="ir.ui.view">
-            <field name="name">hr.contract.type.form</field>
-            <field name="model">hr.contract.type</field>
-            <field name="arch" type="xml">
-                <form string="contract Type">
-                    <group col="4">
-                        <field name="name"/>
-                        <field name="code"/>
-                    </group>
-                </form>
-            </field>
+        <field name="name">hr.contract.type.form</field>
+        <field name="model">hr.contract.type</field>
+        <field name="arch" type="xml">
+            <form string="contract Type">
+                <group col="4">
+                    <field name="name"/>
+                    <field name="code"/>
+                </group>
+            </form>
+        </field>
     </record>
 
     <record id="hr_contract_type_view_tree" model="ir.ui.view">
-            <field name="name">hr.contract.type.tree</field>
-            <field name="model">hr.contract.type</field>
-            <field name="arch" type="xml">
-                <tree string="contract Type">
-                    <field name="sequence" widget="handle"/>
-                    <field colspan="4" name="name"/>
-                    <field name="code"/>
-                </tree>
-            </field>
+        <field name="name">hr.contract.type.tree</field>
+        <field name="model">hr.contract.type</field>
+        <field name="arch" type="xml">
+            <tree string="contract Type">
+                <field name="sequence" widget="handle"/>
+                <field colspan="4" name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
     </record>
 
     <record id="hr_contract_type_view_search" model="ir.ui.view">
@@ -185,7 +236,7 @@
                 <field name="name" string="contract Type"/>
                 <field name="sequence" string="Sequence"/>
                 <field name="code"/>
-           </search>
+            </search>
         </field>
     </record>
 
@@ -198,13 +249,13 @@
     </record>
 
     <menuitem
-        id="hr_menu_contract_type"
-        action="action_hr_contract_type"
-        parent="hr.menu_human_resources_configuration"
-        sequence="3"
-        groups="base.group_no_one"/>
+            id="hr_menu_contract_type"
+            action="action_hr_contract_type"
+            parent="hr.menu_human_resources_configuration"
+            sequence="3"
+            groups="base.group_no_one"/>
 
-            <!-- Inherit Form View Contrato -->
+    <!-- Inherit Form View Contrato -->
     <record model="ir.ui.view" id="hr_contract_view_form_inherit">
         <field name="name">hr.contract.view.form.inherit</field>
         <field name="model">hr.contract</field>
@@ -245,10 +296,10 @@
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
         <field name="arch" type="xml">
             <field name="number" position="before">
-                 <field name="id"/>
+                <field name="id"/>
             </field>
             <field name="state" position="after">
-                 <field name="timbrada"/>
+                <field name="timbrada"/>
             </field>
             <field name="employee_id" position="before">
                 <field name="cod_emp"/>
@@ -259,19 +310,19 @@
         </field>
     </record>
 
-    <record id="view_hr_payslip_form_inherit" model="ir.ui.view" >
+    <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
         <field name="name">hr.payslip.form</field>
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_payslip_done']" position="after">
-            
-                <button name="action_create_cfdi_background" string="Crear CFDI" type="object"  class="oe_highlight"
-                attrs="{'invisible':['|','|',('estado_timbrado','=','timbrada'),('timbrada','=',True),('state','not in',['confirm','done'])]}"/>
 
-               
+                <button name="action_create_cfdi_background" string="Crear CFDI" type="object" class="oe_highlight"
+                        attrs="{'invisible':['|','|',('estado_timbrado','=','timbrada'),('timbrada','=',True),('state','not in',['confirm','done'])]}"/>
+
+
                 <button name="action_cancel_cfdi" type="object" string="Cancelar CFDI"
-                       class="oe_highlight"
+                        class="oe_highlight"
                         attrs="{'invisible':['|',('uuid','=',False),('estado_timbrado','=','cancelada')]}"/>
                 <field name="uuid" invisible="1"/>
             </xpath>
@@ -283,10 +334,10 @@
             <xpath expr="//field[@name='worked_days_line_ids']" position="attributes">
                 <attribute name="context">{'employee_id': employee_id}</attribute>
             </xpath>
-             <xpath expr="//field[@name='worked_days_line_ids']/form//field[@name='contract_id']" position="attributes">
+            <xpath expr="//field[@name='worked_days_line_ids']/form//field[@name='contract_id']" position="attributes">
                 <attribute name="domain">[('employee_id', '?=', context.get('employee_id'))]</attribute>
             </xpath>
-        
+
             <!--holidays_ids cambia con onchange, y si no lo considero en la vista, se pierden los cambios  JGO-->
             <xpath expr="//field[@name='worked_days_line_ids']/tree//field[@name='is_paid']" position="after">
                 <field name="holiday_ids" widget="many2many_tags" invisible="0"/>
@@ -306,7 +357,9 @@
             <xpath expr="//field[@name='contract_id']" position="after">
                 <label for="day_leave_from" string="Faltas"/>
                 <div>
-                    <field name="day_leave_from" class="oe_inline"/> - <field name="day_leave_to" class="oe_inline"/>
+                    <field name="day_leave_from" class="oe_inline"/>
+                    -
+                    <field name="day_leave_to" class="oe_inline"/>
                 </div>
                 <field name="fecha_pago"/>
             </xpath>
@@ -317,11 +370,11 @@
             <field name="payslip_run_id" position="after">
                 <field name="registro_patronal_codigo"/>
             </field>
-             <field name="credit_note" position="after" >
-                <field name="tipo_calculo" />
+            <field name="credit_note" position="after">
+                <field name="tipo_calculo"/>
                 <field name="payment_date"/>
             </field>
-            <notebook position="inside">
+            <xpath expr="//notebook/page[@name='salary_computation']" position="after">
                 <page string="Detail By Salary Category">
                     <field name="rule_line_ids">
                         <tree editable="bottom">
@@ -340,6 +393,8 @@
                         </form>
                     </field>
                 </page>
+            </xpath>
+            <notebook position="inside">
                 <page string="Stamped">
                     <group string="Stamping status">
                         <field name="timbrada" readonly="1" invisible="1"/>
@@ -364,7 +419,7 @@
                         <field name="mensaje_pac" readonly="1"/>
                     </group>
                 </page>
-                 <page id="info" string="Other Info">
+                <page id="info" string="Other Info">
                     <group>
                         <group>
                             <field name="sdi"/>
@@ -377,7 +432,7 @@
                                     <field name="value"/>
                                 </tree>
                             </field>
-                            <field name="sdip_info_calc_ids" nolabel="1"  colspan="2">
+                            <field name="sdip_info_calc_ids" nolabel="1" colspan="2">
                                 <tree decoration-bf="name=='Total percepciones'">
                                     <field name="name"/>
                                     <field name="code"/>
@@ -398,7 +453,8 @@
                         </group>
                     </group>
                 </page>
-                <page id="info" string="Current Bimonthly Info" attrs="{'invisible':[('tipo_calculo','not in',('ajustado','anual'))]}">
+                <page id="info" string="Current Bimonthly Info"
+                      attrs="{'invisible':[('tipo_calculo','not in',('ajustado','anual'))]}">
                     <group>
                         <group>
                             <field name="sdi_last"/>
@@ -411,7 +467,7 @@
                                     <field name="value"/>
                                 </tree>
                             </field>
-                            <field name="sdip_info_calc_last_ids" nolabel="1"  colspan="2">
+                            <field name="sdip_info_calc_last_ids" nolabel="1" colspan="2">
                                 <tree decoration-bf="name=='Total percepciones'">
                                     <field name="name"/>
                                     <field name="code"/>
@@ -448,102 +504,83 @@
                 </page>
                 <page id="page_anual" string="ISR Annual" attrs="{'invisible':[('tipo_calculo','!=','anual')]}">
                     <group>
-                       <field name="calculo_anual" nolabel="1"/>
+                        <field name="calculo_anual" nolabel="1"/>
                     </group>
                 </page>
-               <page id="obrero_patron" string="employer's fees">
-                <group>
+                <page id="obrero_patron" string="Employer's Fees">
                     <group>
-                        <label for="dpnom" string="Days payroll period"/>
-                        <field name="dpnom" nolabel="1"/>
-                        <label for="dtnom" string="Days worked"/>
-                        <field name="dtnom" nolabel="1"/>
+                        <group>
+                            <label for="dpnom" string="Days payroll period"/>
+                            <field name="dpnom" nolabel="1"/>
+                            <label for="dtnom" string="Days worked"/>
+                            <field name="dtnom" nolabel="1"/>
+                        </group>
                     </group>
-                </group>
-                <group>
-                      <separator colspan="3" string="Sickness and Maternity"/>
+                    <group col="4">
+                        <separator colspan="4" string="Sickness and Maternity"/>
 
+                        <span/>
+                        <strong>Patrón</strong>
+                        <strong>Empleado</strong>
+                        <span/>
                         <label for="pe_patron" string="Fixed Quota Species"/>
-                       
-                        <div>
                         <field name="pe_patron" nolabel="1" class="oe_inline"/>
-                         &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
-                        <span class="oe_inline"> - </span>
-                        </div>
+                        <label for="pe_patron" string="-"/>
+                        <label for="pe_patron" string=""/>
 
                         <label for="ae3_patron" string="Major species 3 UMA"/>
-                        <div>
                         <field name="ae3_patron" nolabel="1" class="oe_inline"/>
-                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
                         <field name="ae3_trab" nolabel="1" class="oe_inline"/>
-                        </div>
-                        
+                        <label for="ae3_trab" string=""/>
 
                         <label for="ed_patron" string="Cash Benefits"/>
-                        <div>
-                        <field name="ed_patron" nolabel="1" class="oe_inline"/>&#x2063;
-                        &#x2063;&#x2063;&#x2063;&#x2063;
+                        <field name="ed_patron" nolabel="1" class="oe_inline"/>
                         <field name="ed_trab" nolabel="1" class="oe_inline"/>
-                        </div>
-                        
+                        <label for="ed_trab" string=""/>
 
                         <label for="gmp_patron" string="Pensioners and beneficiaries"/>
-                        <div>
                         <field name="gmp_patron" nolabel="1" class="oe_inline"/>
-                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
                         <field name="gmp_trab" nolabel="1" class="oe_inline"/>
-                        </div>
-                        
-                        <hr class="btn-primary" colspan="3"/>
+                        <label for="gmp_trab" string=""/>
+
+                        <hr class="btn-primary" colspan="4"/>
 
                         <label for="iv_patron" string="Disability and life"/>
-                        <div>
                         <field name="iv_patron" nolabel="1" class="oe_inline"/>
-                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;
                         <field name="iv_trab" nolabel="1" class="oe_inline"/>
-                        </div>
-                        
+                        <label for="iv_trab" string=""/>
+
                         <label for="rt_patron" string="Occupational Risk"/>
-                        <div>
                         <field name="rt_patron" nolabel="1" class="oe_inline"/>
-                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
-                        <span class="oe_inline"> - </span>
-                        </div>
+                        <label for="rt_patron" string="-"/>
+                        <label for="rt_patron" string=""/>
 
                         <label for="gua_patron" string="Nursery Schools and Social Services"/>
-                        <div>
-                            <field name="gua_patron" nolabel="1" class="oe_inline"/>
-                            &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
-                            <span class="oe_inline"> - </span>   
-                        </div>
-                      
+                        <field name="gua_patron" nolabel="1" class="oe_inline"/>
+                        <label for="gua_patron" string="-"/>
+                        <label for="gua_patron" string=""/>
+
                         <label for="ret_patron" string="Retirement Insurance"/>
-                        <div>
-                            <field name="ret_patron" nolabel="1" class="oe_inline"/>
-                            &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
-                            <span class="oe_inline"> - </span>    
-                        </div>
-                
+                        <field name="ret_patron" nolabel="1" class="oe_inline"/>
+                        <label for="ret_patron" string="-"/>
+                        <label for="ret_patron" string=""/>
+
                         <label for="ceav_patron" string="Cesantia and old age"/>
-                        <div>
                         <field name="ceav_patron" nolabel="1" class="oe_inline"/>
-                        &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
-                        <span class="oe_inline"> - </span> 
-                        </div>
+                        <label for="ceav_patron" string="-"/>
+                        <label for="ceav_patron" string=""/>
 
                         <label for="infonavit_patron" string="INFONAVIT"/>
-                        <div>
-                            <field name="infonavit_patron" nolabel="1" class="oe_inline"/>
-                            &#x2063;&#x2063;&#x2063;&#x2063;&#x2063;    
-                            <span class="oe_inline"> - </span> 
-                        </div>
-                 
-                    </group> 
+                        <field name="infonavit_patron" nolabel="1" class="oe_inline"/>
+                        <label for="infonavit_patron" string="-"/>
+                        <label for="infonavit_patron" string=""/>
+
+                    </group>
                 </page>
             </notebook>
             <field name="line_ids" position="replace">
                 <field name="line_ids" colspan="4" nolabel="1">
-                    <tree string="Salary Structure"  colors="blue:total == 0">
+                    <tree string="Salary Structure" colors="blue:total == 0">
                         <field name="salary_rule_id"/>
                         <field name="code"/>
                         <field name="category_id"/>
@@ -557,8 +594,8 @@
                         <field name="exento_imss"/>
                         <field name="gravado_infonavit"/>
                         <!-- <field name="exento_infonavit"/> -->
-                       <!--  <field name="gravado_ptu"/>
-                        <field name="exento_ptu"/> -->
+                        <!--  <field name="gravado_ptu"/>
+                         <field name="exento_ptu"/> -->
                         <!-- <field name="amount"/>
                         <field name="total"/> -->
                     </tree>
@@ -631,7 +668,7 @@
     </record>
 
     <menuitem action="act_open_hr_other_inputs" id="menu_open_hr_other_inputs"
-    parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1"/>
+              parent="hr_work_entry_contract.menu_hr_payroll_configuration" sequence="1"/>
 
     <!-- hr.job -->
     <record model="ir.ui.view" id="hr_job_inherit_template_form">
@@ -768,7 +805,7 @@
             <xpath expr="//page[@name='accounting']//field[@name='not_computed_in_net']" position="after">
                 <field name="tax_id" widget='many2many_tags'/>
             </xpath>
-        </field> 
+        </field>
     </record>
 </odoo>
 
