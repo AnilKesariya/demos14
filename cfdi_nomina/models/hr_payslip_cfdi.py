@@ -745,7 +745,7 @@ class HrPayslip(models.Model):
             'amount_total': "%.2f" % total,
             'emitter_rfc': company.partner_id.vat or "",
             'emitter_name': emitter_name or "",
-            'emitter_fiscal_position': company.partner_id.property_account_position_id.l10n_mx_edi_code,
+            # 'emitter_fiscal_position': company.partner_id.property_account_position_id.l10n_mx_edi_code,
             'receiver_rfc': empleado.rfc or "",
             'receiver_name': empleado.nombre_completo or "",
             'concept_price_unit': "%.2f" % importe,

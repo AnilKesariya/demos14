@@ -194,7 +194,12 @@ class HrPayslip(models.Model):
         "Annual Calculation", readonly=True, help="Annual data")
     # localdict = fields.Text("Variables durante el calculo", readonly=True)
 
-    rule_line_ids =fields.One2many('hr.salary.rule','payslip_id',string="detail by salary category",copy=False)
+    rule_line_ids =fields.One2many('hr.payslip.line',
+        compute='_compute_details_by_salary_rule_category', string='Details by Salary Rule Category')
+
+    def _compute_details_by_salary_rule_category(self):
+        for payslip in self:
+            payslip.rule_line_ids = payslip.mapped('line_ids').filtered(lambda line: line.category_id)
 
     @api.constrains('date_from', 'date_to', 'state', 'employee_id', 'tipo_nomina')
     def _check_date(self):
@@ -543,88 +548,93 @@ class HrPayslip(models.Model):
 
         return res
 
-
-    def _get_payslip_lines(self):
-        def _sum_salary_rule_category(localdict, category, amount):
-            if category.parent_id:
-                localdict = _sum_salary_rule_category(
-                    localdict, category.parent_id, amount)
-            localdict['categories'].dict[category.code] = category.code in localdict['categories'].dict and \
-                localdict['categories'].dict[category.code] + amount or amount
-            return localdict
-
-        self.ensure_one()
-        result = {}
-        rules_dict = {}
-        worked_days_dict = {line.code: line for line in self.worked_days_line_ids if line.code}
-        inputs_dict = {line.code: line for line in self.input_line_ids if line.code}
-
-        employee = self.employee_id
-        contract = self.contract_id
-
-        localdict = {
-            **self._get_base_local_dict(),
-            **{
-                'categories': BrowsableObject(employee.id, {}, self.env),
-                'rules': BrowsableObject(employee.id, rules_dict, self.env),
-                'payslip': Payslips(employee.id, self, self.env),
-                'worked_days': WorkedDays(employee.id, worked_days_dict, self.env),
-                'inputs': InputLine(employee.id, inputs_dict, self.env),
-                'employee': employee,
-                'contract': contract
-            }
-        }
-
-        for contract in contract:
-            # set global initial variables and values
-            self.env['hr.salary.rule']._set_global_values(localdict)
-
-            # disponibles variables acumuladas  NC (aún no contiene la nomina actual),
-            # AC (periodo actual sin la nomina actual), ANT (anterior), AN
-            # (anual)
-            payslip.set_acumulado_variables(localdict, sorted_rules)
-
-            for rule in sorted(self.struct_id.rule_ids, key=lambda x: x.sequence):
-                localdict.update({
-                    'result': None,
-                    'result_qty': 1.0,
-                    'result_rate': 100})
-                if rule._satisfy_condition(localdict):
-                    amount, qty, rate = rule._compute_rule(localdict)
-                    #check if there is already a rule computed with that code
-                    previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
-                    #set/overwrite the amount computed for this rule in the localdict
-                    tot_rule = amount * qty * rate / 100.0
-                    localdict[rule.code] = tot_rule
-                    rules_dict[rule.code] = rule
-                    # sum the amount for its salary category
-                    localdict = _sum_salary_rule_category(localdict, rule.category_id, tot_rule - previous_amount)
-                    # create/overwrite the rule in the temporary results
-                    result[rule.code] = {
-                        'sequence': rule.sequence,
-                        'code': rule.code,
-                        'name': rule.name,
-                        'note': rule.note,
-                        'salary_rule_id': rule.id,
-                        'contract_id': contract.id,
-                        'employee_id': employee.id,
-                        'amount': amount,
-                        'quantity': qty,
-                        'rate': rate,
-                        'slip_id': self.id,
-
-                        'gravado': localdict[rule.code + '_GRV_ISR'],
-                        'exento': localdict[rule.code + '_EXT_ISR'],
-                        'gravado_imss': localdict[rule.code + '_GRV_IMSS'],
-                        'exento_imss': localdict[rule.code + '_EXT_IMSS'],
-                        'gravado_infonavit': localdict[rule.code + '_GRV_INFONAVIT'],
-                        'exento_infonavit': localdict[rule.code + '_EXT_INFONAVIT'],
-                        'gravado_ptu': localdict[rule.code + '_GRV_PTU'],
-                        'exento_ptu': localdict[rule.code + '_EXT_PTU'],
-                        'gravado_local': localdict[rule.code + '_GRV_LOCAL'],
-                        'exento_local': localdict[rule.code + '_EXT_LOCAL'],
-                    }
-        return result.values()
+    # def _get_payslip_lines(self):
+    #     print ("inside method =-=-=-")
+    #     def _sum_salary_rule_category(localdict, category, amount):
+    #         if category.parent_id:
+    #             localdict = _sum_salary_rule_category(localdict, category.parent_id, amount)
+    #         localdict['categories'].dict[category.code] = localdict['categories'].dict.get(category.code, 0) + amount
+    #
+    #         print ("local dict =-=", localdict)
+    #         return localdict
+    #
+    #     self.ensure_one()
+    #     result = {}
+    #     rules_dict = {}
+    #     worked_days_dict = {line.code: line for line in self.worked_days_line_ids if line.code}
+    #     inputs_dict = {line.code: line for line in self.input_line_ids if line.code}
+    #
+    #     employee = self.employee_id
+    #     contract = self.contract_id
+    #
+    #     localdict = {
+    #         **self._get_base_local_dict(),
+    #         **{
+    #             'categories': BrowsableObject(employee.id, {}, self.env),
+    #             'rules': BrowsableObject(employee.id, rules_dict, self.env),
+    #             'payslip': Payslips(employee.id, self, self.env),
+    #             'worked_days': WorkedDays(employee.id, worked_days_dict, self.env),
+    #             'inputs': InputLine(employee.id, inputs_dict, self.env),
+    #             'employee': employee,
+    #             'contract': contract
+    #         }
+    #     }
+    #
+    #     localdict = dict(localdict, employee=employee, contract=contract)
+    #     # set global initial variables and values
+    #     self.env['hr.salary.rule']._set_global_values(localdict)
+    #
+    #     # disponibles variables acumuladas  NC (aún no contiene la nomina actual),
+    #     # AC (periodo actual sin la nomina actual), ANT (anterior), AN (anual)
+    #     sorted_rule_ids = [id for id, sequence in sorted(self.struct_id.rule_ids, key=lambda x: x[1])]
+    #     sorted_rules = self.env['hr.salary.rule'].browse(sorted_rule_ids)
+    #     self.set_acumulado_variables(localdict, sorted_rules)
+    #
+    #     for rule in sorted(self.struct_id.rule_ids, key=lambda x: x.sequence):
+    #         localdict.update({
+    #             'result': None,
+    #             'result_qty': 1.0,
+    #             'result_rate': 100})
+    #         if rule._satisfy_condition(localdict):
+    #             rule._compute_last_income_rule(localdict, payslip)
+    #             amount, qty, rate = rule._compute_rule(localdict)
+    #             # check if there is already a rule computed with that code
+    #             previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
+    #             # set/overwrite the amount computed for this rule in the localdict
+    #             tot_rule = amount * qty * rate / 100.0
+    #             localdict[rule.code] = tot_rule
+    #             rules_dict[rule.code] = rule
+    #             # sum the amount for its salary category
+    #             localdict = _sum_salary_rule_category(localdict, rule.category_id, tot_rule - previous_amount)
+    #
+    #             codigo_nc = "{}_NC".format(rule.code)
+    #             localdict[codigo_nc] = localdict.get(codigo_nc, 0) + tot_rule
+    #             # create/overwrite the rule in the temporary results
+    #             result[rule.code] = {
+    #                 'sequence': rule.sequence,
+    #                 'code': rule.code,
+    #                 'name': rule.name,
+    #                 'note': rule.note,
+    #                 'salary_rule_id': rule.id,
+    #                 'contract_id': contract.id,
+    #                 'employee_id': employee.id,
+    #                 'amount': amount,
+    #                 'quantity': qty,
+    #                 'rate': rate,
+    #                 'slip_id': self.id,
+    #                 'gravado': localdict[rule.code + '_GRV_ISR'],
+    #                 'exento': localdict[rule.code + '_EXT_ISR'],
+    #                 'gravado_imss': localdict[rule.code + '_GRV_IMSS'],
+    #                 'exento_imss': localdict[rule.code + '_EXT_IMSS'],
+    #                 'gravado_infonavit': localdict[rule.code + '_GRV_INFONAVIT'],
+    #                 'exento_infonavit': localdict[rule.code + '_EXT_INFONAVIT'],
+    #                 'gravado_ptu': localdict[rule.code + '_GRV_PTU'],
+    #                 'exento_ptu': localdict[rule.code + '_EXT_PTU'],
+    #                 'gravado_local': localdict[rule.code + '_GRV_LOCAL'],
+    #                 'exento_local': localdict[rule.code + '_EXT_LOCAL']
+    #             }
+    #     print ("Result =-=-=", result.values())
+    #     return result.values()
 
     @api.model
     def get_fper(self):
@@ -750,7 +760,7 @@ class HrPayslip(models.Model):
         if tipo_sueldo in ['VARIABLE', 'MIXTO', '']:
             # Buscar los ultimos 2 meses completos de nomina confirmadas.
             # de acuerdo al calendario de la tabla IMSS
-            tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
+            tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id2').id,
             tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
             if not tbgrv:
                 raise UserError(
@@ -931,7 +941,7 @@ class HrPayslip(models.Model):
         if tipo_sueldo in ['VARIABLE', 'MIXTO', '']:
             # Buscar los ultimos 2 meses completos de nomina confirmadas.
             # de acuerdo al calendario de la tabla IMSS
-            tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
+            tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id2').id,
             tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
             if not tbgrv:
                 raise UserError(
@@ -1138,7 +1148,7 @@ class HrPayslip(models.Model):
         if tipo_sueldo in ['VARIABLE', 'MIXTO', '']:
             # Buscar los ultimos 2 meses completos de nomina confirmadas.
             # de acuerdo al calendario de la tabla IMSS
-            tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
+            tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id2').id,
             tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
             if not tbgrv:
                 raise UserError(
@@ -1366,7 +1376,7 @@ class HrPayslip(models.Model):
         self.ensure_one()
         payslip = self
         tabla_basegrv_imss_id = self.env.ref(
-            'cfdi_nomina.tabla_basegravable_imss').id
+            'cfdi_nomina.hr_taxable_base_id2').id
         tbgrv = self.env['hr.basegravable.acum'].browse(
             tabla_basegrv_imss_id)
         if not tbgrv:
@@ -1561,17 +1571,17 @@ class HrPayslip(models.Model):
 
         # Ingresos Exentos ISR
         tabla_basegravable_id = self.env.ref(
-            'cfdi_nomina.tabla_basegravable_isr').id
+            'cfdi_nomina.hr_taxable_base_id1').id
         data_grv = payslip.get_acumulado_tabla(anual_lines, tabla_basegravable_id,
                                                name='Ingresos Exentos', field_name='exento')
         lines.append((0, 0, data_grv))
         # Datos de la tabla de base gravable
         base_gravable_ids = [
-            self.env.ref('cfdi_nomina.tabla_basegravable_isr').id,
-            self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
-            self.env.ref('cfdi_nomina.tabla_basegravable_infonavit').id,
-            self.env.ref('cfdi_nomina.tabla_basegravable_ptu').id,
-            self.env.ref('cfdi_nomina.tabla_basegravable_local').id,
+            self.env.ref('cfdi_nomina.hr_taxable_base_id1').id,
+            self.env.ref('cfdi_nomina.hr_taxable_base_id2').id,
+            self.env.ref('cfdi_nomina.hr_taxable_base_id3').id,
+            self.env.ref('cfdi_nomina.hr_taxable_base_id4').id,
+            self.env.ref('cfdi_nomina.hr_taxable_base_id5').id,
         ]
         for base_gravable_id in base_gravable_ids:
             data_grv = payslip.get_acumulado_tabla(
@@ -1583,7 +1593,7 @@ class HrPayslip(models.Model):
         lines_nomina_fija = anual_lines.filtered(lambda l: bool(
             l.gravado_imss) > 0 and l.tipo_de_percepcion == 'fijo')
         tabla_basegrv_imss_id = self.env.ref(
-            'cfdi_nomina.tabla_basegravable_imss').id
+            'cfdi_nomina.hr_taxable_base_id2').id
         data_grv = payslip.get_acumulado_tabla(lines_nomina_fija, tabla_basegrv_imss_id,
                                                name='Sueldo fijo IMSS', field_name='gravado_imss')
         lines.append((0, 0, data_grv))
@@ -1606,7 +1616,7 @@ class HrPayslip(models.Model):
         }))
 
         # Dias trabajados del mes ( usa el calendario de la tabla ISR )
-        data_grv = payslip.get_acumulado_dias(self.env.ref('cfdi_nomina.tabla_basegravable_isr').id,
+        data_grv = payslip.get_acumulado_dias(self.env.ref('cfdi_nomina.hr_taxable_base_id1').id,
                                               name="Dias trabajados del mes")
         lines.append((0, 0, data_grv))
 
@@ -1655,7 +1665,7 @@ class HrPayslip(models.Model):
         self.ensure_one()
         payslip = self
 
-        tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_isr').id
+        tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id1').id
         tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
@@ -1704,7 +1714,7 @@ class HrPayslip(models.Model):
         self.ensure_one()
         payslip = self
 
-        tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_isr').id
+        tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id1').id
         tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
@@ -1753,7 +1763,7 @@ class HrPayslip(models.Model):
         self.ensure_one()
         payslip = self
 
-        tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_isr').id
+        tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id1').id
         tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)
@@ -1902,7 +1912,7 @@ class HrPayslip(models.Model):
         i = 0
         fper = payslip_obj.get_fper()
         tabla_gravable_isr_id = self.env.ref(
-            'cfdi_nomina.tabla_basegravable_isr').id
+            'cfdi_nomina.hr_taxable_base_id1').id
         tabla_isr_id = literal_eval(ICPSudo.get_param(
             'cfdi_nomina.NominaIPSTMensualID') or 'None')
         tabla_sube_id = literal_eval(ICPSudo.get_param(

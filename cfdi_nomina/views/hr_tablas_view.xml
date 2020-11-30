@@ -36,11 +36,11 @@
                 <notebook>
                     <page name="cuotas_imss" string="Cuotas IMSS">
                         <group col="4">
-                           <!--  <label string=""/>
-                            <label string="Tope (SF)"/>
-                            <label string="% Patrón"/>
-                            <label string="% Empleado"/>
- -->
+                           <label string="" for="PRT_SF"/>
+                            <label string="Tope (SF)" for="PRT_SF"/>
+                            <label string="% Patrón" for="PRT_SF"/>
+                            <label string="% Empleado" for="PRT_SF"/>
+
                             <label for="PRT_SF" string="Riesgos del Trabajo"/>
                             <field name="PRT_SF" nolabel="1"/>
                             <field name="PRT" nolabel="1"/>

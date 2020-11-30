@@ -420,7 +420,7 @@ class HrMovNomina(models.TransientModel):
             asuencia = 'Falta'
         else:
             holiday_status_id = self.env.ref(
-                'cfdi_nomina.holiday_status_retardo').id
+                'cfdi_nomina.hr_leave_type_id').id
             asuencia = 'Retardo'
         mensaje = '{} por checador, Motivo: {}, {}'.format(
             asuencia, motivo, nombre_empleado)
@@ -471,7 +471,7 @@ class HrMovNomina(models.TransientModel):
                 ('date_from', '>=', str(date_dia_1_mes)),
                 ('date_to', '<=', str(date_dia_ultimo_mes)),
                 ('holiday_status_id', '=', self.env.ref(
-                    'cfdi_nomina.holiday_status_retardo').id),
+                    'cfdi_nomina.hr_leave_type_id').id),
                 ('employee_id', '=', employee.id),
                 ('holiday_type', '=', 'employee'),
                 # Si no ha sido marcado el retardo

@@ -115,14 +115,14 @@ class Employee(models.Model):
 
         if not res.get('tabla_sdi_id'):
             try:
-                tabla_sdi_id = self.env.ref('cfdi_nomina.tabla1_fi').id
+                tabla_sdi_id = self.env.ref('cfdi_nomina.hr_fi_id').id
                 res['tabla_sdi_id'] = tabla_sdi_id
             except ValueError:
                 pass
 
         if not res.get('tabla_vacaciones_id'):
             try:
-                tabla_vac_id = self.env.ref('cfdi_nomina.tabla1_vac').id
+                tabla_vac_id = self.env.ref('cfdi_nomina.hr_holiday_id').id
                 res['tabla_vacaciones_id'] = tabla_vac_id
             except ValueError:
                 pass

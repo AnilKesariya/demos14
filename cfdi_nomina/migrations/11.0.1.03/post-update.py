@@ -13,7 +13,7 @@ def migrate(cr, version):
     _logger.info('Migracion Iniciada')
 
     env = api.Environment(cr, SUPERUSER_ID, {})
-    tabla_vac_id = env.ref('cfdi_nomina.tabla1_vac').id
+    tabla_vac_id = env.ref('cfdi_nomina.hr_holiday_id').id
     sql = """
     UPDATE hr_employee SET tabla_vacaciones_id = %d WHERE tabla_vacaciones_id IS NULL
     """ % tabla_vac_id

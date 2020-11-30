@@ -108,7 +108,7 @@ class HrEmployeeTransferWiz(models.TransientModel):
     def buscar_nominas(self):
         # Buscar los ultimos 2 meses completos de nomina confirmadas.
         # de acuerdo al calendario de la tabla IMSS
-        tabla_id = self.env.ref('cfdi_nomina.tabla_basegravable_imss').id,
+        tabla_id = self.env.ref('cfdi_nomina.hr_taxable_base_id2').id,
         tbgrv = self.env['hr.basegravable.acum'].browse(tabla_id)
         if not tbgrv:
             raise UserError('No hay tabla Base Gravable con id %s' % tabla_id)

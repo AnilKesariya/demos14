@@ -268,7 +268,7 @@ class HRSalaryRule(models.Model):
             slip = localdict.get('payslip').dict
             # Base gravable ISR
             tabla_gravable_isr_id = self.env.ref(
-                'cfdi_nomina.tabla_basegravable_isr').id
+                'cfdi_nomina.hr_taxable_base_id1').id
             anual_lines = slip.get_anual_lines()
             data_grv = slip.get_acumulado_tabla(
                 anual_lines, tabla_gravable_isr_id)

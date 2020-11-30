@@ -20,7 +20,7 @@ def migrate(cr, version):
     ICPSudo = env['ir.config_parameter'].sudo()
 
     fper = payslip_obj.get_fper()
-    tabla_gravable_isr_id = env.ref('cfdi_nomina.tabla_basegravable_isr').id
+    tabla_gravable_isr_id = env.ref('cfdi_nomina.hr_taxable_base_id1').id
     tabla_isr_id = literal_eval(ICPSudo.get_param('cfdi_nomina.NominaIPSTMensualID') or 'None')
     tabla_sube_id = literal_eval(ICPSudo.get_param('cfdi_nomina.NominaSUBEID') or 'None')
 

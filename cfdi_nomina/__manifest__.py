@@ -48,7 +48,7 @@
         'data/hr.contract.type.csv',
         'data/cfdi_nomina.codigo.agrupador.csv',
         'data/ir_cron.xml',
-        # 'data/catalog.xml',
+        'data/catalog.xml',
         # 'data/res_bank.xml',
         'data/mail_template_data.xml',
         'views/account_journal_view.xml',
