@@ -574,12 +574,16 @@ class HRSalaryRule(models.Model):
         if self.tipo_de_percepcion == 'fijo' and gravado:
             localdict['TOTAL_GRV_FIJO_IMSS'] = localdict.get(
                 'TOTAL_GRV_FIJO_IMSS', 0.0) + gravado
-            localdict[
-                'gravado_fijo_list'] += [{'name': self.name, 'code': self.code, 'value': gravado}]
+            if 'gravado_fijo_list' in localdict:
+                localdict['gravado_fijo_list'] += [{'name': self.name, 'code': self.code, 'value': gravado}]
+            else:
+                localdict['gravado_fijo_list'] = [{'name': self.name, 'code': self.code, 'value': gravado}]
 
         elif self.tipo_de_percepcion == 'variable' and gravado:
-            localdict[
-                'gravado_variable_list'] += [{'name': self.name, 'code': self.code, 'value': gravado}]
+            if 'gravado_variable_list' in localdict:
+                localdict['gravado_variable_list'] += [{'name': self.name, 'code': self.code, 'value': gravado}]
+            else:
+                localdict['gravado_variable_list'] = [{'name': self.name, 'code': self.code, 'value': gravado}]
 
         # Gravado INFONAVIT
         exento = gravado = 0.0

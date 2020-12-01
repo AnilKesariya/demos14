@@ -101,13 +101,13 @@
                     <field name="apmat" placeholder="Ap. Materno" class="oe_inline"/>
                 </xpath>
 
-                <xpath expr="//field[@name='category_ids']" position="after"> 
-                    <group>
-                        <group>
-                            <field name="nombre_compelto"/>
-                        </group>
-                    </group>
-                </xpath>
+<!--                <xpath expr="//field[@name='category_ids']" position="after"> -->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="nombre_compelto"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </xpath>-->
 
                 <field name="job_id" position="after">
                     <field name="escolaridad"/>

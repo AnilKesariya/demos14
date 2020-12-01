@@ -244,6 +244,15 @@ class HrPayslip(models.Model):
             self.employee_id, self.day_leave_from)
         self.date_from = self.check_start_date(
             self.employee_id, self.date_from)
+        if self.contract_id:
+            self.journal_id = self.contract_id.salary_journal if self.contract_id.salary_journal else False
+        if self.struct_id and self.struct_id.input_line_type_ids:
+            input_type_ids = self.input_line_ids.mapped('input_type_id').ids
+            for line in self.struct_id.input_line_type_ids:
+                if line.id not in input_type_ids:
+                    self.input_line_ids = [(0, 0, {
+                        'input_type_id': line.id
+                    })]
         return super(HrPayslip, self)._onchange_employee()
 
     def _calculation_confirm_sheet(self, use_new_cursor=False):
