@@ -83,6 +83,7 @@
         'wizard/genera_laypoliza_wiz_view.xml',
         'wizard/idse_wiz_view.xml',
         'wizard/employee_change_company_wiz_view.xml',
+        'security/security.xml'
     ],
     'demo': [
         # "demo/salary_rule_demo.xml",

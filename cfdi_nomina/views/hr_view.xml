@@ -349,6 +349,26 @@
                 <field name="holiday_ids" invisible="0"/>
             </xpath>
 
+             <xpath expr="//field[@name='worked_days_line_ids']/tree//field[@name='work_entry_type_id']"
+                    position="attributes">
+                 <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='worked_days_line_ids']/tree//field[@name='number_of_days']"
+                    position="attributes">
+                 <attribute name="readonly">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='worked_days_line_ids']/tree//field[@name='number_of_hours']"
+                    position="attributes">
+                 <attribute name="readonly">0</attribute>
+            </xpath>
+
+             <xpath expr="//field[@name='worked_days_line_ids']/tree" position="attributes">
+                 <attribute name="create">1</attribute>
+                 <attribute name="delete">1</attribute>
+            </xpath>
+
             <field name="name" position="after">
                 <field name="concepto"/>
                 <field name="tipo_nomina" attrs="{'readonly':[('state','=','done')]}"/>
@@ -593,11 +613,11 @@
                         <field name="gravado_imss"/>
                         <field name="exento_imss"/>
                         <field name="gravado_infonavit"/>
-                        <!-- <field name="exento_infonavit"/> -->
-                        <!--  <field name="gravado_ptu"/>
-                         <field name="exento_ptu"/> -->
-                        <!-- <field name="amount"/>
-                        <field name="total"/> -->
+                        <field name="exento_infonavit"/>
+                        <field name="gravado_ptu"/>
+                        <field name="exento_ptu"/>
+                        <field name="amount"/>
+                        <field name="total"/>
                     </tree>
                     <form string="Payslip Line">
                         <group col="4">

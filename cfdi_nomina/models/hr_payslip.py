@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
+import json
 import logging
 import threading
-import json
-from datetime import time as datetime_time
-from datetime import datetime, timedelta
 from ast import literal_eval
-from odoo.exceptions import UserError, ValidationError
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime, timedelta
+from datetime import time as datetime_time
 from odoo.addons.hr_payroll.models.browsable_object import BrowsableObject, InputLine, WorkedDays, Payslips
+from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Datetime
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+
 from odoo import _, api, models, fields, registry
 
 _logger = logging.getLogger(__name__)
@@ -21,6 +22,7 @@ class HrPayslipWorkedDays(models.Model):
     holiday_ids = fields.Many2many('hr.leave', string='Absences considered')
     dias_imss_ausencia = fields.Float()
     dias_imss_incapacidad = fields.Float()
+    number_of_days = fields.Integer(string='Number of Days')
 
     def calc_dias_imss(self):
 
@@ -101,9 +103,9 @@ class HrPayslipLine(models.Model):
     exento_ptu = fields.Float()
     gravado_local = fields.Float()
     exento_local = fields.Float()
-    code = fields.Char(related="salary_rule_id.code",required=True,
+    code = fields.Char(related="salary_rule_id.code", required=True,
                        help="The code of salary rules can be used as reference in computation of other rules. "
-                       "In that case, it is case sensitive.")
+                            "In that case, it is case sensitive.")
 
 
 class HrPayslip(models.Model):
@@ -193,9 +195,12 @@ class HrPayslip(models.Model):
     calculo_anual = fields.Html(
         "Annual Calculation", readonly=True, help="Annual data")
     # localdict = fields.Text("Variables durante el calculo", readonly=True)
-
-    rule_line_ids =fields.One2many('hr.payslip.line',
-        compute='_compute_details_by_salary_rule_category', string='Details by Salary Rule Category')
+    worked_days_line_ids = fields.One2many('hr.payslip.worked_days', 'payslip_id',
+                                           string='Payslip Worked Days', copy=True, readonly=False,
+                                           states={'verify': [('readonly', True)]})
+    rule_line_ids = fields.One2many('hr.payslip.line',
+                                    compute='_compute_details_by_salary_rule_category',
+                                    string='Details by Salary Rule Category')
 
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
@@ -209,7 +214,7 @@ class HrPayslip(models.Model):
                 ('date_to', '>=', payslip.date_from),
                 ('employee_id', '=', payslip.employee_id.id),
                 ('id', '!=', payslip.id),
-                ('tipo_nomina', '=', 'O'),    # Solo nominas ordinarias
+                ('tipo_nomina', '=', 'O'),  # Solo nominas ordinarias
                 ('state', 'in', ['done']),
             ]
             payslips = self.search_count(domain)
@@ -344,8 +349,9 @@ class HrPayslip(models.Model):
             payslip.dpnom = dpnom
 
             # suma de faltas en el periodo  JRV 21112019
-            data_faltas = payslip.worked_days_line_ids.filtered(lambda l: l.code == 'No pagado' or l.code == 'PS' or l.code ==
-                                                                'Incapacidad General' or l.code == 'Incapacidad Permanente Parcial' or l.code == 'Incapacidad Permanente Toatl')
+            data_faltas = payslip.worked_days_line_ids.filtered(
+                lambda l: l.code == 'No pagado' or l.code == 'PS' or l.code ==
+                          'Incapacidad General' or l.code == 'Incapacidad Permanente Parcial' or l.code == 'Incapacidad Permanente Toatl')
             dias_faltas = sum(data_faltas.mapped('number_of_days'))
 
             ################
@@ -360,9 +366,9 @@ class HrPayslip(models.Model):
             # fin JRV
             if sbc > (uma * 3):
                 payslip.ae3_trab = (
-                    ((sbc - (uma * 3)) * payslip.dpnom) * rp.AE3_TRAB) / 100
+                                           ((sbc - (uma * 3)) * payslip.dpnom) * rp.AE3_TRAB) / 100
                 payslip.ae3_patron = (
-                    ((sbc - (uma * 3)) * payslip.dpnom) * rp.AE3_PATRON) / 100
+                                             ((sbc - (uma * 3)) * payslip.dpnom) * rp.AE3_PATRON) / 100
 
             payslip.pe_patron = ((uma * dpnom) * rp.PE_PATRON) / 100
             payslip.ed_trab = ((sbc * dpnom) * rp.ED_TRAB) / 100
@@ -379,11 +385,10 @@ class HrPayslip(models.Model):
             payslip.ceav_trab = ((dpnom * sbc) * rp.CEAV_TRAB) / 100
             payslip.ceav_patron = ((dpnom * sbc) * rp.CEAV_PATRON) / 100
             payslip.infonavit_patron = (
-                (dpnom * sbc) * rp.INFONAVIT_PATRON) / 100
+                                               (dpnom * sbc) * rp.INFONAVIT_PATRON) / 100
             payslip.rt_patron = ((sbc * rp.PRT) * (dpnom - dias_faltas)) / 100
             # imss = ae3_trab + ed_trab + gmp_trab + iv_patron + ceav_patron
             payslip.dtnom = dias_periodo  # Dias trabajado en el periodo JRV 20190514
-
 
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
@@ -471,7 +476,8 @@ class HrPayslip(models.Model):
                     current_leave_struct['holiday_ids'] += [(4, holiday.id, None)]  # Agrega la falta considerada
 
             # compute worked days
-            work_data = contract.employee_id.get_work_days_data(day_from, day_to, calendar=contract.resource_calendar_id)
+            work_data = contract.employee_id.get_work_days_data(day_from, day_to,
+                                                                calendar=contract.resource_calendar_id)
 
             # Sobreescribir dias trabajados
             work_data['days'] = dias_trabajados - dias_falta
@@ -488,7 +494,7 @@ class HrPayslip(models.Model):
             res.append(attendances)
             res.extend(leaves.values())
         return res
-    
+
     @api.model
     def get_inputs(self, contracts, date_from, date_to):
         if self._context.get('struct_run_id'):
@@ -1934,7 +1940,7 @@ class HrPayslip(models.Model):
             for mes in range(1, 2):
                 ini_mes = datetime(year=2020, month=mes, day=1)
                 fin_mes = ini_mes + \
-                    relativedelta.relativedelta(months=+1, days=-1)
+                          relativedelta.relativedelta(months=+1, days=-1)
                 nominas_mes = payslip_obj.search([
                     ('employee_id', '=', emp.id),
                     ('state', '=', 'done'),
