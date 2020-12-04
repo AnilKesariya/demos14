@@ -305,7 +305,7 @@ class HrPayslip(models.Model):
 
     def compute_sheet(self):
         res = super().compute_sheet()
-        self.compute_sheet_total()
+        self.total = self.compute_sheet_total()
         return res
 
     def compute_sheet_total(self):
