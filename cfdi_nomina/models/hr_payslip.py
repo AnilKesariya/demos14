@@ -51,6 +51,7 @@ class HrPayslipInput(models.Model):
     _inherit = "hr.payslip.input"
     _description = 'hr payslip input'
 
+    code = fields.Char("Code")
     quantity = fields.Float('Quantity', default=1.0)
     amount_python_compute = fields.Text(string='Python code',
                                         help='If there is code, it is executed and the result '
@@ -251,13 +252,22 @@ class HrPayslip(models.Model):
             self.employee_id, self.date_from)
         if self.contract_id:
             self.journal_id = self.contract_id.salary_journal if self.contract_id.salary_journal else False
-        if self.struct_id and self.struct_id.input_line_type_ids:
-            input_type_ids = self.input_line_ids.mapped('input_type_id').ids
-            for line in self.struct_id.input_line_type_ids:
-                if line.id not in input_type_ids:
-                    self.input_line_ids = [(0, 0, {
-                        'input_type_id': line.id
-                    })]
+        if self.struct_id and self.struct_id.rule_ids and self.struct_id.rule_ids.input_ids:
+            self.input_line_ids = [(5, 0)]
+            payslip_input_type_obj = self.env['hr.payslip.input.type']
+            for line in self.struct_id.rule_ids.input_ids:
+                type = payslip_input_type_obj.search([('name', '=', line.name), ('code', '=', line.code),
+                                                      ('struct_ids', 'in', self.struct_id.id)], limit=1)
+                if not type:
+                    type = payslip_input_type_obj.create({
+                        'name': line.name,
+                        'code': line.code,
+                        'struct_ids': [(4, self.struct_id.id)]
+                    })
+                self.input_line_ids = [(0, 0, {
+                    'input_type_id': type.id,
+                    'code': line.code
+                })]
         return super(HrPayslip, self)._onchange_employee()
 
     def _calculation_confirm_sheet(self, use_new_cursor=False):
@@ -285,9 +295,12 @@ class HrPayslip(models.Model):
         # Marcar las faltas para no repetir en otro calculo de quincenca
         res = super().action_payslip_done()
         for payslip in self:
+            total = 0
             for line in payslip.worked_days_line_ids:
+                total += line.number_of_days * payslip.contract_id.wage
                 for falta in line.holiday_ids:
                     falta.payslip_status = True
+            payslip.total = total
         return res
 
     def compute_sheet(self):

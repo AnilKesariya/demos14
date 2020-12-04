@@ -383,6 +383,9 @@
                 </div>
                 <field name="fecha_pago"/>
             </xpath>
+            <xpath expr="//field[@name='input_line_ids']/tree//field[@name='amount']" position="before">
+                <field name="code"/>
+            </xpath>
             <xpath expr="//field[@name='input_line_ids']/tree//field[@name='amount']" position="after">
                 <field name="quantity"/>
                 <field name="amount_python_compute"/>
